@@ -1,5 +1,5 @@
 const Config = {
-    url: "https://bingx.com"
+    url: "https://m.bingx.com"
 }
 
 export default Config;

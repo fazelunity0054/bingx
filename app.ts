@@ -7,15 +7,19 @@ import {WebSocket} from 'ws';
 import {InitialSocketTransformer} from "./ws/Transformer";
 import {contractList} from "./utils/other";
 import {currencyImage} from "./routes/image";
+import {middleware} from "./middleware/middleware";
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../public')));
+
 app.get("/contracts", contractList)
 // @ts-ignore
 app.get("/image", currencyImage)
+// @ts-ignore
 
+app.use(middleware)
 
 const server = createServer(app);
 const wss = new WebSocket.Server({server, path: '/market'});

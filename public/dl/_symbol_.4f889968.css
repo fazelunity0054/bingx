@@ -5,7 +5,6 @@
     flex-direction: row-reverse;
     flex: 0 0 1.333333rem;
     padding: 0 .426667rem;
-    position: sticky;
     top: 0;
     background: #fff !important;
     padding-top: 0.4906667rem;
@@ -274,7 +273,7 @@
 .place-order-light .trade-wrapper .trade-type[data-v-c3fb9a93] {
     align-items: center;
     border: .026667rem solid var(--light-line-banana);
-    border-radius: .16rem;
+    border-radius: .29rem;
     display: flex;
     height: 1.040667rem;
     justify-content: space-between;
@@ -400,7 +399,7 @@ p.content {
 .place-order-light .trade-wrapper .volume[data-v-c3fb9a93] {
     align-items: center;
     border: .026667rem solid var(--light-line-banana);
-    border-radius: .16rem;
+    border-radius: .29rem;
     display: flex;
     height: 1.066667rem;
     padding: .026667rem .266667rem;
@@ -828,6 +827,13 @@ p.content {
     align-items: center;
     display: flex;
     justify-content: space-between
+}
+
+#_refresh_page_scroll_view_id_ > div.order.order-light > div.top-wrapper {
+    position: sticky;
+    background: #fff;
+    top: 0;
+    z-index: 1000;
 }
 
 .order-light.order .top-wrapper .left-wrapper[data-v-e3e4d836] {
@@ -1504,8 +1510,8 @@ p.content {
 
 .positions-light .list-wrapper .item-wrapper .detail-wrapper .name[data-v-db2fc607] {
     color: var(--light-text-1);
-    font-size: .426667rem;
-    font-weight: 700;
+    font-size: .376667rem;
+    font-weight: 400;
     line-height: .426667rem
 }
 
@@ -1552,6 +1558,12 @@ p.content {
     font-weight: 400
 }
 
+.positions-light .list-wrapper .item-wrapper .detail-wrapper .tag-wrapper .tag.short[data-v-db2fc607] {
+    border-color: var(--kline-down);
+    color: var(--kline-down);
+    font-weight: 400
+}
+
 .positions-light .list-wrapper .item-wrapper .detail-wrapper .tag-wrapper .tag {
     color: var(--kline-down);
     position: relative;
@@ -1564,15 +1576,13 @@ p.content {
     position: absolute;
     top: 0;
     left: 0;
-    background: var(--kline-down);
+    background: #fdeff0;
     width: 100%;
-    opacity: 0.05;
-   
-    z-index: 1;
+    z-index: -1;
     height: 100%;
 }
 .tag-wrapper .tag.long:before {
-    background: var(--kline-up) !important;
+    background: #e9f7f1 !important;
 }
 
 .positions-light .list-wrapper .item-wrapper .profit-and-loss[data-v-db2fc607] {

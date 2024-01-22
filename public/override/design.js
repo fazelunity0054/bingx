@@ -51,9 +51,10 @@
             const domVariables = document.querySelectorAll(".variable");
             domVariables.forEach(domVariable => {
                 const key = domVariable.getAttribute("data-key");
-                const hint = domVariable.getAttribute("data-hint") ?? "مقدار مورد نظر را وارد کنید"
+                const hint = domVariable.getAttribute("data-hint") ?? "Enter Value"
                 domVariable.onclick = ()=>{
-                    const value = window.prompt(hint);
+                    const value = +window.prompt(hint);
+                    if (!value) return;
                     window.variables[key] = value;
                     domVariable.innerText = value;
                 }
@@ -111,6 +112,24 @@
             const str = `0${n(1,7)}:${n(1,5,2)}:${n(1,5,2)}`;
 
             document.querySelector(".funding-timer").innerText = str;
+        }
+    },
+    {
+        name: "Margin Unit",
+        handle() {
+            const element = document.querySelector(".margin-unit");
+            const units = marginUnits;
+            const display = marginDisplay;
+            element.onclick = ()=>{
+                let current = units.findIndex(u => u === window.marginUnit) + 1;
+
+                const next = units[current] ?? units[0];
+                window.marginUnit = next;
+                element.innerText =display[units.findIndex(u => u === next)]
+                alert(`Margin Unit Changed to ${next}`)
+
+                document.querySelector(".available-volume").style.display = next === "symbol" ? "flex":"none";
+            }
         }
     }
 ].forEach((item)=>{
