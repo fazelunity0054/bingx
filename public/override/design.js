@@ -131,6 +131,17 @@
                 document.querySelector(".available-volume").style.display = next === "symbol" ? "flex":"none";
             }
         }
+    },
+    {
+        name: "fontsize",
+        handle() {
+            const html = document.querySelector("html");
+            document.querySelector("body").onclick = ()=>{
+                const n = window.prompt("Enter Elements size value default: (38)");
+                html.style.fontSize = `${n}px`
+            }
+            html.style.fontSize = "38px"
+        }
     }
 ].forEach((item)=>{
     try {
