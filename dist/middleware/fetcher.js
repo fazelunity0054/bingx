@@ -22,6 +22,7 @@ async function forceFetch(path, init) {
         }
         catch (e) {
             console.error("error");
+            console.error(e);
             console.log(echoRequest(path, init, e));
         }
     }
