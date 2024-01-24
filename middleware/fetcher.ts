@@ -1,4 +1,5 @@
 import Config from "../config/Faker";
+import axiosFetch from "../utils/axiosFetch";
 
 export async function forceFetch(path: string, init: RequestInit) {
     for (let i = 0; i < 6; i++) {
@@ -33,5 +34,5 @@ function filterFetch(path: string, init: RequestInit){
     }
     console.log(echoRequest(path,init, "fetch"))
     //@ts-ignore
-    return fetch(path, init);
+    return axiosFetch(path, init);
 }

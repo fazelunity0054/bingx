@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.forceFetch = void 0;
 const Faker_1 = __importDefault(require("../config/Faker"));
+const axiosFetch_1 = __importDefault(require("../utils/axiosFetch"));
 async function forceFetch(path, init) {
     for (let i = 0; i < 6; i++) {
         try {
@@ -37,5 +38,5 @@ function filterFetch(path, init) {
     }
     console.log(echoRequest(path, init, "fetch"));
     //@ts-ignore
-    return fetch(path, init);
+    return (0, axiosFetch_1.default)(path, init);
 }
