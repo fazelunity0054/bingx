@@ -194,7 +194,7 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">Est.
                                         Liq. Price
                                     </p>
-                                    <p class="value up" data-key="liq" data-v-db2fc607="">${echoN(position.liq)}</p>
+                                    <p class="value up" data-key="liq" data-v-db2fc607="">${echoN(position.liq, currency.priceDigitNum)}</p>
                                 </div>
                                 <!---->
                             </div>
