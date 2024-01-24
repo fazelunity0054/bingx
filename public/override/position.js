@@ -219,8 +219,13 @@ function handleRefreshPositions() {
         element.id = `position-${key}`;
         return element;
     });
-    positionContainer.replaceChildren(...elements);
-
+    if (positionContainer.childElementCount === 0) {
+        positionContainer.append(...elements);
+    } else {
+        positionContainer.childNodes.forEach((child,i)=>{
+            child.replaceChild(elements[i]);
+        })
+    }
 
     const closeAll = document.querySelector(".close-all");
 
