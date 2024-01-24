@@ -1,5 +1,5 @@
 import Config from "../config/Faker";
-
+import fetch from "node-fetch"
 
 export async function forceFetch(path: string, init: RequestInit) {
     for (let i = 0; i < 6; i++) {
@@ -8,6 +8,7 @@ export async function forceFetch(path: string, init: RequestInit) {
                 ...init,
                 headers: {
                     ...init.headers,
+                    // @ts-ignore
                     "connection": undefined
                 }
             });
@@ -34,5 +35,6 @@ function filterFetch(path: string, init: RequestInit){
         path = Config.url + path;
     }
     console.log(echoRequest(path,init, "fetch"))
+    //@ts-ignore
     return fetch(path, init);
 }
