@@ -22,7 +22,9 @@ async function forceFetch(path, init) {
             return fetch;
         }
         catch (e) {
+            console.error(e);
             console.error(echoRequest(path, init, e));
+            break;
         }
     }
 }

@@ -17,7 +17,9 @@ export async function forceFetch(path: string, init: RequestInit) {
             console.log("FINISHED");
             return fetch;
         } catch (e) {
+            console.error(e);
             console.error(echoRequest(path,init,e))
+            break;
         }
     }
 }
