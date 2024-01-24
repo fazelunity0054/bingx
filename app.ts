@@ -19,7 +19,12 @@ app.get("/contracts", contractList)
 app.get("/image", currencyImage)
 // @ts-ignore
 
-app.use(middleware)
+app.use((req,res,n)=>{
+    if (req.path.startsWith("/fake")) {
+        // @ts-ignore
+        middleware(req,res);
+    } else n();
+})
 
 const server = createServer(app);
 const wss = new WebSocket.Server({server, path: '/market'});

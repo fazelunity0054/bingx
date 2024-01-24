@@ -35,17 +35,17 @@ function calcNumber(n) {
     if (n < 1000)
         return {
             symbol: "",
-            result: substringNumber(n, n < 0 ? 4 : 2, false)
+                result: substringNumber(n, currency.qtyDigitNum, false)
         }
     if (n >= 1000 && n < 1_000_000) {
         return {
-            result: +(substringNumber((n / 1000), 2)),
+            result: +(substringNumber((n / 1000), currency.qtyDigitNum)),
             symbol: "K"
         }
     }
     if (n >= 1_000_000) {
         return {
-            result: +(substringNumber((n / 1_000_000), 2)),
+            result: +(substringNumber((n / 1_000_000), currency.qtyDigitNum)),
             symbol: "M"
         }
     }
@@ -96,28 +96,30 @@ window.handleMargin = ()=>{
     );
 }
 
-function calculateLiquidationPrice(type) {
-    const leverageRatioInput = +variables[`${type}-leverage`];
-    const entryPriceInput = document.querySelector(".price-input");
-    const leverageRatio = parseFloat(leverageRatioInput) || 0;
-    const entryPrice = parseFloat(entryPriceInput.value) || 0;
+function calculateLiquidationPrice(type = "short", key = 'currency', callback = null) {
 
-    let liquidationPrice = 0;
-    const balance = getUSDTBalance();
-    if (type === 'long') {
+    /**
+     *
+     * @type {position}
+     */
+    const position = key === "currency" ? {
+        leverage: +variables[`${type}-leverage`],
+        type,
+        openedPrice: +document.querySelector(".price-input").value,
+        marginMode: document.querySelector(".margin-mode").innerText,
+        amount: +document.querySelector(".volume-input").value,
+        margin: getMarginOfType(type)
+    }:positions[key];
 
-        if (leverageRatio > 1) {
-            const distanceToLiquidation = (1 / leverageRatio) * entryPrice;
-            liquidationPrice = entryPrice - distanceToLiquidation
-        }
-    } else {
-        liquidationPrice = entryPrice / (1 - (balance / leverageRatio))
-    }
-    const t = document.querySelector(`.liq-${type}-price`);
-    const value = liquidationPrice / (1 - fee);
-    if (t && liquidationPrice)
-        t.innerText = substringNumber(value, currency.qtyDigitNum);
-    return value;
+    handleLiquidCalculation(key === 'currency' ? `currency-${type}`:key, position, (number)=>{
+        if (!callback) {
+            const t = document.querySelector(`.liq-${type}-price`);
+            if (t)
+                t.innerText = substringNumber(number, currency.priceDigitNum);
+        } else callback(number);
+    });
+
+
 }
 
 window.calculateLiquidationPrice = calculateLiquidationPrice;
@@ -225,3 +227,160 @@ window.marginDisplay = [currency.asset, 'USDT','USDT']
  * @type {"symbol" | "usdt"}
  */
 window.marginUnit = "symbol";
+
+window.registerCalculators = ()=>{
+    const container = document.querySelector(".calculators");
+    container.innerHTML = null;
+    /**
+     * @type {positions}
+     */
+    let p = JSON.parse(window.localStorage.getItem("positions") ?? "{}");
+    let symbols = {
+        "currency-short": currency.symbol,
+        "currency-long": currency.symbol
+    };
+    Object.entries(p).forEach(([key, p]) => {
+        symbols[key] = p.currency.symbol
+    })
+
+    let registered = [];
+    Object.entries(symbols).map(([key, symbol])=>{
+        const iframe = document.createElement('iframe');
+        iframe.src = `/calculator.html?symbol=${symbol}`
+        iframe.id = key;
+        iframe.key = key;
+        container.append(iframe);
+    })
+}
+
+
+let calculatorStatus = {}
+let calculatorCallbacks = {}
+
+/**
+ *
+ * @param key {string}
+ * @param position {position}
+ * @param callback {(v: number)=>void}
+ */
+window.handleLiquidCalculation = (key, position, callback) => {
+    if (!+position.margin || !+position.openedPrice) return;
+
+    calculatorCallbacks[key] ??= [];
+    calculatorCallbacks[key].push(callback);
+
+    if (calculatorStatus[key] === "PENDING") {
+        return;
+    }
+    const iframe = document.querySelector("#"+key);
+    if (!iframe) {
+        console.error(`Unregistered calculator ${key}`)
+        callback(0);
+        return;
+    }
+
+    const iframeDoc = iframe.contentWindow.document;
+
+    new Promise(async (r,c) => {
+        try {
+            calculatorStatus[key] = "PENDING";
+            const waitFor = async (selector) => {
+                return await new Promise((r,re)=>{
+                    let n = 0;
+                    const thread =setInterval(()=>{
+                        n++;
+                        const find = iframeDoc.querySelector(selector);
+                        if (find && iframeDoc.readyState === 'complete') {
+                            r(true);
+                            clearInterval(thread);
+                        }
+                        if (n > 10000) {
+                            re("timeout");
+                            clearInterval(thread);
+                        }
+                    },20);
+                })
+            }
+            await waitFor("body");
+
+            /**
+             *
+             * @param e{Element}
+             */
+            const input = (e)=>{
+                e.dispatchEvent(new Event("input",{
+                    bubbles: true
+                }));
+                return e;
+            }
+
+            {
+                iframeDoc.querySelector("#__layout > div > div > div > section > div.targets.m > div:nth-child(3)").click();
+            } // Open Liq Tab
+            {
+                iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div").click();
+                await waitFor(".selector-dialog .option-list");
+                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div.selector-dialog > div.option-list > div:nth-child(${position.marginMode.includes("Iso") ? 2:1})`).click();
+            } // Select Margin Mode
+            {
+                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.direction > button:nth-child(${position.type === "short" ? 3:1})`).click();
+            } // Position Type
+            {
+                const currentLeverage = +iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span.leverage-input-small").innerText;
+                const diff = position.leverage - currentLeverage;
+                if (diff < 0) { // Decrease
+                    for (let i=0;i< -(diff);i++) {
+                        iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span:nth-child(1)").click();
+                    }
+                } else {
+                    for (let i=0;i<diff;i++) {
+                        iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span:nth-child(6)").click();
+                    }
+                }
+            } // leverage
+            {
+                const opIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.open-price > div > div > div.input > input[type=text]");
+                input(opIn)
+                    .value = +(+position.openedPrice).toFixed(5)
+                input(opIn)
+            } // opened Price
+            {
+                const amIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.input > input[type=number]");
+
+                input(amIn).value = +((+position.amount).toFixed(5));
+                input(amIn);
+            } // amount
+            {
+                let target = +(+variables.balance).toFixed(5);
+                const mode = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.label.long").innerText;
+                if (mode.includes("Position")) {
+                    target = Object.values(positions).reduce((total, p) => total + p.margin, 0);
+                }
+                const bIn =iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.input > input[type=number]");
+                input(bIn)
+                    .value = target;
+                input(bIn);
+            } // balance | margin
+            iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.calc-btn > button").click();
+            let n=  0;
+            const th= setInterval(()=>{
+                let result = iframeDoc.querySelector("#__layout > div > div > div > section > div.result-wrapper > div > div > span.value > span").innerText+"";
+                if (result.includes("--") && n < 100) {
+                    n++;
+                    return;
+                }
+                r(+(result.replaceAll(",","")) || 0);
+                clearInterval(th);
+            },10);
+        } catch (e) {
+            c(e);
+        }
+    }).then((n)=>{
+        calculatorCallbacks[key]?.forEach?.(c => c(n));
+        calculatorCallbacks[key] = undefined;
+    }).catch((e)=>{
+        return true;
+    }).finally(()=>{
+        calculatorStatus[key] = "FREE";
+    })
+}

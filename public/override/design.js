@@ -136,12 +136,12 @@
         name: "fontsize",
         handle() {
             const html = document.querySelector("html");
-            document.querySelector("body").onclick = ()=>{
-                const n = window.prompt("Enter Elements size value default: (38)");
-                html.style.fontSize = `${n}px`
-            }
-            html.style.fontSize = "38px"
+            html.style.fontSize = "37px"
         }
+    },
+    {
+        name: "Register Calculators",
+        handle: registerCalculators
     }
 ].forEach((item)=>{
     try {
@@ -152,6 +152,7 @@
 })
 
 function changeSlider(percent) {
+    percent = Math.max(1.24, percent);
     const btn = document.querySelector('.slider-btn');
     btn.style.left = `calc(${percent}% - 8px)`
     const track = document.querySelector('.slider .track');

@@ -4,23 +4,7 @@ window.addPosition = handleAddPosition;
 window.refreshPositions = handleRefreshPositions;
 
 /**
- *
- * @type {{
- *     [key: string]: {
- *         asset: string,
- *         currency: any,
- *         type: "short" | "long",
- *         margin: number,
- *         openedPrice: number,
- *         targetPrice: number,
- *         targetVolume: number,
- *         leverage: number,
- *         amount: number,
- *         marginMode: "Isolated" | "Cross",
- *         liq: number,
- *         [key: string]: any
- *     }
- * }}
+ * @type {positions}
  */
 window.positions = new Proxy(JSON.parse(localStorage.getItem('positions') || "{}"), {
     set: (positions, key, value)=>{
@@ -32,17 +16,22 @@ window.positions = new Proxy(JSON.parse(localStorage.getItem('positions') || "{}
     deleteProperty(target, p) {
         delete target[p];
         localStorage.setItem("positions", JSON.stringify(target));
+        window.registerCalculators();
         return true;
     },
 
 });
 
+/**
+ * @typedef {{[key: string]: position}} positions
+ */
 
 /**
  *
  * @param type {"short" | "long"}
  */
 function handleAddPosition(type) {
+
     const id = generateRandomString();
     const tradeType = document.querySelector(".trade-type .target").innerText;
     const targetPrice = tradeType.includes("Limit") ? +document.querySelector(".price-input").value:+currency.tradePrice;
@@ -55,7 +44,7 @@ function handleAddPosition(type) {
     }
     const volumePercentInBalance = (targetVolume / +variables.balance) * 100;
     const margin = getMarginOfType(type,"symbol");
-    const amount = ((targetVolume * leverage) / targetPrice) * (1 - +currency.defaultPrecision);
+    const amount = /*((targetVolume * leverage) / targetPrice) * (1 - +currency.defaultPrecision)*/ targetVolume;
 
     if (margin > +variables.balance) {
         alert("Increase your balance");
@@ -63,8 +52,10 @@ function handleAddPosition(type) {
     }
 
     variables.balance = ((+variables.balance) - margin).toFixed(2);
-
-    positions[id] = {
+    /**
+     * @name position
+     */
+    const position = {
         asset: currency.asset,
         margin,
         amount,
@@ -72,39 +63,67 @@ function handleAddPosition(type) {
         targetVolume,
         leverage,
         type,
-        marginMode: document.querySelector(".margin-mode").innerText,
+        marginMode: document.querySelector(".margin-mode").innerText+"",
         openedPrice: (basisRate + targetPrice) / 2,
-        liq: calculateLiquidationPrice(type),
-        risk: 33,
         currency
-    }
+    };
+
+    positions[id] = position
 
     alert("Position has been opened");
+    registerCalculators()
+}
+
+function calculateRisk(lastPrice, liquid, type = "long") {
+    if (lastPrice === 0) {
+        // Avoid division by zero
+        return "0.00";
+    }
+    let change;
+    if (type === "short") {
+        // For short positions, the calculation is reversed
+        change = (liquid - lastPrice) / lastPrice * 100;
+    } else {
+        // For long positions (default)
+        change = (lastPrice - liquid) / lastPrice * 100;
+    }
+    return Math.max(change < 100 ? change.toFixed(2):1090, 0);
 }
 
 function handleRefreshPositions() {
     const positionContainer = document.querySelector(".positions");
-    positionContainer.innerHTML = "";
 
     const len = document.querySelector(".position-length");
     const length = Object.keys(positions).length;
     len.innerText = length;
-    Object.entries(window.positions).forEach(([key, position]) => {
+    const elements = Object.entries(window.positions).map(([key, position]) => {
         const currency = position.currency;
         const coin = position.currency;
+        const risk = typeof position.liq !== 'undefined' ? calculateRisk(+currency.tradePrice, position.liq,position.type):"WQ";
         const tradePrice = +currency.tradePrice;
         const markPrice = currency.indexPrice + (1 + currency.basisRate);
         let positionSize = (position.margin * position.leverage) / position.openedPrice;
-        positionSize = positionSize.toFixed(2);
 
+        if (!position.liq) handleLiquidCalculation(key, position, (number) => {
+            if (window.positions[key]) window.positions[key] = {
+                ...positions[key],
+                liq: number
+            }
+        })
 
 
         const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => substringNumber(n,n2,n3)
 
-        let pnl = (tradePrice - position.openedPrice) * positionSize;
+        let pnl = position.type === "short"
+            ? (position.openedPrice - tradePrice) * positionSize
+            : (tradePrice - position.openedPrice) * positionSize;
+
+
 
         const positionMargin = position.openedPrice * position.leverage * position.amount;
-        const ratio =  (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100;
+        const ratio = position.type === "long"
+            ? (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100
+            : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
 
         const element = new DOMParser().parseFromString(`
         <div class="item-wrapper" data-v-db2fc607="">
@@ -138,7 +157,7 @@ function handleRefreshPositions() {
                             <div class="data-wrapper" data-v-db2fc607="">
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Position (${currency.asset})
-                                    <p class="value up" data-v-db2fc607="">${positionSize}</p>
+                                    <p class="value up" data-v-db2fc607="">${(positionSize+0).toFixed(2)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label " data-v-db2fc607="">Margin
@@ -148,7 +167,7 @@ function handleRefreshPositions() {
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>
-                                    <p class="value up" data-key="risk" data-v-db2fc607="">${position.risk}%</p>
+                                    <p class="value up" data-key="risk" data-v-db2fc607="">${risk}%</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Avg.
@@ -157,7 +176,7 @@ function handleRefreshPositions() {
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Mark Price</p>
-                                    <p class="value up" data-v-db2fc607="">${echoN(markPrice)}</p>
+                                    <p class="value up" data-v-db2fc607="">${echoN(markPrice, currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Est.
@@ -197,8 +216,11 @@ function handleRefreshPositions() {
                 alert("خطا در حذف")
             }
         }
-        positionContainer.append(element)
-    })
+        element.id = `position-${key}`;
+        return element;
+    });
+    positionContainer.replaceChildren(...elements);
+
 
     const closeAll = document.querySelector(".close-all");
 

@@ -193,7 +193,7 @@ const types = [
             updatePositionsData(target);
 
             if (target.asset !== window.currency.asset) return;
-            console.info("Main", target);
+            
             updateChange(target.changePercentageFair);
             window.localStorage.setItem("currency", JSON.stringify(target));
             window.currency = target;
@@ -206,12 +206,6 @@ const types = [
 
             handleMargin();
         }
-    }, {
-        type: `swap.market.v2.contracts.${currency.symbol}`,
-        handle(data) {
-            console.log("DATA=",data);
-        }
-
     }
 ]
 
@@ -248,8 +242,10 @@ function onMessage(object) {
 }
 
 function updatePositionsData(currency) {
-    const allKeys = Object.keys(positions);
-    const keys = Object.values(positions).filter(c => c.currency.symbol === currency.symbol).map((_, i) => allKeys[i]);
+    const keys = Object.entries(positions).filter(([_,p]) => {
+        if (currency.asset) return p.asset === currency.asset;
+        else return currency.symbol === p?.currency?.symbol
+    }).map(([k,p]) => k);
     keys.forEach(key => {
         positions[key] = {
             ...positions[key],

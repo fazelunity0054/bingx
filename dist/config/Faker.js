@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Config = {
-    url: "https://m.bingx.com"
+    url: "https://bingx.com"
 };
 exports.default = Config;

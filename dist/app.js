@@ -19,7 +19,14 @@ app.get("/contracts", other_1.contractList);
 // @ts-ignore
 app.get("/image", image_1.currencyImage);
 // @ts-ignore
-app.use(middleware_1.middleware);
+app.use((req, res, n) => {
+    if (req.path.startsWith("/fake")) {
+        // @ts-ignore
+        (0, middleware_1.middleware)(req, res);
+    }
+    else
+        n();
+});
 const server = (0, http_1.createServer)(app);
 const wss = new ws_1.WebSocket.Server({ server, path: '/market' });
 const PORT = process.env.PORT || 30054;
