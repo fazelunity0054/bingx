@@ -55,7 +55,9 @@ async function middleware(req, res) {
     });
     res.writeHead(200, {
         ...headers,
-        "access-control-allow-origin": "*"
+        "access-control-allow-origin": "*",
+        "access-control-allow-headers": "*",
+        "access-control-request-headers": "*"
     });
     res.write(filtered.buffer);
     res.end();

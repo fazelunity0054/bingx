@@ -52,7 +52,9 @@ export async function middleware(req: Request, res: ServerResponse) {
 
 	res.writeHead(200, {
 		...headers,
-		"access-control-allow-origin": "*"
+		"access-control-allow-origin": "*",
+		"access-control-allow-headers": "*",
+		"access-control-request-headers": "*"
 	});
 	res.write(filtered.buffer)
 	res.end();
