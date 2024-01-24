@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.forceFetch = void 0;
 const Faker_1 = __importDefault(require("../config/Faker"));
-const node_fetch_1 = __importDefault(require("node-fetch"));
 async function forceFetch(path, init) {
     for (let i = 0; i < 6; i++) {
         try {
@@ -40,5 +39,5 @@ function filterFetch(path, init) {
     }
     console.log(echoRequest(path, init, "fetch"));
     //@ts-ignore
-    return (0, node_fetch_1.default)(path, init);
+    return require("node-fetch")(path, init);
 }

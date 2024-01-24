@@ -1,5 +1,4 @@
 import Config from "../config/Faker";
-import fetch from "node-fetch"
 
 export async function forceFetch(path: string, init: RequestInit) {
     for (let i = 0; i < 6; i++) {
@@ -36,5 +35,5 @@ function filterFetch(path: string, init: RequestInit){
     }
     console.log(echoRequest(path,init, "fetch"))
     //@ts-ignore
-    return fetch(path, init);
+    return require("node-fetch")(path, init);
 }
