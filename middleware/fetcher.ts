@@ -4,7 +4,13 @@ import Config from "../config/Faker";
 export async function forceFetch(path: string, init: RequestInit) {
     for (let i = 0; i < 6; i++) {
         try {
-            const fetch = await filterFetch(path,init);
+            const fetch = await filterFetch(path,{
+                ...init,
+                headers: {
+                    ...init.headers,
+                    "connection": undefined
+                }
+            });
             if (!fetch.ok) {
                 throw(`${init.method} ${fetch.url} ${fetch.status}  REQUEST NOT COMPLETED`);
             }
