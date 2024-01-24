@@ -249,6 +249,7 @@ window.registerCalculators = ()=>{
         iframe.src = `/calculator.html?symbol=${symbol}`
         iframe.id = key;
         iframe.key = key;
+        iframe.loading = "lazy";
         container.append(iframe);
     })
 }

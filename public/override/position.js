@@ -150,7 +150,6 @@ function handleRefreshPositions() {
                                         <div class="tag" data-v-db2fc607="">${position.marginMode}</div>
                                         <!---->
                                         <div class="tag" data-v-db2fc607="">${position.leverage}X</div>
-                                        <img src="/ui/charge.png" class="charge" />
                                     </div>
                                 </div>
                                 <!---->

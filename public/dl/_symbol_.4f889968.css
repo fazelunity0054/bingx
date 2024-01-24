@@ -818,7 +818,7 @@ p.content {
     background: var(--light-bg-dog);
     border-radius: .32rem .32rem 0 0;
     padding-top: 0rem !important;
-    padding: .536667rem;
+    padding: 0;
     margin-top: 0;
 }
 
@@ -832,6 +832,7 @@ p.content {
     position: sticky;
     background: #fff;
     top: 0;
+    padding: 0 .536667rem;
     z-index: 1000;
 }
 
@@ -869,6 +870,7 @@ p.content {
     align-content: stretch;
     flex-wrap: nowrap;
     align-items: stretch;
+    padding: 0 .536667rem;
 }
 
 .order-light.order .container .place-order[data-v-e3e4d836] {
@@ -1521,8 +1523,28 @@ p.content {
 
 .positions-light .list-wrapper .item-wrapper .detail-wrapper .tag-wrapper[data-v-db2fc607] {
     align-items: center;
+    position: relative;
     display: flex;
     margin-top: .106667rem
+}
+
+.tag-wrapper {
+    position: relative;
+}
+
+.tag-wrapper:before {
+    content: "";
+    position: absolute;
+    right: -0.98rem;
+    z-index: 1;
+    width: 0.8rem;
+    height: 80%;
+    background: url("/ui/charge.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
 }
 
 .positions-light .list-wrapper .item-wrapper .detail-wrapper .tag-wrapper .tag[data-v-db2fc607] {
