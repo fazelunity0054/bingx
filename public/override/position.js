@@ -38,6 +38,10 @@ function handleAddPosition(type) {
     const targetVolume = +document.querySelector(".volume-input").value;
     const leverage = +variables[`${type}-leverage`];
 
+    if (window.document.readyState !== 'complete') {
+        alert("Wait for document load");
+        return;
+    }
     if (!basisRate) {
         alert("Waiting for basis rate");
         return;
@@ -223,7 +227,8 @@ function handleRefreshPositions() {
         return element;
     });
     positionContainer.innerHTML = "";
-    positionContainer.append(...elements);
+    for (let element of elements) positionContainer.append(element);
+
 
     const closeAll = document.querySelector(".close-all");
 
