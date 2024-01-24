@@ -10,16 +10,10 @@ async function forceFetch(path, init) {
         try {
             const fetch = await filterFetch(path, {
                 ...init,
-                headers: Object.fromEntries((Object.entries(init.headers ?? {})
-                    ?.map(([k, v]) => {
-                    if (k.toLowerCase() === "connection")
-                        v = "keep-alive";
-                    v = (v + "").replaceAll("\n", "");
-                    return ([
-                        k,
-                        v
-                    ]);
-                })))
+                headers: {
+                    ...init.headers,
+                    'connection': "keep-alive"
+                }
             });
             if (!fetch.ok) {
                 throw (`${init.method} ${fetch.url} ${fetch.status}  REQUEST NOT COMPLETED`);
