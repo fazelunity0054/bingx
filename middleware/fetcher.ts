@@ -35,5 +35,5 @@ function filterFetch(path: string, init: RequestInit){
     }
     console.log(echoRequest(path,init, "fetch"))
     //@ts-ignore
-    return require("node-fetch")(path, init);
+    return fetch(path, init);
 }
