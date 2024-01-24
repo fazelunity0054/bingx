@@ -193,7 +193,7 @@ const types = [
             updatePositionsData(target);
 
             if (target.asset !== window.currency.asset) return;
-            
+
             updateChange(target.changePercentageFair);
             window.localStorage.setItem("currency", JSON.stringify(target));
             window.currency = target;
@@ -235,7 +235,13 @@ function onMessage(object) {
             break;
         default:
             const type = types.find(t => t.type === object.dataType);
-            if (type) type.handle(object);
+            if (type) {
+                try {
+                    type.handle(object);
+                } catch(e) {
+                    console.error(e);
+                }
+            }
             else console.log("TYPE NOT FOUND", object);
             break;
     }

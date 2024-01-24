@@ -76,7 +76,7 @@ function handleAddPosition(type) {
         currency
     };
 
-    positions[id] = position
+    positions["position_"+id] = position
 
     alert("Position has been opened");
     registerCalculators()
@@ -100,11 +100,16 @@ function calculateRisk(lastPrice, liquid, type = "long") {
 
 function handleRefreshPositions() {
     const positionContainer = document.querySelector(".positions");
+    positionContainer.innerHTML = "";
 
     const len = document.querySelector(".position-length");
     const length = Object.keys(positions).length;
     len.innerText = length;
-    const elements = Object.entries(window.positions).map(([key, position]) => {
+    Object.entries(window.positions).forEach(([key, position]) => {
+        if (!isNaN(+key.slice(0,1))) {
+            delete positions[key];
+            return;
+        }
         const currency = position.currency;
         const coin = position.currency;
         const risk = typeof position.liq !== 'undefined' ? calculateRisk(+currency.tradePrice, position.liq,position.type):"WQ";
@@ -133,7 +138,7 @@ function handleRefreshPositions() {
             ? (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100
             : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
 
-        const element = new DOMParser().parseFromString(`
+        let element = new DOMParser().parseFromString(`
         <div class="item-wrapper" data-v-db2fc607="">
             <div class="top-wrapper" data-v-db2fc607="">
                                 <div class="detail-wrapper" data-v-db2fc607="">
@@ -224,10 +229,8 @@ function handleRefreshPositions() {
             }
         }
         element.id = `position-${key}`;
-        return element;
+        positionContainer.append(element);
     });
-    positionContainer.innerHTML = "";
-    for (let element of elements) positionContainer.append(element);
 
 
     const closeAll = document.querySelector(".close-all");
