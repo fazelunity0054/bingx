@@ -38,6 +38,10 @@ function handleAddPosition(type) {
     const targetVolume = +document.querySelector(".volume-input").value;
     const leverage = +variables[`${type}-leverage`];
 
+    if (!basisRate) {
+        alert("Waiting for basis rate");
+        return;
+    }
     if (!targetPrice || !targetVolume) {
         alert("targetPrice and targetVolume required!");
         return;
@@ -163,16 +167,15 @@ function handleRefreshPositions() {
                                     <p class="label " data-v-db2fc607="">Margin
                                         (USDT)
                                     </p>
-                                    <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin)}</p>
+                                    <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin,+currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>
                                     <p class="value up" data-key="risk" data-v-db2fc607="">${risk}%</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
-                                    <p class="label dotted" data-v-db2fc607="">Avg.
-                                        Open Price
-                                    <p class="value up" data-key="openedPrice" >${echoN(position.openedPrice)}</p>
+                                    <p class="label dotted" data-v-db2fc607="">Avg. Open Price</p>
+                                    <p class="value up" data-key="openedPrice" >${echoN(position.openedPrice,+currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Mark Price</p>
@@ -219,13 +222,8 @@ function handleRefreshPositions() {
         element.id = `position-${key}`;
         return element;
     });
-    if (positionContainer.childElementCount === 0) {
-        positionContainer.append(...elements);
-    } else {
-        positionContainer.childNodes.forEach((child,i)=>{
-            child.replaceChild(elements[i]);
-        })
-    }
+    positionContainer.innerHTML = "";
+    positionContainer.append(...elements);
 
     const closeAll = document.querySelector(".close-all");
 
