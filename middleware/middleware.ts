@@ -46,8 +46,8 @@ export async function middleware(req: Request, res: ServerResponse) {
 	let headers: any = {};
 	filtered?.headers?.forEach?.((v,k)=>{
 		if (k === "content-encoding") return;
-		if (k === "content-security-policy") v= 'default-src \'self\' blob:;img-src https: *.google-analytics.com \'self\' * data: blob:;style-src \'self\' https: \'unsafe-inline\';script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' blob: *.bb-os.com localhost:3000 *.webpushs.com *.legendtrading.com *.sendpulse.com *.bing.com *.googletagmanager.com static.zdassets.com *.google-analytics.com ajax.cloudflare.com *.geetest.com *.qbox.me *.zopim.com *.tradingview.com *.twitter.com *.ads-twitter.com *.recaptcha.net *.google.com *.facebook.net *.facebook.com *.gstatic.com *.doubleclick.net *.googleadservices.com *.volccdn.com *.ibytedtos.com fpnpmcdn.net fpcdn.io *.prdredir.com *.geevisit.com *.mql5.com *.taboola.com *.ads-twitter.com *.yandex.ru;script-src-elem \'self\' \'unsafe-inline\' *;connect-src \'self\' \'unsafe-inline\' * data: blob: *.fptls.com api.fpjs.io *.api.fpjs.io fp.bingx.com localhost:3000;form-action \'self\' *.facebook.com *.facebook.net *.advcash.com *.mrcr.io *.mercuryo.io;frame-src \'self\' * blob:;object-src \'none\';font-src \'self\' * data:;media-src \'self\' *;manifest-src \'self\' \'unsafe-inline\' \'unsafe-eval\';worker-src * blob:;child-src * blob:'
-		headers[k] = v.replace("qq-os.com",'localhost').replace("bingx.com",'localhost').replace("HttpOnly;", "").replace("Secure;", "").replace("SameSite=None","");
+		if (k === "content-security-policy") v= 'default-src \'self\' blob:;img-src https: *.google-analytics.com \'self\' * data: blob:;style-src \'self\' https: \'unsafe-inline\';script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' blob: *.bb-os.com bigxdex.online:3000 *.webpushs.com *.legendtrading.com *.sendpulse.com *.bing.com *.googletagmanager.com static.zdassets.com *.google-analytics.com ajax.cloudflare.com *.geetest.com *.qbox.me *.zopim.com *.tradingview.com *.twitter.com *.ads-twitter.com *.recaptcha.net *.google.com *.facebook.net *.facebook.com *.gstatic.com *.doubleclick.net *.googleadservices.com *.volccdn.com *.ibytedtos.com fpnpmcdn.net fpcdn.io *.prdredir.com *.geevisit.com *.mql5.com *.taboola.com *.ads-twitter.com *.yandex.ru;script-src-elem \'self\' \'unsafe-inline\' *;connect-src \'self\' \'unsafe-inline\' * data: blob: *.fptls.com api.fpjs.io *.api.fpjs.io fp.bingx.com bigxdex.online:3000;form-action \'self\' *.facebook.com *.facebook.net *.advcash.com *.mrcr.io *.mercuryo.io;frame-src \'self\' * blob:;object-src \'none\';font-src \'self\' * data:;media-src \'self\' *;manifest-src \'self\' \'unsafe-inline\' \'unsafe-eval\';worker-src * blob:;child-src * blob:'
+		headers[k] = v.replace("qq-os.com",'bigxdex.online').replace("bingx.com",'bigxdex.online').replace("HttpOnly;", "").replace("Secure;", "").replace("SameSite=None","");
 	})
 
 	res.writeHead(200, {
@@ -75,12 +75,12 @@ const filters = [
 			while ((match = regex.exec(inputString)) !== null) {
 				let [fullMatch, protocol, domain, path] = match;
 				protocol = protocol || "http"; // default to "http" if no protocol is provided
-				let replacement = `http://localhost:3000/fake/fetch/${protocol}/${domain}`;
+				let replacement = `http://bigxdex.online:3000/fake/fetch/${protocol}/${domain}`;
 				replacedString = replacedString.replace(`${protocol}://${domain}`, replacement);
 			}
-			replacedString = replacedString.replaceAll("api-app.qq-os.com", "localhost:3000/fake/fetch/https/api-app.qq-os.com")
-			replacedString = replacedString.replaceAll("api-base.bingx.io", "localhost:3000/fake/fetch/https/api-base.bingx.io")
-			replacedString = replacedString.replaceAll("https://localhost", "http://localhost")
+			replacedString = replacedString.replaceAll("api-app.qq-os.com", "bigxdex.online:3000/fake/fetch/https/api-app.qq-os.com")
+			replacedString = replacedString.replaceAll("api-base.bingx.io", "bigxdex.online:3000/fake/fetch/https/api-base.bingx.io")
+			replacedString = replacedString.replaceAll("https://bigxdex.online", "http://bigxdex.online")
 			replacedString = replacedString.replaceAll("/fetch/https/", "/fetch/ht_tps/")
 			replacedString = replacedString.replaceAll("https", "http")
 			replacedString = replacedString.replaceAll("/fetch/ht_tps/", "/fetch/https/")
