@@ -6,8 +6,7 @@ export async function forceFetch(path: string, init: RequestInit) {
             const fetch = await filterFetch(path,{
                 ...init,
                 headers: {
-                     ...init.headers,
-                     'connection': "keep-alive"
+                     ...init.headers
                 }
             });
             if (!fetch.ok) {

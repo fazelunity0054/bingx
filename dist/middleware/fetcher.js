@@ -11,8 +11,7 @@ async function forceFetch(path, init) {
             const fetch = await filterFetch(path, {
                 ...init,
                 headers: {
-                    ...init.headers,
-                    'connection': "keep-alive"
+                    ...init.headers
                 }
             });
             if (!fetch.ok) {
