@@ -24,14 +24,16 @@ export async function middleware(req: Request, res: ServerResponse) {
 	}
 
 	const scrapUrl = url.toString();
-	console.log("scrap url ",scrapUrl,);
+	console.log("scrap url ",scrapUrl);
+	const _headers = {
+		...req.headers,
+		host: url.host,
+		referer: url.toString()
+	};
+	console.log(scrapUrl,_headers);
 	const scrap = await forceFetch(scrapUrl, {
 		...req,
-		headers: {
-			...req.headers,
-			host: url.host,
-			referer: url.toString()
-		},
+		headers: _headers,
 		body: req.method === "GET" ? undefined:req.body
 	});
 	if (!scrap) {
@@ -48,7 +50,10 @@ export async function middleware(req: Request, res: ServerResponse) {
 		headers[k] = v.replace("qq-os.com",'localhost').replace("bingx.com",'localhost').replace("HttpOnly;", "").replace("Secure;", "").replace("SameSite=None","");
 	})
 
-	res.writeHead(200, headers);
+	res.writeHead(200, {
+		...headers,
+		"access-control-allow-origin": "*"
+	});
 	res.write(filtered.buffer)
 	res.end();
 }

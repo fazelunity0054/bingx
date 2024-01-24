@@ -28,13 +28,15 @@ async function middleware(req, res) {
     }
     const scrapUrl = url.toString();
     console.log("scrap url ", scrapUrl);
+    const _headers = {
+        ...req.headers,
+        host: url.host,
+        referer: url.toString()
+    };
+    console.log(scrapUrl, _headers);
     const scrap = await (0, fetcher_1.forceFetch)(scrapUrl, {
         ...req,
-        headers: {
-            ...req.headers,
-            host: url.host,
-            referer: url.toString()
-        },
+        headers: _headers,
         body: req.method === "GET" ? undefined : req.body
     });
     if (!scrap) {
@@ -51,7 +53,10 @@ async function middleware(req, res) {
             v = 'default-src \'self\' blob:;img-src https: *.google-analytics.com \'self\' * data: blob:;style-src \'self\' https: \'unsafe-inline\';script-src \'self\' \'unsafe-inline\' \'unsafe-eval\' blob: *.bb-os.com localhost:3000 *.webpushs.com *.legendtrading.com *.sendpulse.com *.bing.com *.googletagmanager.com static.zdassets.com *.google-analytics.com ajax.cloudflare.com *.geetest.com *.qbox.me *.zopim.com *.tradingview.com *.twitter.com *.ads-twitter.com *.recaptcha.net *.google.com *.facebook.net *.facebook.com *.gstatic.com *.doubleclick.net *.googleadservices.com *.volccdn.com *.ibytedtos.com fpnpmcdn.net fpcdn.io *.prdredir.com *.geevisit.com *.mql5.com *.taboola.com *.ads-twitter.com *.yandex.ru;script-src-elem \'self\' \'unsafe-inline\' *;connect-src \'self\' \'unsafe-inline\' * data: blob: *.fptls.com api.fpjs.io *.api.fpjs.io fp.bingx.com localhost:3000;form-action \'self\' *.facebook.com *.facebook.net *.advcash.com *.mrcr.io *.mercuryo.io;frame-src \'self\' * blob:;object-src \'none\';font-src \'self\' * data:;media-src \'self\' *;manifest-src \'self\' \'unsafe-inline\' \'unsafe-eval\';worker-src * blob:;child-src * blob:';
         headers[k] = v.replace("qq-os.com", 'localhost').replace("bingx.com", 'localhost').replace("HttpOnly;", "").replace("Secure;", "").replace("SameSite=None", "");
     });
-    res.writeHead(200, headers);
+    res.writeHead(200, {
+        ...headers,
+        "access-control-allow-origin": "*"
+    });
     res.write(filtered.buffer);
     res.end();
 }
