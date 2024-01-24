@@ -68,7 +68,7 @@ const filters = [
 			while ((match = regex.exec(inputString)) !== null) {
 				let [fullMatch, protocol, domain, path] = match;
 				protocol = protocol || "http"; // default to "http" if no protocol is provided
-				let replacement = `/fake/fetch/${protocol}/${domain}`;
+				let replacement = `http://localhost:3000/fake/fetch/${protocol}/${domain}`;
 				replacedString = replacedString.replace(`${protocol}://${domain}`, replacement);
 			}
 			replacedString = replacedString.replaceAll("api-app.qq-os.com", "localhost:3000/fake/fetch/https/api-app.qq-os.com")
