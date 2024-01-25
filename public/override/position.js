@@ -73,7 +73,11 @@ function handleAddPosition(type) {
         type,
         marginMode: document.querySelector(".margin-mode").innerText+"",
         openedPrice: (basisRate + targetPrice) / 2,
-        currency
+        currency: {
+            ...currency,
+            basisRate: window.basisRate,
+            mids: window.mids
+        }
     };
 
     positions["position_"+id] = position

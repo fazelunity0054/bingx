@@ -369,7 +369,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 input(amIn);
             } // amount
             {
-                let target = +(+variables.balance).toFixed(5);
+                let target = +position?.balance ?? +(+variables.balance).toFixed(5);
                 const mode = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.label.long").innerText;
                 if (mode.includes("Position")) {
                     target = Object.values(positions).filter(p => p.asset === position.asset).reduce((total, p) => total + p.margin, 0);
@@ -382,6 +382,19 @@ window.handleLiquidCalculation = (key, position, callback) => {
             iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.calc-btn > button").click();
             let n=  0;
             const th= setInterval(()=>{
+                const message = iframeDoc.querySelector("body > div:nth-child(30) > div > span > div > div > div > div > div > span")?.innerText;
+                if (message) {
+                    const n = +(message+"").split("").filter(s => !isNaN(+s)).join("");
+                    console.log(message, n);
+                    c(e);
+                    calculatorStatus[key] = "FREE";
+                    handleLiquidCalculation(key, {
+                        ...position,
+                        margin: n,
+                        balance: n
+                    }, callback);
+                    clearInterval(th);
+                }
                 let result = iframeDoc.querySelector("#__layout > div > div > div > section > div.result-wrapper > div > div > span.value > span").innerText+"";
                 if (result.includes("--") && n < 100) {
                     n++;
