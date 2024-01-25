@@ -319,7 +319,28 @@ window.handleLiquidCalculation = (key, position, callback) => {
                     },20);
                 })
             }
+            const waitForExec = async (func) => {
+                return await new Promise((r,re)=>{
+                    let n = 0;
+                    const thread =setInterval(()=>{
+
+                        n++;
+                        try {
+                            const find = func(iframeDoc);
+                            if (find && iframeDoc.readyState === 'complete') {
+                                r(find);
+                                clearInterval(thread);
+                            }
+                        } catch{}
+                        if (n > 10000) {
+                            re("timeout");
+                            clearInterval(thread);
+                        }
+                    },20);
+                })
+            }
             await waitFor("body");
+
 
             /**
              *
@@ -366,6 +387,10 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span").click();
                 (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
                     .click();
+                await waitForExec((iframeDoc)=>{
+                    iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span")
+                        .innerText.trim() === "USDT"
+                })
             }
             {
                 const amIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.input > input[type=number]");
