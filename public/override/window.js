@@ -250,6 +250,12 @@ window.registerCalculators = ()=>{
         iframe.src = `/calculator.html?symbol=${symbol}`
         iframe.id = key;
         iframe.key = key;
+        iframe.onload = ()=>{
+            console.log(key, 'loaded')
+            iframe.contentWindow.addEventListener("", (e)=>{
+                console.log("DOC ERROR",key, e)
+            })
+        }
         container.append(iframe);
         console.log("CALCULATOR",key,"REGISTERED!")
     });
@@ -266,6 +272,7 @@ window.registerCalculators = ()=>{
 
 let calculatorStatus = {}
 let calculatorCallbacks = {}
+let calculatorErrors = {};
 
 /**
  *
@@ -389,6 +396,15 @@ window.handleLiquidCalculation = (key, position, callback) => {
         calculatorCallbacks[key]?.forEach?.(c => c(n));
         calculatorCallbacks[key] = undefined;
     }).catch((e)=>{
+        calculatorErrors[key] ??= 0;
+
+        if (calculatorErrors[key] >= 40) {
+            iframe.contentWindow.location.reload();
+            delete calculatorErrors[key];
+            return true;
+        }
+
+        calculatorErrors[key] += 1;
         return true;
     }).finally(()=>{
         calculatorStatus[key] = "FREE";
