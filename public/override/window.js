@@ -243,14 +243,13 @@ window.registerCalculators = ()=>{
         symbols[key] = p.currency.symbol
     })
 
-    let registered = [];
     Object.entries(symbols).map(([key, symbol])=>{
         const iframe = document.createElement('iframe');
         iframe.src = `/calculator.html?symbol=${symbol}`
         iframe.id = key;
         iframe.key = key;
-        iframe.loading = "lazy";
         container.append(iframe);
+        console.log("CALCULATOR",key,"REGISTERED!")
     })
 }
 
