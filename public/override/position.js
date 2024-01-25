@@ -102,7 +102,7 @@ function calculateRisk(lastPrice, liquid, type = "long") {
 }
 
 function handleRefreshPositions() {
-    if (typeof calculatorStatus !== 'undefined' && Object.keys(calculatorStatus).length === 0) {
+    if (document.querySelectorAll(".calculators > iframe").length === 0) {
         window.registerCalculators();
     }
     const positionContainer = document.querySelector(".positions");
