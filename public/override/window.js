@@ -441,7 +441,10 @@ window.handleLiquidCalculation = (key, position, callback) => {
                             ...position,
                             forceMargin: n,
                             balance: n
-                        },callback);
+                        },(n)=>{
+                            callback(n);
+                            calculatorStatus[key] = "FREE";
+                        });
                     }
                     clearInterval(th);
                 }
