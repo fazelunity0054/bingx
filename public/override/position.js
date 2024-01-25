@@ -112,7 +112,7 @@ function handleRefreshPositions() {
         }
         const currency = position.currency;
         const coin = position.currency;
-        const risk = typeof position.liq !== 'undefined' ? calculateRisk(+currency.tradePrice, position.liq,position.type):"WQ";
+        const risk = typeof position.liq !== 'undefined' ? calculateRisk(+currency.tradePrice, position.liq,position.type):"Wait";
         const tradePrice = +currency.tradePrice;
         const markPrice = currency.indexPrice + (1 + currency.basisRate);
         let positionSize = (position.margin * position.leverage) / position.openedPrice;
@@ -193,7 +193,7 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">Est.
                                         Liq. Price
                                     </p>
-                                    <p class="value up" data-key="liq" data-v-db2fc607="">${echoN(position.liq, currency.priceDigitNum)}</p>
+                                    <p class="value up" data-key="liq" data-v-db2fc607="">${position.liq ? echoN(position.liq, currency.priceDigitNum):"Calculating"}</p>
                                 </div>
                                 <!---->
                             </div>
