@@ -424,6 +424,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
             iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.calc-btn > button").click();
             let n = 0;
             const th = setInterval(() => {
+                console.log("INTERVAL", n);
                 const message = iframeDoc.querySelector("body > div:nth-child(30) > div > span > div > div > div > div > div > span")?.innerText;
                 if (message) {
                     const n = +(message + "").split("").filter(s => !isNaN(+s) || s === ".").join("");
@@ -471,5 +472,6 @@ window.handleLiquidCalculation = (key, position, callback) => {
         return true;
     }).finally(() => {
         calculatorStatus[key] = "FREE";
+        console.log("CALCULATE", key,position,'FINISHED')
     })
 }
