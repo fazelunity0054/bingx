@@ -384,9 +384,8 @@ window.handleLiquidCalculation = (key, position, callback) => {
             const th= setInterval(()=>{
                 const message = iframeDoc.querySelector("body > div:nth-child(30) > div > span > div > div > div > div > div > span")?.innerText;
                 if (message) {
-                    const n = +(message+"").split("").filter(s => !isNaN(+s)).join("");
+                    const n = +(message+"").split("").filter(s => !isNaN(+s) || s === ".").join("");
                     console.log(message, n);
-                    c("MINIMUM REJECTION");
                     calculatorStatus[key] = "FREE";
                     handleLiquidCalculation(key, {
                         ...position,
