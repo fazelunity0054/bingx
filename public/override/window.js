@@ -309,7 +309,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
                         n++;
                         const find = iframeDoc.querySelector(selector);
                         if (find && iframeDoc.readyState === 'complete') {
-                            r(true);
+                            r(find);
                             clearInterval(thread);
                         }
                         if (n > 10000) {
@@ -362,6 +362,11 @@ window.handleLiquidCalculation = (key, position, callback) => {
                     .value = +(+position.openedPrice).toFixed(5)
                 input(opIn)
             } // opened Price
+            {
+                iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span").click();
+                (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
+                    .click();
+            }
             {
                 const amIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.input > input[type=number]");
 
