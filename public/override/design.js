@@ -127,7 +127,10 @@
                 window.marginUnit = next;
                 element.innerText =display[units.findIndex(u => u === next)]
                 alert(`Margin Unit Changed to ${next}`)
-
+                document.querySelectorAll(".symbol-reverse").forEach(e => {
+                    console.log(next);
+                    e.innerText =  next === "symbol" ? "USDT":currency.asset
+                })
                 document.querySelector(".available-volume").style.display = next === "symbol" ? "flex":"none";
             }
         }
