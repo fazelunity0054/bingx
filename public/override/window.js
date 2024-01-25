@@ -230,7 +230,7 @@ window.marginUnit = "symbol";
 
 window.registerCalculators = ()=>{
     const container = document.querySelector(".calculators");
-    container.innerHTML = null;
+
     /**
      * @type {positions}
      */
@@ -244,6 +244,8 @@ window.registerCalculators = ()=>{
     })
 
     Object.entries(symbols).map(([key, symbol])=>{
+        if (container.querySelector(`#${key}`)) return;
+
         const iframe = document.createElement('iframe');
         iframe.src = `/calculator.html?symbol=${symbol}`
         iframe.id = key;
