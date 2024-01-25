@@ -3,7 +3,7 @@
  * @param type {"short" | "long"}
  * @return number
  */
-window.getAvailableMargin = (type)=>{
+window.getAvailableMargin = (type) => {
     const leverage = +variables[`${type}-leverage`] || 0;
     const targetPrice = +document.querySelector(".price-input")?.value || 0;
     const targetVolume = +document.querySelector(".volume-input")?.value || 0;
@@ -15,7 +15,7 @@ window.getAvailableMargin = (type)=>{
  * @param marginUnit {"symbol" | "usdt"}
  * @return number
  */
-window.getMarginOfType = (type, marginUnit = window.marginUnit)=>{
+window.getMarginOfType = (type, marginUnit = window.marginUnit) => {
     const leverage = +variables[`${type}-leverage`] || 0;
     let targetPrice = +document.querySelector(".price-input")?.value || 0;
     if (type === 'short' && targetPrice < currency.tradePrice)
@@ -31,11 +31,12 @@ window.getMarginOfType = (type, marginUnit = window.marginUnit)=>{
     }
 }
 window.currency = JSON.parse(window.localStorage.getItem("currency")) ?? null
+
 function calcNumber(n) {
     if (n < 1000)
         return {
             symbol: "",
-                result: substringNumber(n, currency.qtyDigitNum, false)
+            result: substringNumber(n, currency.qtyDigitNum, false)
         }
     if (n >= 1000 && n < 1_000_000) {
         return {
@@ -50,7 +51,9 @@ function calcNumber(n) {
         }
     }
 }
+
 window.calcNumber = calcNumber;
+
 /**
  *
  * @param type {"short" | "long"}
@@ -66,33 +69,34 @@ function calculateMaxMarginAsSymbol(type, lastTrade) {
         targetPrice = currency.tradePrice;
 
     const B = +variables.balance;
-    let origin = ((B * leverage) / targetPrice) ;
+    let origin = ((B * leverage) / targetPrice);
     const fee = (type === "long" ? calculateFee(B, leverage, targetPrice) : 0);
 
     let result = origin - fee;
     if (result < 0)
         result = 0;
-    return result < 99 ? substringNumber(result, +currency.qtyDigitNum,true) : (type === "long" ? Math.floor(result):Math.round(result)).toLocaleString();
+    return result < 99 ? substringNumber(result, +currency.qtyDigitNum, true) : (type === "long" ? Math.floor(result) : Math.round(result)).toLocaleString();
 }
+
 window.calculateMaxMarginAsSymbol = calculateMaxMarginAsSymbol;
 
-window.calculateFee = (B, leverage, targetPrice)=>{
+window.calculateFee = (B, leverage, targetPrice) => {
     return (((B * leverage) * 0.0005) * leverage) / targetPrice
 }
 
-window.isLimit = ()=>{
+window.isLimit = () => {
     return document.querySelector(".trade-type")?.querySelector('.target')?.innerText?.includes("Limit");
 }
 
-window.handleMargin = ()=>{
-    document.querySelectorAll(".margin").forEach(e=>{
-        const type = e.getAttribute("data-type");
-        const margin = getMarginOfType(type);
-        let R = substringNumber(margin, marginUnit === "symbol" ? 2:+currency.qtyDigitNum, true)
-        R = marginUnit === "symbol" ? +R:R; // Remove end zeros
-        e.innerText = margin > 0 ? R : "--";
-        calculateLiquidationPrice(type);
-    }
+window.handleMargin = () => {
+    document.querySelectorAll(".margin").forEach(e => {
+            const type = e.getAttribute("data-type");
+            const margin = getMarginOfType(type);
+            let R = substringNumber(margin, marginUnit === "symbol" ? 2 : +currency.qtyDigitNum, true)
+            R = marginUnit === "symbol" ? +R : R; // Remove end zeros
+            e.innerText = margin > 0 ? R : "--";
+            calculateLiquidationPrice(type);
+        }
     );
 }
 
@@ -110,9 +114,9 @@ function calculateLiquidationPrice(type = "short", key = 'currency', callback = 
         amount: +document.querySelector(".volume-input").value,
         margin: getMarginOfType(type),
         asset: currency.asset
-    }:positions[key];
+    } : positions[key];
 
-    handleLiquidCalculation(key === 'currency' ? `currency-${type}`:key, position, (number)=>{
+    handleLiquidCalculation(key === 'currency' ? `currency-${type}` : key, position, (number) => {
         if (!callback) {
             const t = document.querySelector(`.liq-${type}-price`);
             if (t)
@@ -125,15 +129,15 @@ function calculateLiquidationPrice(type = "short", key = 'currency', callback = 
 
 window.calculateLiquidationPrice = calculateLiquidationPrice;
 
-window.substringNumber = (margin,n=2,force=true)=>{
+window.substringNumber = (margin, n = 2, force = true) => {
     const R = (margin + '').split(".");
     if (n === 0) return R?.[0] ?? margin;
     return R[0] + (!!R[1] || force ? "." : "") + (!!R[1] || force ? Array.from({
         length: n
-    }).map((_,i)=>(R?.[1]?.split("")?.[i] || "0")).join("") : "");
+    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : "");
 }
 
-function generateRandomString(charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', length=10) {
+function generateRandomString(charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', length = 10) {
     // Validate the provided length
     if (length < 1 || !Number.isInteger(length)) {
         throw new Error('Invalid length. Please provide a positive integer.');
@@ -148,7 +152,9 @@ function generateRandomString(charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmno
 
     return randomString;
 }
+
 window.generateRandomString = generateRandomString;
+
 function formatNumber(number, len) {
     const args = (number + "").split(".");
     if (args.length === 1)
@@ -168,25 +174,29 @@ function formatNumber(number, len) {
 
     return result;
 }
+
 window.formatNumber = formatNumber;
 
 function getUSDTBalance() {
     const b = +variables.balance;
     return b - (b / 100 * fee);
 }
+
 window.getActualBalance = getUSDTBalance;
-window.refreshFee = ()=>{
+window.refreshFee = () => {
     window.fee = 0.045 + +currency.fundingRate
 }
 window.fee = 0.045;
 refreshFee()
+
 function getActualNumber(number) {
     return number * rate;
 }
+
 window.getActualNumber = getActualNumber;
 
-window.variables = new Proxy(JSON.parse(window.localStorage.getItem("variables") || "{}") ?? {},{
-    set: (object,key,newValue)=>{
+window.variables = new Proxy(JSON.parse(window.localStorage.getItem("variables") || "{}") ?? {}, {
+    set: (object, key, newValue) => {
         const elm = document.querySelector(`*[data-key="${key}"]`);
         if (elm && elm.innerText !== newValue) elm.innerText = newValue;
         object[key] = newValue;
@@ -195,7 +205,7 @@ window.variables = new Proxy(JSON.parse(window.localStorage.getItem("variables")
     }
 });
 window.rate = 1;
-window.updateChange = (newChange='unknown')=>{
+window.updateChange = (newChange = 'unknown') => {
     const cChange = document.querySelector(".currency-change");
     cChange.innerText = newChange + "%";
     const change = +newChange;
@@ -205,31 +215,31 @@ window.updateChange = (newChange='unknown')=>{
 }
 window.basisRate = 0;
 window.events = {};
-window.addRefreshEvent = (id,event)=>{
+window.addRefreshEvent = (id, event) => {
     events[id] = event;
 }
 window.positions ??= JSON.parse(localStorage.getItem('positions') || "{}");
 
-window.test = (targetKey)=>{
+window.test = (targetKey) => {
     const target = currency[targetKey];
     for (let key in currency) {
-        console.log("TEST",targetKey,"-",key,target - currency[key])
+        console.log("TEST", targetKey, "-", key, target - currency[key])
     }
 }
 
-window.testAll = ()=>{
+window.testAll = () => {
     for (let key in currency) window.test(key);
 }
 
-window.marginUnits = ["symbol","usdt"]
-window.marginDisplay = [currency.asset, 'USDT','USDT']
+window.marginUnits = ["symbol", "usdt"]
+window.marginDisplay = [currency.asset, 'USDT', 'USDT']
 /**
  *
  * @type {"symbol" | "usdt"}
  */
 window.marginUnit = "symbol";
 
-window.registerCalculators = ()=>{
+window.registerCalculators = () => {
     const container = document.querySelector(".calculators");
 
     /**
@@ -244,28 +254,28 @@ window.registerCalculators = ()=>{
         symbols[key] = p.currency.symbol
     })
 
-    Object.entries(symbols).map(([key, symbol])=>{
+    Object.entries(symbols).map(([key, symbol]) => {
         if (container.querySelector(`#${key}`)) return;
 
         const iframe = document.createElement('iframe');
         iframe.src = `/calculator.html?symbol=${symbol}`
         iframe.id = key;
         iframe.key = key;
-        iframe.onload = ()=>{
+        iframe.onload = () => {
             console.log(key, 'loaded')
-            iframe.contentWindow.addEventListener("", (e)=>{
-                console.log("DOC ERROR",key, e)
+            iframe.contentWindow.addEventListener("", (e) => {
+                console.log("DOC ERROR", key, e)
             })
         }
         container.append(iframe);
-        console.log("CALCULATOR",key,"REGISTERED!")
+        console.log("CALCULATOR", key, "REGISTERED!")
     });
 
     container.querySelectorAll("iframe").forEach(iframe => {
         const id = iframe.id
         if (!symbols[id]) {
             iframe.parentNode.removeChild(iframe);
-            console.log("CALCULATOR",id,"REMOVED!")
+            console.log("CALCULATOR", id, "REMOVED!")
         }
     })
 }
@@ -290,7 +300,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
     if (calculatorStatus[key] === "PENDING") {
         return;
     }
-    const iframe = document.querySelector("#"+key);
+    const iframe = document.querySelector("#" + key);
     if (!iframe) {
         console.error(`Unregistered calculator ${key}`)
         registerCalculators();
@@ -299,13 +309,13 @@ window.handleLiquidCalculation = (key, position, callback) => {
 
     const iframeDoc = iframe.contentWindow.document;
 
-    new Promise(async (r,c) => {
+    new Promise(async (r, c) => {
         try {
             calculatorStatus[key] = "PENDING";
             const waitFor = async (selector) => {
-                return await new Promise((r,re)=>{
+                return await new Promise((r, re) => {
                     let n = 0;
-                    const thread =setInterval(()=>{
+                    const thread = setInterval(() => {
                         n++;
                         const find = iframeDoc.querySelector(selector);
                         if (find && iframeDoc.readyState === 'complete') {
@@ -316,27 +326,28 @@ window.handleLiquidCalculation = (key, position, callback) => {
                             re("timeout");
                             clearInterval(thread);
                         }
-                    },20);
+                    }, 20);
                 })
             }
             const waitForExec = async (func) => {
-                return await new Promise((r,re)=>{
+                return await new Promise((r, re) => {
                     let n = 0;
-                    const thread =setInterval(()=>{
+                    const thread = setInterval(async () => {
 
                         n++;
                         try {
-                            const find = func(iframeDoc);
+                            const find = await func(iframeDoc);
                             if (find && iframeDoc.readyState === 'complete') {
                                 r(find);
                                 clearInterval(thread);
                             }
-                        } catch{}
+                        } catch {
+                        }
                         if (n > 10000) {
                             re("timeout");
                             clearInterval(thread);
                         }
-                    },20);
+                    }, 20);
                 })
             }
             await waitFor("body");
@@ -346,8 +357,8 @@ window.handleLiquidCalculation = (key, position, callback) => {
              *
              * @param e{Element}
              */
-            const input = (e)=>{
-                e.dispatchEvent(new Event("input",{
+            const input = (e) => {
+                e.dispatchEvent(new Event("input", {
                     bubbles: true
                 }));
                 return e;
@@ -359,20 +370,20 @@ window.handleLiquidCalculation = (key, position, callback) => {
             {
                 iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div").click();
                 await waitFor(".selector-dialog .option-list");
-                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div.selector-dialog > div.option-list > div:nth-child(${position.marginMode.includes("Iso") ? 2:1})`).click();
+                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div.selector-dialog > div.option-list > div:nth-child(${position.marginMode.includes("Iso") ? 2 : 1})`).click();
             } // Select Margin Mode
             {
-                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.direction > button:nth-child(${position.type === "short" ? 3:1})`).click();
+                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.direction > button:nth-child(${position.type === "short" ? 3 : 1})`).click();
             } // Position Type
             {
                 const currentLeverage = +iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span.leverage-input-small").innerText;
                 const diff = position.leverage - currentLeverage;
                 if (diff < 0) { // Decrease
-                    for (let i=0;i< -(diff);i++) {
+                    for (let i = 0; i < -(diff); i++) {
                         iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span:nth-child(1)").click();
                     }
                 } else {
-                    for (let i=0;i<diff;i++) {
+                    for (let i = 0; i < diff; i++) {
                         iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.leverage > div:nth-child(1) > div > div.leverage-input > span:nth-child(6)").click();
                     }
                 }
@@ -384,10 +395,11 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 input(opIn)
             } // opened Price
             {
-                iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span").click();
-                (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
-                    .click();
-                await waitForExec((iframeDoc)=>{
+                await waitForExec(async (iframeDoc) => {
+                    iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span").click();
+                    (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
+                        .click();
+
                     return iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span")
                         .innerText.trim() === "USDT"
                 })
@@ -404,17 +416,17 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 if (mode.includes("Position")) {
                     target = position.forceMargin ?? Object.values(positions).filter(p => p.asset === position.asset).reduce((total, p) => total + p.margin, 0);
                 }
-                const bIn =iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.input > input[type=number]");
+                const bIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.input > input[type=number]");
                 input(bIn)
                     .value = target;
                 input(bIn);
             } // balance | margin
             iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.calc-btn > button").click();
-            let n=  0;
-            const th= setInterval(()=>{
+            let n = 0;
+            const th = setInterval(() => {
                 const message = iframeDoc.querySelector("body > div:nth-child(30) > div > span > div > div > div > div > div > span")?.innerText;
                 if (message) {
-                    const n = +(message+"").split("").filter(s => !isNaN(+s) || s === ".").join("");
+                    const n = +(message + "").split("").filter(s => !isNaN(+s) || s === ".").join("");
                     console.log(position, message, n);
                     calculatorStatus[key] = "FREE";
                     window.positions[key] = {
@@ -424,21 +436,21 @@ window.handleLiquidCalculation = (key, position, callback) => {
                     }
                     clearInterval(th);
                 }
-                let result = iframeDoc.querySelector("#__layout > div > div > div > section > div.result-wrapper > div > div > span.value > span").innerText+"";
+                let result = iframeDoc.querySelector("#__layout > div > div > div > section > div.result-wrapper > div > div > span.value > span").innerText + "";
                 if (result.includes("--") && n < 100) {
                     n++;
                     return;
                 }
-                r(+(result.replaceAll(",","")) || 0);
+                r(+(result.replaceAll(",", "")) || 0);
                 clearInterval(th);
-            },10);
+            }, 10);
         } catch (e) {
             c(e);
         }
-    }).then((n)=>{
+    }).then((n) => {
         calculatorCallbacks[key]?.forEach?.(c => c(n));
         calculatorCallbacks[key] = undefined;
-    }).catch((e)=>{
+    }).catch((e) => {
         calculatorErrors[key] ??= 0;
 
         if (calculatorErrors[key] >= 40) {
@@ -449,7 +461,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
 
         calculatorErrors[key] += 1;
         return true;
-    }).finally(()=>{
+    }).finally(() => {
         calculatorStatus[key] = "FREE";
     })
 }
