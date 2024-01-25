@@ -397,7 +397,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
             {
                 await waitForExec(async (iframeDoc) => {
                     iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span").click();
-                    (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
+                    (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options.fade-leave.fade-leave-active > div:nth-child(2)"))
                         .click();
 
                     return iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span")

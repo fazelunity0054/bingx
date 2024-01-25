@@ -223,6 +223,8 @@ function handleRefreshPositions() {
                     positions[key] ={
                         ...positions[key],
                         liq: undefined,
+                        balance: undefined,
+                        forceMargin: undefined,
                         [eKey]: +value,
                     }
 
