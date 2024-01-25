@@ -388,7 +388,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 (await waitFor("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div.select-options > div.option.active"))
                     .click();
                 await waitForExec((iframeDoc)=>{
-                    iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span")
+                    return iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.extra > div > div > span")
                         .innerText.trim() === "USDT"
                 })
             }
