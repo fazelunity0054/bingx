@@ -215,9 +215,13 @@ function handleRefreshPositions() {
                 const eKey = e.getAttribute("data-key");
                 const hint = e.getAttribute("data-hint");
                 const value = window.prompt(hint || "Enter Value");
-                if (!!value?.length) positions[key] ={
-                    ...positions[key],
-                    [eKey]: +value
+                if (!!value?.length) {
+                    positions[key] ={
+                        ...positions[key],
+                        liq: undefined,
+                        [eKey]: +value,
+                    }
+
                 }
             }
         })
