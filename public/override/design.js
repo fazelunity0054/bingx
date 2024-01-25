@@ -141,7 +141,11 @@
     },
     {
         name: "Register Calculators",
-        handle: registerCalculators
+        handle: ()=>{
+            window.addEventListener("load", ()=>{
+                registerCalculators();
+            })
+        }
     }
 ].forEach((item)=>{
     try {
