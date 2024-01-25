@@ -294,6 +294,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
     if (!iframe) {
         console.error(`Unregistered calculator ${key}`)
         callback(0);
+        registerCalculators();
         return;
     }
 

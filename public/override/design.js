@@ -138,14 +138,6 @@
             const html = document.querySelector("html");
             html.style.fontSize = "37px"
         }
-    },
-    {
-        name: "Register Calculators",
-        handle: ()=>{
-            window.addEventListener("load", ()=>{
-                registerCalculators();
-            })
-        }
     }
 ].forEach((item)=>{
     try {
