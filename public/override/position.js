@@ -147,14 +147,23 @@ function handleRefreshPositions() {
 
         }
 
+        const liquidationPrice = +position.liq;
+        const stopLoss = position.sl ? +position.sl : null;
+        const takeProfit = position.tp ? +position.tp : null;
+
+        const buffer = 0.001;
+
         if (position.type === "long") {
-            if (+currency.tradePrice <= +position.liq) closePosition("GOT LIQUID");
-            if (position.sl && position.sl >= +currency.tradePrice) closePosition("STOP LOSS");
-            if (position.tp && position.tp <= +currency.tradePrice) closePosition("TAKE PROFIT");
+            if (tradePrice <= liquidationPrice) closePosition("GOT LIQUID");
+            if (stopLoss !== null && tradePrice <= stopLoss + buffer) closePosition("STOP LOSS");
+            if (takeProfit !== null && tradePrice >= takeProfit - buffer) closePosition("TAKE PROFIT");
+        } else if (position.type === "short") {
+            if (tradePrice >= liquidationPrice) closePosition("GOT LIQUID");
+            if (stopLoss !== null && tradePrice >= stopLoss - buffer) closePosition("STOP LOSS");
+            if (takeProfit !== null && tradePrice <= takeProfit + buffer) closePosition("TAKE PROFIT");
         } else {
-            if (+currency.tradePrice >= +position.liq) closePosition("GOT LIQUID");
-            if (position.sl && position.sl <= +currency.tradePrice) closePosition("STOP LOSS");
-            if (position.tp && position.tp >= +currency.tradePrice) closePosition("TAKE PROFIT");
+            // Handle any other position types or log an error
+            console.log("Unknown position type:", position.type);
         }
 
         const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => typeof n === 'undefined' ? undefined:substringNumber(n,n2,n3)
