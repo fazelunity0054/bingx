@@ -95,7 +95,7 @@ function calculateRisk(lastPrice, liquid, type = "long") {
         // For long positions (default)
         change = (lastPrice - liquid) / lastPrice * 100;
     }
-    return Math.max(change < 100 ? change.toFixed(2):1090, 0);
+    return Math.max(change < 100 ? change.toFixed(2):99.99, 0);
 }
 
 function handleRefreshPositions() {
