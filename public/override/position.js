@@ -193,7 +193,7 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">Est.
                                         Liq. Price
                                     </p>
-                                    <p class="value up" data-key="liq" data-v-db2fc607="">${position.liq ? echoN(position.liq, currency.priceDigitNum):"Calculating"}</p>
+                                    <p class="value up" data-key="liq" data-v-db2fc607="">${typeof position.liq !== 'undefined' ? echoN(position.liq, currency.priceDigitNum):"Calculating"}</p>
                                 </div>
                                 <!---->
                             </div>
