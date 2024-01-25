@@ -293,7 +293,6 @@ window.handleLiquidCalculation = (key, position, callback) => {
     const iframe = document.querySelector("#"+key);
     if (!iframe) {
         console.error(`Unregistered calculator ${key}`)
-        callback(0);
         registerCalculators();
         return;
     }
