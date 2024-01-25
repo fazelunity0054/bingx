@@ -426,7 +426,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
             const th = setInterval(() => {
                 console.log("INTERVAL", n);
                 const message = iframeDoc.querySelector("body > div:nth-child(30) > div > span > div > div > div > div > div > span")?.innerText;
-                if (message) {
+                if (message && !position.handleMinimum) {
                     const n = +(message + "").split("").filter(s => !isNaN(+s) || s === ".").join("");
                     console.log(position, message, n);
                     calculatorStatus[key] = "FREE";
@@ -434,13 +434,15 @@ window.handleLiquidCalculation = (key, position, callback) => {
                         window.positions[key] = {
                             ...window.positions[key],
                             balance: n,
-                            forceMargin: n
+                            forceMargin: n,
+                            handleMinimum: true
                         }
                     } else {
                         handleLiquidCalculation(key, {
                             ...position,
                             forceMargin: n,
-                            balance: n
+                            balance: n,
+                            handleMinimum: true
                         },(n)=>{
                             callback(n);
                             calculatorStatus[key] = "FREE";
