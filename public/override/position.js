@@ -215,7 +215,7 @@ function handleRefreshPositions() {
                 const eKey = e.getAttribute("data-key");
                 const hint = e.getAttribute("data-hint");
                 const value = window.prompt(hint || "Enter Value");
-                positions[key] ={
+                if (!!value.length) positions[key] ={
                     ...positions[key],
                     [eKey]: +value
                 }
@@ -223,8 +223,8 @@ function handleRefreshPositions() {
         })
         const btn = element.querySelector(".position-close");
         btn.onclick = ()=>{
-            if (window.confirm("ایا میخواهید پوزیشن را ببنید؟") && !(delete window.positions[key])) {
-                alert("خطا در حذف")
+            if (window.confirm(`Delete the ${currency.asset} position?`) && !(delete window.positions[key])) {
+                alert("FAILED TO DELETE THE POSITION! position doesn't exists")
             }
         }
         element.id = `position-${key}`;
