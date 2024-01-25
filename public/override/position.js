@@ -128,21 +128,37 @@ function handleRefreshPositions() {
                 ...positions[key],
                 liq: number
             }
-        })
-
-
-        const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => substringNumber(n,n2,n3)
+        });
 
         let pnl = position.type === "short"
             ? (position.openedPrice - tradePrice) * positionSize
             : (tradePrice - position.openedPrice) * positionSize;
 
-
-
         const positionMargin = position.openedPrice * position.leverage * position.amount;
         const ratio = position.type === "long"
             ? (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100
             : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
+
+        const closePosition = (reason)=>{
+            alert(`${currency.asset} Closed! reason: ${reason}`);
+            const profit = (+position.margin / 100) * ratio;
+            variables.balance = (+variables.balance + (+position.margin + profit)).toFixed(3);
+            delete window.positions[key]
+
+        }
+
+        if (position.type === "long") {
+            if (+currency.tradePrice <= +position.liq) closePosition("GOT LIQUID");
+            if (position.sl && position.sl >= +currency.tradePrice) closePosition("STOP LOSS");
+            if (position.tp && position.tp <= +currency.tradePrice) closePosition("TAKE PROFIT");
+        } else {
+            if (+currency.tradePrice >= +position.liq) closePosition("GOT LIQUID");
+            if (position.sl && position.sl <= +currency.tradePrice) closePosition("STOP LOSS");
+            if (position.tp && position.tp >= +currency.tradePrice) closePosition("TAKE PROFIT");
+        }
+
+        const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => typeof n === 'undefined' ? undefined:substringNumber(n,n2,n3)
+
 
         let element = new DOMParser().parseFromString(`
         <div class="item-wrapper" data-v-db2fc607="">
@@ -152,7 +168,7 @@ function handleRefreshPositions() {
                                         ${currency?.name?.split("/")?.join("")}
                                     </p>
                                     <div class="tag-wrapper" data-v-db2fc607="">
-                                        <div class="tag ${position.type}" data-v-db2fc607="">${position.type.slice(0,1).toUpperCase()}${position.type.slice(1)}</div>
+                                        <div class="tag ${position.type}" data-v-db2fc607="">${position.type.slice(0, 1).toUpperCase()}${position.type.slice(1)}</div>
                                         <div class="tag" data-v-db2fc607="">${position.marginMode}</div>
                                         <!---->
                                         <div class="tag" data-key="leverage" data-v-db2fc607="">${position.leverage}X</div>
@@ -165,23 +181,23 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">
                                         Unrealized PnL (USDT)
                                     </p>
-                                    <p class="value ${pnl > 0 ? "up":"down"}" data-v-db2fc607="">${pnl > 0 ? "+":""}${echoN(pnl, 4)}</p>
+                                    <p class="value ${pnl > 0 ? "up" : "down"}" data-v-db2fc607="">${pnl > 0 ? "+" : ""}${echoN(pnl, 4)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">PnL Ratio</p>
-                                    <p class="value ${ratio > 0 ? "up":"down"}" data-v-db2fc607="">${ratio > 0 ? "+":""}${ratio.toFixed(2)}%</p>
+                                    <p class="value ${ratio > 0 ? "up" : "down"}" data-v-db2fc607="">${ratio > 0 ? "+" : ""}${ratio.toFixed(2)}%</p>
                                 </div>
                             </div>
                             <div class="data-wrapper" data-v-db2fc607="">
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Position (${currency.asset})
-                                    <p class="value up" data-v-db2fc607="">${(positionSize+0).toFixed(2)}</p>
+                                    <p class="value up" data-v-db2fc607="">${(positionSize + 0).toFixed(2)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label " data-v-db2fc607="">Margin
                                         (USDT)
                                     </p>
-                                    <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin,+currency.priceDigitNum)}</p>
+                                    <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin, +currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>
@@ -189,7 +205,7 @@ function handleRefreshPositions() {
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Avg. Open Price</p>
-                                    <p class="value up" data-key="openedPrice" >${echoN(position.openedPrice,+currency.priceDigitNum)}</p>
+                                    <p class="value up" data-key="openedPrice" >${echoN(position.openedPrice, +currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Mark Price</p>
@@ -199,9 +215,20 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">Est.
                                         Liq. Price
                                     </p>
-                                    <p class="value up" data-key="liq" data-v-db2fc607="">${typeof position.liq !== 'undefined' ? echoN(position.liq, currency.priceDigitNum):"Calculating"}</p>
+                                    <p class="value up" data-key="liq" data-v-db2fc607="">${typeof position.liq !== 'undefined' ? echoN(position.liq, currency.priceDigitNum) : "Calculating"}</p>
                                 </div>
                                 <!---->
+                            </div>
+                            <div class="tb-sl">
+                                 <p class="label tp-sl-text">Position TP/SL</p>
+                                 <div class="ts-data">
+                                   <div class="ts-data-inner">
+                                    <span class="up ts-up average-buy">${echoN(position.tp, currency.priceDigitNum) ?? "--"}</span>
+                                    <span class="bold rb-space">/</span>
+                                    <span class="down ts-down average-sell">${echoN(position.sl, currency.priceDigitNum) ?? "--"}</span>
+                                    </div>
+                                   <img src="/ui/pen.png" />
+                                  </div>
                             </div>
                             <div class="button-wrapper" data-v-db2fc607="">
                                 <button class="bm-btn-wrap-light bm-btn-default bm-btn-small button" data-v-7f8286e3=""
@@ -240,6 +267,29 @@ function handleRefreshPositions() {
                 alert("FAILED TO DELETE THE POSITION! position doesn't exists")
             }
         }
+
+        element.querySelector(".tb-sl").onclick = () => {
+            Object.entries({
+                tp: "Take Profit",
+                sl: "Stop Loss"
+            }).forEach(([_key, name]) => {
+                const value = window.prompt(`Enter ${name} value (current: ${currency.tradePrice} ${currency.asset})`);
+                if (!isNaN(+value) && 0 < +value) {
+                    console.log("SET");
+                    window.positions[key] = {
+                        ...window.positions[key] ?? {},
+                        [_key]: +value
+                    }
+                } else {
+                    if (typeof position[_key] !== 'undefined') {
+                        let c= {...window.positions[key]};
+                        delete c[_key];
+                        window.positions[key] = c;
+                    }
+                }
+            })
+        }
+
         element.id = `position-${key}`;
         positionContainer.append(element);
     });

@@ -70,9 +70,10 @@
         name: "Volume Handler",
         handle() {
             const input = document.querySelector(".volume-input");
+            const price = document.querySelector(".price-input");
 
             const handle = () => {
-                const number = +input.value || 0;
+                const number = (getMarginOfType('short','symbol') + getMarginOfType('long', 'symbol')) / 2;
                 const balance = +variables.balance;
                 const percent = 100 / (balance / number);
                 handleMargin()
@@ -151,7 +152,7 @@
 })
 
 function changeSlider(percent) {
-    percent = Math.max(1.24, percent);
+    percent = Math.min(Math.max(1.24, percent), 100);
     const btn = document.querySelector('.slider-btn');
     btn.style.left = `calc(${percent}% - 8px)`
     const track = document.querySelector('.slider .track');
