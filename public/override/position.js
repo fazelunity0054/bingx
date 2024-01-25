@@ -31,7 +31,6 @@ window.positions = new Proxy(JSON.parse(localStorage.getItem('positions') || "{}
  * @param type {"short" | "long"}
  */
 function handleAddPosition(type) {
-    window.registerCalculators();
     const id = generateRandomString();
     const tradeType = document.querySelector(".trade-type .target").innerText;
     const targetPrice = tradeType.includes("Limit") ? +document.querySelector(".price-input").value:+currency.tradePrice;
@@ -103,6 +102,9 @@ function calculateRisk(lastPrice, liquid, type = "long") {
 }
 
 function handleRefreshPositions() {
+    if (typeof calculatorStatus !== 'undefined' && Object.keys(calculatorStatus).length === 0) {
+        window.registerCalculators();
+    }
     const positionContainer = document.querySelector(".positions");
     positionContainer.innerHTML = "";
 
