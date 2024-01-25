@@ -252,6 +252,14 @@ window.registerCalculators = ()=>{
         iframe.key = key;
         container.append(iframe);
         console.log("CALCULATOR",key,"REGISTERED!")
+    });
+
+    container.querySelectorAll("iframe").forEach(iframe => {
+        const id = iframe.id
+        if (!symbols[id]) {
+            iframe.parentNode.removeChild(iframe);
+            console.log("CALCULATOR",id,"REMOVED!")
+        }
     })
 }
 
