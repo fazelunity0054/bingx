@@ -140,7 +140,7 @@ function handleRefreshPositions() {
             : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
 
         const closePosition = (reason)=>{
-            alert(`${currency.asset} Closed! reason: ${reason}`);
+            console.log(`${currency.asset} Closed! reason: ${reason}`);
             const profit = (+position.margin / 100) * ratio;
             variables.balance = (+variables.balance + (+position.margin + profit)).toFixed(3);
             delete window.positions[key]
