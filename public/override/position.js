@@ -225,6 +225,7 @@ function handleRefreshPositions() {
                         liq: undefined,
                         balance: undefined,
                         forceMargin: undefined,
+                        handleMinimum: undefined,
                         [eKey]: +value,
                     }
 
