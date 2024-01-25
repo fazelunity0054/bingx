@@ -387,11 +387,11 @@ window.handleLiquidCalculation = (key, position, callback) => {
                     const n = +(message+"").split("").filter(s => !isNaN(+s) || s === ".").join("");
                     console.log(position, message, n);
                     calculatorStatus[key] = "FREE";
-                    handleLiquidCalculation(key, {
-                        ...position,
-                        forceMargin: n,
-                        balance: n
-                    }, callback);
+                    window.positions[key] = {
+                        ...window.positions[key],
+                        balance: n,
+                        forceMargin: n
+                    }
                     clearInterval(th);
                 }
                 let result = iframeDoc.querySelector("#__layout > div > div > div > section > div.result-wrapper > div > div > span.value > span").innerText+"";
