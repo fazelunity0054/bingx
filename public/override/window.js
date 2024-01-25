@@ -112,7 +112,7 @@ function calculateLiquidationPrice(type = "short", key = 'currency', callback = 
         openedPrice: +document.querySelector(".price-input").value,
         marginMode: document.querySelector(".margin-mode").innerText,
         amount: +document.querySelector(".volume-input").value,
-        margin: getMarginOfType(type),
+        margin: getMarginOfType(type, 'symbol'),
         asset: currency.asset
     } : positions[key];
 
@@ -407,7 +407,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
             {
                 const amIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.input.volume > div > div > div.input > input[type=number]");
 
-                input(amIn).value = +((+position.amount).toFixed(5));
+                input(amIn).value = +((+position.margin).toFixed(5));
                 input(amIn);
             } // amount
             {
