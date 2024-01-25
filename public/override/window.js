@@ -386,7 +386,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 if (message) {
                     const n = +(message+"").split("").filter(s => !isNaN(+s)).join("");
                     console.log(message, n);
-                    c(e);
+                    c("MINIMUM REJECTION");
                     calculatorStatus[key] = "FREE";
                     handleLiquidCalculation(key, {
                         ...position,
