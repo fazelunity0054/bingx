@@ -108,7 +108,8 @@ function calculateLiquidationPrice(type = "short", key = 'currency', callback = 
         openedPrice: +document.querySelector(".price-input").value,
         marginMode: document.querySelector(".margin-mode").innerText,
         amount: +document.querySelector(".volume-input").value,
-        margin: getMarginOfType(type)
+        margin: getMarginOfType(type),
+        asset: currency.asset
     }:positions[key];
 
     handleLiquidCalculation(key === 'currency' ? `currency-${type}`:key, position, (number)=>{
@@ -371,7 +372,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 let target = +(+variables.balance).toFixed(5);
                 const mode = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.label.long").innerText;
                 if (mode.includes("Position")) {
-                    target = Object.values(positions).reduce((total, p) => total + p.margin, 0);
+                    target = Object.values(positions).filter(p => p.asset === position.asset).reduce((total, p) => total + p.margin, 0);
                 }
                 const bIn =iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.input > input[type=number]");
                 input(bIn)
