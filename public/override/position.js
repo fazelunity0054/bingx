@@ -31,7 +31,7 @@ window.positions = new Proxy(JSON.parse(localStorage.getItem('positions') || "{}
  * @param type {"short" | "long"}
  */
 function handleAddPosition(type) {
-
+    window.registerCalculators();
     const id = generateRandomString();
     const tradeType = document.querySelector(".trade-type .target").innerText;
     const targetPrice = tradeType.includes("Limit") ? +document.querySelector(".price-input").value:+currency.tradePrice;
