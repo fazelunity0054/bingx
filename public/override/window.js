@@ -411,9 +411,14 @@ window.handleLiquidCalculation = (key, position, callback) => {
                 input(amIn);
             } // amount
             {
+                let target = +position?.balance ?? +(+variables.balance).toFixed(5);
+                const mode = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.label.long").innerText;
+                if (mode.includes("Position")) {
+                    target = position.forceMargin ?? 0;
+                }
                 const bIn = iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div:nth-child(6) > div > div > div.input > input[type=number]");
                 input(bIn)
-                    .value = 0;
+                    .value = target;
                 input(bIn);
             } // balance | margin
             iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.calc-btn > button").click();
