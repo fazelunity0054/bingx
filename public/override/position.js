@@ -149,7 +149,7 @@ function handleRefreshPositions() {
                                         <div class="tag ${position.type}" data-v-db2fc607="">${position.type.slice(0,1).toUpperCase()}${position.type.slice(1)}</div>
                                         <div class="tag" data-v-db2fc607="">${position.marginMode}</div>
                                         <!---->
-                                        <div class="tag" data-v-db2fc607="">${position.leverage}X</div>
+                                        <div class="tag" data-key="leverage" data-v-db2fc607="">${position.leverage}X</div>
                                     </div>
                                 </div>
                                 <!---->
