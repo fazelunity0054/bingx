@@ -429,10 +429,18 @@ window.handleLiquidCalculation = (key, position, callback) => {
                     const n = +(message + "").split("").filter(s => !isNaN(+s) || s === ".").join("");
                     console.log(position, message, n);
                     calculatorStatus[key] = "FREE";
-                    window.positions[key] = {
-                        ...window.positions[key],
-                        balance: n,
-                        forceMargin: n
+                    if (key.includes("position")) {
+                        window.positions[key] = {
+                            ...window.positions[key],
+                            balance: n,
+                            forceMargin: n
+                        }
+                    } else {
+                        handleLiquidCalculation(key, {
+                            ...position,
+                            forceMargin: n,
+                            balance: n
+                        },callback);
                     }
                     clearInterval(th);
                 }
