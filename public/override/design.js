@@ -43,6 +43,8 @@
             updateChange(currency.changePercentage);
             const symbol  =document.querySelectorAll(".symbol");
             symbol.forEach(e => e.innerText = currency.asset)
+            const pInput = document.querySelector(".price-input");
+            pInput.value = currency.tradePrice;
         }
     },
     {

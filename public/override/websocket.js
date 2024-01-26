@@ -43,7 +43,7 @@ function handleDepth(data) {
     if (isMain) {
         const lastTrade = data.data.latestTrade;
         const pInput = document.querySelector(".price-input");
-        if (!pInput.value) pInput.value = lastTrade?.price;
+        if (pInput.value === "last") pInput.value = lastTrade?.price;
 
         const cLast = document.querySelector(".current-last");
         const cond = lastTrade.priceSide?.toLowerCase?.() === 'up';
