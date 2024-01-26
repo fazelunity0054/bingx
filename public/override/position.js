@@ -173,6 +173,7 @@ function handleRefreshPositions() {
         <div class="item-wrapper" data-v-db2fc607="">
             <div class="top-wrapper" data-v-db2fc607="">
                                 <div class="detail-wrapper" data-v-db2fc607="">
+                                    <div>
                                     <p class="name" data-v-db2fc607="">
                                         ${currency?.name?.split("/")?.join("")}
                                     </p>
@@ -182,6 +183,10 @@ function handleRefreshPositions() {
                                         <!---->
                                         <div class="tag" data-key="leverage" data-v-db2fc607="">${position.leverage}X</div>
                                     </div>
+                                    </div>
+                                    <div class="card-container">
+                                    <img src="/ui/card.png" class="card-action" />
+                                     </div>
                                 </div>
                                 <!---->
                             </div>
@@ -297,6 +302,16 @@ function handleRefreshPositions() {
                     }
                 }
             })
+        }
+
+        element.querySelector(".card-action").onclick = () => {
+            window.localStorage.setItem("card", JSON.stringify({
+                currency,
+                position,
+                pnl,
+                ratio,
+            }));
+            window.location.href="/export.html";
         }
 
         element.id = `position-${key}`;

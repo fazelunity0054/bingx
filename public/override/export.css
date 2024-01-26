@@ -1,0 +1,30 @@
+.inputs {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.select-banner, .select-avatar {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.select-banner img, .select-avatar img {
+    width: 12.5rem;
+    object-fit: cover;
+}
+
+.result {
+    background-size: contain !important;
+    padding-bottom: 100px;
+}
+
+button, input {
+    color: #000 !important;
+}

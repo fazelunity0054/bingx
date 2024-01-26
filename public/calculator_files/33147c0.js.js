@@ -2048,7 +2048,7 @@ _global.SENTRY_RELEASE = {
                         if (Object(h.s)(t))
                             return c.swapApiBase + d + l.basePath + t;
                         var f = N ? "http://".concat(l.host) : r ? c.getDiffApi("businessHosts", c.apiBase) : c.apiBase;
-                        return t.includes("//") ? t.replaceAll("//","") : "".concat(f).concat(l.basePath).concat(t)
+                        return t.includes("//") ? t.slice(2) : "".concat(f).concat(l.basePath).concat(t)
                     }(F.url, Y, F.isRetry, A, D);
                     var $ = (new Date).getTime()
                       , J = {};

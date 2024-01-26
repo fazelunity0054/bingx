@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EXPORT</title>
+    <link rel="stylesheet" href="/override/export.css" >
+    <link rel="stylesheet" href="/override/vendor-navigation.891a2907.css" >
+    <link rel="stylesheet" href="/override/vendor-ant.d8965531.css" >
+    <link rel="stylesheet" href="/override/export-entry.css" >
+    <link rel="stylesheet" href="https://static-app.bb-os.com/fe-common/fonts/common.min.css?v=1.0.7" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="BingX, by iTzUnity">
+    <style type="text/css">.vue-grid-item {
+        -webkit-transition: all .2s ease;
+        transition: all .2s ease;
+        -webkit-transition-property: left, top, right;
+        transition-property: left, top, right
+    }
+
+    .vue-grid-item, .vue-grid-item.no-touch {
+        -ms-touch-action: none;
+        touch-action: none
+    }
+
+    .vue-grid-item.cssTransforms {
+        -webkit-transition-property: -webkit-transform;
+        transition-property: -webkit-transform;
+        transition-property: transform;
+        transition-property: transform, -webkit-transform;
+        left: 0;
+        right: auto
+    }
+
+    .vue-grid-item.cssTransforms.render-rtl {
+        left: auto;
+        right: 0
+    }
+
+    .vue-grid-item.resizing {
+        opacity: .6;
+        z-index: 3
+    }
+
+    .vue-grid-item.vue-draggable-dragging {
+        -webkit-transition: none;
+        transition: none;
+        z-index: 3
+    }
+
+    .vue-grid-item.vue-grid-placeholder {
+        background: red;
+        opacity: .2;
+        -webkit-transition-duration: .1s;
+        transition-duration: .1s;
+        z-index: 2;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none
+    }
+
+    .vue-grid-item > .vue-resizable-handle {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        bottom: 0;
+        right: 0;
+        background: url("data:image/svg+xml;base64,PHN2ZyBzdHlsZT0iYmFja2dyb3VuZC1jb2xvcjojZmZmZmZmMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjYiIGhlaWdodD0iNiI+PHBhdGggZD0iTTYgNkgwVjQuMmg0LjJWMEg2djZ6IiBvcGFjaXR5PSIuMzAyIi8+PC9zdmc+");
+        background-position: 100% 100%;
+        padding: 0 3px 3px 0;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        cursor: se-resize
+    }
+
+    .vue-grid-item > .vue-rtl-resizable-handle {
+        bottom: 0;
+        left: 0;
+        background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZmlsbD0ibm9uZSIgZD0iTS0xLTFoMTJ2MTJILTF6Ii8+PGc+PHBhdGggc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2U9IiMwMDAiIGZpbGw9Im5vbmUiIGQ9Ik0xNDQuODIxLTM4LjM5M2wtMjAuMzU3LTMxLjc4NSIvPjxwYXRoIHN0cm9rZT0iIzY2NiIgc3Ryb2tlLWxpbmVjYXA9InVuZGVmaW5lZCIgc3Ryb2tlLWxpbmVqb2luPSJ1bmRlZmluZWQiIHN0cm9rZS13aWR0aD0iMiIgZmlsbD0ibm9uZSIgZD0iTS45NDctLjAxOHY5LjEyNU0tLjY1NiA5aDEwLjczIi8+PC9nPjwvc3ZnPg==);
+        background-position: 0 100%;
+        padding-left: 3px;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        cursor: sw-resize;
+        right: auto
+    }
+
+    .vue-grid-item.disable-userselect {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none
+    }</style>
+    <style type="text/css">.vue-grid-layout {
+        position: relative;
+        -webkit-transition: height .2s ease;
+        transition: height .2s ease
+    }</style>
+    <script type="text/javascript"
+            src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>:root {
+        --primary: #2a66ff;
+        --light-blue: #0047FF;
+        --light-blue-hover: #5576FF;
+        --light-blue-pressed: #274DEB;
+        --light-blue-alert: #D8E7FF;
+        --light-yellow: #FFD677;
+        --light-yellow-hover: #FFE2A0;
+        --light-yellow-pressed: #EBC56D;
+        --light-yellow-alert: #FFF3D7;
+        --light-red: #FF4D4F;
+        --light-red-hover: #FF8284;
+        --light-red-pressed: #EB4749;
+        --light-red-alert: #FFCACA;
+        --light-green: #24C587;
+        --light-green-hover: #66D6AB;
+        --light-green-pressed: #21B57C;
+        --light-green-alert: #BDEEDB;
+        --light-white: #FFFFFF;
+        --light-black: #000000;
+        --light-misa: #02E887;
+        --light-bg-bird: #FFFFFF;
+        --light-bg-bird-hover: #ECECEC;
+        --light-bg-fish: #F0F0F0;
+        --light-bg-fish-hover: #E6E6E6;
+        --light-bg-cat: #F6F6F6;
+        --light-bg-cat-hover: #ECECEC;
+        --light-bg-dog: #FFFFFF;
+        --light-bg-dog-hover: #F5F5F5;
+        --light-bg-pig: #FFFFFF;
+        --light-bg-pig-hover: #F5F5F5;
+        --light-bg-panda: #F9F9F9;
+        --light-text-1: #000000;
+        --light-text-1-old: #1A1A1A;
+        --light-text-1-pressed: #000000;
+        --light-text-2: rgba(0, 0, 0, 0.7);
+        --light-text-2-old: #555555;
+        --light-text-2-hover: #2B2B2B;
+        --light-text-2-pressed: #484848;
+        --light-text-3: rgba(0, 0, 0, 0.5);
+        --light-text-3-old: #999999;
+        --light-text-3-hover: #4D4D4D;
+        --light-text-3-pressed: #828282;
+        --light-text-4: rgba(0, 0, 0, 0.4);
+        --light-text-4-old: #BFBFBF;
+        --light-text-4-hover: #606060;
+        --light-text-4-pressed: #A2A2A2;
+        --light-line-apple: #D0D0D0;
+        --light-line-apple-hover: #929292;
+        --light-line-banana: #D9D9D9;
+        --light-line-banana-hover: #989898;
+        --light-line-mango: #F0F0F0;
+        --light-line-mango-hover: #A8A8A8;
+        --light-alert-yellow: #FFF3D7;
+        --light-alert-green: #D2FFF7;
+        --light-alert-red: #FFECED;
+        --light-alert-blue: #D8E7FF;
+        --dark-white: #FFFFFF;
+        --dark-blue: #0F5FFF;
+        --dark-blue-hover: #71A1FF;
+        --dark-blue-pressed: #487FEB;
+        --dark-yellow: #FFD677;
+        --dark-yellow-hover: #FFE2A0;
+        --dark-yellow-pressed: #EBC56D;
+        --dark-red: #E2464A;
+        --dark-red-hover: #E86B6E;
+        --dark-red-pressed: #D04044;
+        --dark-green: #20AC95;
+        --dark-green-hover: #4DBDAA;
+        --dark-green-pressed: #1D9E89;
+        --dark-bg-1: #0A0B0D;
+        --dark-bg-1-hover: #585858;
+        --dark-bg-2: #141519;
+        --dark-bg-2-hover: #343434;
+        --dark-bg-3: #23242B;
+        --dark-bg-3-hover: #0E0E0E;
+        --dark-bg-4: #363942;
+        --dark-bg-bird: #383838;
+        --dark-bg-bird-hover: #484848;
+        --dark-bg-fish: #292929;
+        --dark-bg-fish-hover: #3A3A3A;
+        --dark-bg-cat: #222222;
+        --dark-bg-cat-hover: #343434;
+        --dark-bg-dog: #191919;
+        --dark-bg-dog-hover: #2B2B2B;
+        --dark-bg-pig: #0E0E0E;
+        --dark-bg-pig-hover: #212121;
+        --dark-bg-panda: #000000;
+        --dark-text-1: #FFFFFF;
+        --dark-text-1-old: #E6E6E6;
+        --dark-text-1-pressed: #D4D4D4;
+        --dark-text-2: rgba(255, 255, 255, 0.7);
+        --dark-text-2-old: #B2B2B2;
+        --dark-text-2-hover: #D8D8D8;
+        --dark-text-2-pressed: #A4A4A4;
+        --dark-text-3: rgba(255, 255, 255, 0.5);
+        --dark-text-3-old: #808080;
+        --dark-text-3-hover: #BFBFBF;
+        --dark-text-3-pressed: #767676;
+        --dark-text-4: rgba(255, 255, 255, 0.4);
+        --dark-text-4-old: #444444;
+        --dark-text-4-hover: #A2A2A2;
+        --dark-text-4-pressed: #3F3F3F;
+        --dark-line-1: #141519;
+        --dark-line-2: #2A2D34;
+        --dark-line-3: #23242B;
+        --dark-line-apple: #424242;
+        --dark-line-apple-hover: #7B7B7B;
+        --dark-line-banana: #333333;
+        --dark-line-banana-hover: #707070;
+        --dark-line-mango: #232323;
+        --dark-line-mango-hover: #656565;
+        --disabled-opacity: 0.6;
+        --dark-alert-yellow: #805C00;
+        --dark-alert-green: #10564A;
+        --dark-alert-red: #712325;
+        --dark-alert-blue: #274580;
+        --color-blue: #0F5FFF;
+        --color-blue-rgb: 15, 95, 255;
+        --color-blue-hover: #71A1FF;
+        --color-blue-hover-rgb: 113, 161, 255;
+        --color-blue-pressed: #487FEB;
+        --color-blue-pressed-rgb: 72, 127, 235;
+        --color-blue-alert: #274580;
+        --color-blue-alert-rgb: 39, 69, 128;
+        --color-yellow: #FFD677;
+        --color-yellow-rgb: 255, 214, 119;
+        --color-yellow-hover: #FFE2A0;
+        --color-yellow-hover-rgb: 255, 226, 160;
+        --color-yellow-pressed: #EBC56D;
+        --color-yellow-pressed-rgb: 235, 197, 109;
+        --color-yellow-alert: #805C00;
+        --color-yellow-alert-rgb: 128, 92, 0;
+        --color-green: #20AC95;
+        --color-green-rgb: 32, 172, 149;
+        --color-green-hover: #4DBDAA;
+        --color-green-hover-rgb: 77, 189, 170;
+        --color-green-pressed: #1D9E89;
+        --color-green-pressed-rgb: 29, 158, 137;
+        --color-green-alert: #10564A;
+        --color-green-alert-rgb: 16, 86, 74;
+        --color-red: #E2464A;
+        --color-red-rgb: 226, 70, 74;
+        --color-red-hover: #E86B6E;
+        --color-red-hover-rgb: 232, 107, 110;
+        --color-red-pressed: #D04044;
+        --color-red-pressed-rgb: 208, 64, 68;
+        --color-red-alert: #712325;
+        --color-red-alert-rgb: 113, 35, 37;
+        --color-white: #FFFFFF;
+        --color-white-rgb: 255, 255, 255;
+        --color-black: #000000;
+        --color-black-rgb: 0, 0, 0;
+        --color-misa: #02E887;
+        --color-misa-rgb: 2, 232, 135;
+        --semantic-up: #20AC95;
+        --semantic-up-rgb: 32, 172, 149;
+        --semantic-upsec: #10564A;
+        --semantic-upsec-rgb: 16, 86, 74;
+        --semantic-down: #E2464A;
+        --semantic-down-rgb: 226, 70, 74;
+        --semantic-downsec: #712325;
+        --semantic-downsec-rgb: 113, 35, 37;
+        --bg-bird: #383838;
+        --bg-bird-rgb: 56, 56, 56;
+        --bg-bird-hover: #484848;
+        --bg-bird-hover-rgb: 72, 72, 72;
+        --bg-fish: #292929;
+        --bg-fish-rgb: 41, 41, 41;
+        --bg-fish-hover: #3A3A3A;
+        --bg-fish-hover-rgb: 58, 58, 58;
+        --bg-cat: #222222;
+        --bg-cat-rgb: 34, 34, 34;
+        --bg-cat-hover: #343434;
+        --bg-cat-hover-rgb: 52, 52, 52;
+        --bg-dog: #191919;
+        --bg-dog-rgb: 25, 25, 25;
+        --bg-dog-hover: #2B2B2B;
+        --bg-dog-hover-rgb: 43, 43, 43;
+        --bg-pig: #0E0E0E;
+        --bg-pig-rgb: 14, 14, 14;
+        --bg-pig-hover: #212121;
+        --bg-pig-hover-rgb: 33, 33, 33;
+        --bg-panda: #000000;
+        --bg-panda-rgb: 0, 0, 0;
+        --text-1: #FFFFFF;
+        --text-1-rgb: 255, 255, 255;
+        --text-1-pressed: #D4D4D4;
+        --text-1-pressed-rgb: 212, 212, 212;
+        --text-2: rgba(255, 255, 255, 0.7);
+        --text-2-hover: #D8D8D8;
+        --text-2-hover-rgb: 216, 216, 216;
+        --text-2-pressed: #A4A4A4;
+        --text-2-pressed-rgb: 164, 164, 164;
+        --text-3: rgba(255, 255, 255, 0.5);
+        --text-3-hover: #BFBFBF;
+        --text-3-hover-rgb: 191, 191, 191;
+        --text-3-pressed: #767676;
+        --text-3-pressed-rgb: 118, 118, 118;
+        --text-4: rgba(255, 255, 255, 0.4);
+        --text-4-hover: #A2A2A2;
+        --text-4-hover-rgb: 162, 162, 162;
+        --text-4-pressed: #3F3F3F;
+        --text-4-pressed-rgb: 63, 63, 63;
+        --line-apple: #424242;
+        --line-apple-rgb: 66, 66, 66;
+        --line-apple-hover: #7B7B7B;
+        --line-apple-hover-rgb: 123, 123, 123;
+        --line-banana: #333333;
+        --line-banana-rgb: 51, 51, 51;
+        --line-banana-hover: #707070;
+        --line-banana-hover-rgb: 112, 112, 112;
+        --line-mango: #232323;
+        --line-mango-rgb: 35, 35, 35;
+        --line-mango-hover: #656565;
+        --line-mango-hover-rgb: 101, 101, 101;
+        --bg-pig-loading: rgba(14, 14, 14, 0.9);
+        --bg-dog-loading: rgba(25, 25, 25, 0.9);
+        --text-5: rgba(255, 255, 255, 0.3);
+        --text-6: rgba(255, 255, 255, 0.2);
+        --bg-1: #0A0B0D;
+        --bg-1-rgb: 10, 11, 13;
+        --bg-2: #141519;
+        --bg-2-rgb: 20, 21, 25;
+        --bg-3: #23242B;
+        --bg-3-rgb: 35, 36, 43;
+        --bg-4: #363942;
+        --bg-4-rgb: 54, 57, 66;
+        --bg-5: #1F2126;
+        --bg-5-rgb: 31, 33, 38;
+        --bg-6: #313338;
+        --bg-6-rgb: 49, 51, 56;
+        --color-primary: #0F5FFF;
+        --color-primary-rgb: 15, 95, 255;
+        --color-primary-hover: rgba(14, 134, 255, 0.1);
+        --color-buy: #27AD75;
+        --color-buy-rgb: 39, 173, 117;
+        --color-buy-hover: rgba(39, 173, 117, 0.1);
+        --color-sell: #F0616D;
+        --color-sell-rgb: 240, 97, 109;
+        --color-sell-hover: rgba(240, 97, 109, 0.1);
+        --color-grey: #2A2D34;
+        --color-grey-rgb: 42, 45, 52;
+        --line-1: #141519;
+        --line-1-rgb: 20, 21, 25;
+        --shadow-small: 0px 6px 6px rgba(0, 0, 0, 0.24), 0px 0px 1px 0px #777;
+        --shadow-dialog: 0px 24px 24px rgba(0, 0, 0, 0.64), 0px 0px 1px 0px #747474;
+        --line-2: #2A2D34;
+        --line-2-rgb: 42, 45, 52;
+        --line-3: #23242B;
+        --line-3-rgb: 35, 36, 43;
+        --kline-up: #20AC95;
+        --kline-down: #E2464A;
+        --light-blue-rgb: 0, 71, 255;
+        --light-blue-hover-rgb: 85, 118, 255;
+        --light-blue-pressed-rgb: 39, 77, 235;
+        --light-blue-alert-rgb: 216, 231, 255;
+        --light-yellow-rgb: 255, 214, 119;
+        --light-yellow-hover-rgb: 255, 226, 160;
+        --light-yellow-pressed-rgb: 235, 197, 109;
+        --light-yellow-alert-rgb: 255, 243, 215;
+        --light-green-rgb: 36, 197, 135;
+        --light-green-hover-rgb: 102, 214, 171;
+        --light-green-pressed-rgb: 33, 181, 124;
+        --light-green-alert-rgb: 189, 238, 219;
+        --light-red-rgb: 255, 77, 79;
+        --light-red-hover-rgb: 255, 130, 132;
+        --light-red-pressed-rgb: 235, 71, 73;
+        --light-red-alert-rgb: 255, 202, 202;
+        --light-white-rgb: 255, 255, 255;
+        --light-black-rgb: 0, 0, 0;
+        --light-misa-rgb: 2, 232, 135;
+        --light-semantic-up: #24C587;
+        --light-semantic-up-rgb: 36, 197, 135;
+        --light-semantic-upsec: #BDEEDB;
+        --light-semantic-upsec-rgb: 189, 238, 219;
+        --light-semantic-down: #FF4D4F;
+        --light-semantic-down-rgb: 255, 77, 79;
+        --light-semantic-downsec: #FFCACA;
+        --light-semantic-downsec-rgb: 255, 202, 202;
+        --light-bg-bird-rgb: 255, 255, 255;
+        --light-bg-bird-hover-rgb: 236, 236, 236;
+        --light-bg-fish-rgb: 240, 240, 240;
+        --light-bg-fish-hover-rgb: 230, 230, 230;
+        --light-bg-cat-rgb: 246, 246, 246;
+        --light-bg-cat-hover-rgb: 236, 236, 236;
+        --light-bg-dog-rgb: 255, 255, 255;
+        --light-bg-dog-hover-rgb: 245, 245, 245;
+        --light-bg-pig-rgb: 255, 255, 255;
+        --light-bg-pig-hover-rgb: 245, 245, 245;
+        --light-bg-panda-rgb: 249, 249, 249;
+        --light-text-1-rgb: 0, 0, 0;
+        --light-text-1-pressed-rgb: 0, 0, 0;
+        --light-text-2-hover-rgb: 43, 43, 43;
+        --light-text-2-pressed-rgb: 72, 72, 72;
+        --light-text-3-hover-rgb: 77, 77, 77;
+        --light-text-3-pressed-rgb: 130, 130, 130;
+        --light-text-4-hover-rgb: 96, 96, 96;
+        --light-text-4-pressed-rgb: 162, 162, 162;
+        --light-line-apple-rgb: 208, 208, 208;
+        --light-line-apple-hover-rgb: 146, 146, 146;
+        --light-line-banana-rgb: 217, 217, 217;
+        --light-line-banana-hover-rgb: 152, 152, 152;
+        --light-line-mango-rgb: 240, 240, 240;
+        --light-line-mango-hover-rgb: 168, 168, 168;
+        --light-bg-pig-loading: rgba(255, 255, 255, 0.9);
+        --light-bg-dog-loading: rgba(255, 255, 255, 0.9);
+        --light-text-5: rgba(0, 0, 0, 0.3);
+        --light-text-6: rgba(0, 0, 0, 0.2);
+        --light-bg-1: #FFFFFF;
+        --light-bg-1-rgb: 255, 255, 255;
+        --light-bg-2: #F4F5F6;
+        --light-bg-2-rgb: 244, 245, 246;
+        --light-bg-3: #F2F2F2;
+        --light-bg-3-rgb: 242, 242, 242;
+        --light-bg-4: #DBDBDB;
+        --light-bg-4-rgb: 219, 219, 219;
+        --light-bg-5: #FFFFFF;
+        --light-bg-5-rgb: 255, 255, 255;
+        --light-bg-6: #000000;
+        --light-bg-6-rgb: 0, 0, 0;
+        --light-primary: #0047FF;
+        --light-primary-rgb: 0, 71, 255;
+        --light-primary-hover: rgba(0, 94, 255, 0.1);
+        --light-buy: #27AD75;
+        --light-buy-rgb: 39, 173, 117;
+        --light-buy-hover: rgba(39, 173, 117, 0.1);
+        --light-sell: #F0616D;
+        --light-sell-rgb: 240, 97, 109;
+        --light-sell-hover: rgba(240, 97, 109, 0.1);
+        --light-grey: #F4F5F6;
+        --light-grey-rgb: 244, 245, 246;
+        --light-line-1: #F4F5F6;
+        --light-line-1-rgb: 244, 245, 246;
+        --light-shadow-small: 0px 6px 6px rgba(52, 52, 52, 0.06), 0px 0px 1px 0px #858585;
+        --light-shadow-dialog: 0px 24px 24px rgba(95, 95, 95, 0.12), 0px 0px 1px 0px #979797;
+        --light-line-2: #F4F5F6;
+        --light-line-2-rgb: 244, 245, 246;
+        --light-line-3: #E6E6E6;
+        --light-line-3-rgb: 230, 230, 230;
+        --dark-blue-rgb: 15, 95, 255;
+        --dark-blue-hover-rgb: 113, 161, 255;
+        --dark-blue-pressed-rgb: 72, 127, 235;
+        --dark-blue-alert: #274580;
+        --dark-blue-alert-rgb: 39, 69, 128;
+        --dark-yellow-rgb: 255, 214, 119;
+        --dark-yellow-hover-rgb: 255, 226, 160;
+        --dark-yellow-pressed-rgb: 235, 197, 109;
+        --dark-yellow-alert: #805C00;
+        --dark-yellow-alert-rgb: 128, 92, 0;
+        --dark-green-rgb: 32, 172, 149;
+        --dark-green-hover-rgb: 77, 189, 170;
+        --dark-green-pressed-rgb: 29, 158, 137;
+        --dark-green-alert: #10564A;
+        --dark-green-alert-rgb: 16, 86, 74;
+        --dark-red-rgb: 226, 70, 74;
+        --dark-red-hover-rgb: 232, 107, 110;
+        --dark-red-pressed-rgb: 208, 64, 68;
+        --dark-red-alert: #712325;
+        --dark-red-alert-rgb: 113, 35, 37;
+        --dark-white-rgb: 255, 255, 255;
+        --dark-black: #000000;
+        --dark-black-rgb: 0, 0, 0;
+        --dark-misa: #02E887;
+        --dark-misa-rgb: 2, 232, 135;
+        --dark-semantic-up: #20AC95;
+        --dark-semantic-up-rgb: 32, 172, 149;
+        --dark-semantic-upsec: #10564A;
+        --dark-semantic-upsec-rgb: 16, 86, 74;
+        --dark-semantic-down: #E2464A;
+        --dark-semantic-down-rgb: 226, 70, 74;
+        --dark-semantic-downsec: #712325;
+        --dark-semantic-downsec-rgb: 113, 35, 37;
+        --dark-bg-bird-rgb: 56, 56, 56;
+        --dark-bg-bird-hover-rgb: 72, 72, 72;
+        --dark-bg-fish-rgb: 41, 41, 41;
+        --dark-bg-fish-hover-rgb: 58, 58, 58;
+        --dark-bg-cat-rgb: 34, 34, 34;
+        --dark-bg-cat-hover-rgb: 52, 52, 52;
+        --dark-bg-dog-rgb: 25, 25, 25;
+        --dark-bg-dog-hover-rgb: 43, 43, 43;
+        --dark-bg-pig-rgb: 14, 14, 14;
+        --dark-bg-pig-hover-rgb: 33, 33, 33;
+        --dark-bg-panda-rgb: 0, 0, 0;
+        --dark-text-1-rgb: 255, 255, 255;
+        --dark-text-1-pressed-rgb: 212, 212, 212;
+        --dark-text-2-hover-rgb: 216, 216, 216;
+        --dark-text-2-pressed-rgb: 164, 164, 164;
+        --dark-text-3-hover-rgb: 191, 191, 191;
+        --dark-text-3-pressed-rgb: 118, 118, 118;
+        --dark-text-4-hover-rgb: 162, 162, 162;
+        --dark-text-4-pressed-rgb: 63, 63, 63;
+        --dark-line-apple-rgb: 66, 66, 66;
+        --dark-line-apple-hover-rgb: 123, 123, 123;
+        --dark-line-banana-rgb: 51, 51, 51;
+        --dark-line-banana-hover-rgb: 112, 112, 112;
+        --dark-line-mango-rgb: 35, 35, 35;
+        --dark-line-mango-hover-rgb: 101, 101, 101;
+        --dark-bg-pig-loading: rgba(14, 14, 14, 0.9);
+        --dark-bg-dog-loading: rgba(25, 25, 25, 0.9);
+        --dark-text-5: rgba(255, 255, 255, 0.3);
+        --dark-text-6: rgba(255, 255, 255, 0.2);
+        --dark-bg-1-rgb: 10, 11, 13;
+        --dark-bg-2-rgb: 20, 21, 25;
+        --dark-bg-3-rgb: 35, 36, 43;
+        --dark-bg-4-rgb: 54, 57, 66;
+        --dark-bg-5: #1F2126;
+        --dark-bg-5-rgb: 31, 33, 38;
+        --dark-bg-6: #313338;
+        --dark-bg-6-rgb: 49, 51, 56;
+        --dark-primary: #0F5FFF;
+        --dark-primary-rgb: 15, 95, 255;
+        --dark-primary-hover: rgba(14, 134, 255, 0.1);
+        --dark-buy: #27AD75;
+        --dark-buy-rgb: 39, 173, 117;
+        --dark-buy-hover: rgba(39, 173, 117, 0.1);
+        --dark-sell: #F0616D;
+        --dark-sell-rgb: 240, 97, 109;
+        --dark-sell-hover: rgba(240, 97, 109, 0.1);
+        --dark-grey: #2A2D34;
+        --dark-grey-rgb: 42, 45, 52;
+        --dark-line-1-rgb: 20, 21, 25;
+        --dark-shadow-small: 0px 6px 6px rgba(0, 0, 0, 0.24), 0px 0px 1px 0px #777;
+        --dark-shadow-dialog: 0px 24px 24px rgba(0, 0, 0, 0.64), 0px 0px 1px 0px #747474;
+        --dark-line-2-rgb: 42, 45, 52;
+        --dark-line-3-rgb: 35, 36, 43;
+    }</style>
+</head>
+<body class="dark-theme-scroll-bar hide-horizontal scroll-disabled">
+<div>
+    <iframe style="display: none" src="/calculator.html"></iframe>
+    <div>
+        <h1>
+            Select Background Banner
+        </h1>
+        <div class="select-banner"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        <h1>
+            Select Avatar
+        </h1>
+        <div class="select-avatar"></div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="inputs">
+        <label>
+            Email
+            <input placeholder="email" name="email" />
+        </label>
+        <label>
+            Ref Code
+            <input placeholder="ref" name="ref" />
+        </label>
+        <button onclick="generate()" style="height: 3rem">Generate</button>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="result">
+
+    </div>
+</div>
+<script src="/override/positionCard.js"></script>
+</body>
+</html>
