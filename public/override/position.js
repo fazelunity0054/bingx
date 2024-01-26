@@ -36,11 +36,6 @@ function handleAddPosition(type) {
     const targetPrice = tradeType.includes("Limit") ? +document.querySelector(".price-input").value:+currency.tradePrice;
     const targetVolume = +document.querySelector(".volume-input").value;
     const leverage = +variables[`${type}-leverage`];
-
-    if (window.document.readyState !== 'complete') {
-        alert("Wait for document load");
-        return;
-    }
     if (!basisRate) {
         alert("Waiting for basis rate");
         return;
