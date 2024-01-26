@@ -79,12 +79,14 @@ img.header-ui {
 
 .card-container.card-action {
     position: relative;
+    width: 25px;
+    height: 25px;
 }
 .card-container.card-action:before {
     position: absolute;
     content: "";
-    width: 0.45rem;
-    height: 0.45rem;
+    width: 0.35rem;
+    height: 0.35rem;
     background: url('/ui/card.png');
     background-size: contain;
     right: 0;
@@ -275,5 +277,4 @@ img.icon-arrow {}.default-font-family,html,html body{font-family:HarmonyOS Sans,
     justify-content: center;
     align-content: center;
     flex-wrap: nowrap;
-    flex-direction: row;
-}
+    fle                   

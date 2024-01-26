@@ -112,9 +112,7 @@
         name: "Funding Timer",
         handle() {
             const n = (min, max, l =1)=>generateRandomString(Array.from({length: max}).map((_, i)=>(i+min)+""), l);
-            const str = `0${n(1,7)}:${n(1,5,2)}:${n(1,5,2)}`;
-
-            document.querySelector(".funding-timer").innerText = str;
+            document.querySelector(".funding-timer").innerText = `0${n(1, 7)}:${n(1, 5, 2)}:${n(1, 5, 2)}`;
         }
     },
     {
@@ -129,7 +127,6 @@
                 const next = units[current] ?? units[0];
                 window.marginUnit = next;
                 element.innerText =display[units.findIndex(u => u === next)]
-                alert(`Margin Unit Changed to ${next}`)
                 document.querySelectorAll(".symbol-reverse").forEach(e => {
                     console.log(next);
                     e.innerText =  next === "symbol" ? "USDT":currency.asset
@@ -143,6 +140,13 @@
         handle() {
             const html = document.querySelector("html");
             html.style.fontSize = "37px"
+        }
+    },
+    {
+        name: "Change Default Units",
+        handle() {
+            document.querySelector(".margin-unit").click();
+            document.querySelector(".margin-mode").click();
         }
     }
 ].forEach((item)=>{
