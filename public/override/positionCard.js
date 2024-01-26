@@ -125,7 +125,7 @@ window.generate = () => {
                </div>
                <div class="user-info" data-v-d1925dea="">
                   <p class="nickname" data-v-d1925dea="">${data?.email?.slice(0,2)+`***@${data?.email?.split("@")?.[1]?.split("").slice(0,8).join("")}...`}</p>
-                  <p class="date din-pro" data-v-d1925dea="">${new Date().toLocaleDateString().split("/").slice(0,2).reverse().join("/")} ${new Date().getHours() < 9 ? "0":""}${new Date().getHours()}:${new Date().getMinutes() < 9 ? "0":""}${new Date().getMinutes()}</p>
+                  <p class="date din-pro" data-v-d1925dea="">${new Date().toLocaleDateString().split("/").slice(0,2).join("/")} ${new Date().getHours() < 9 ? "0":""}${new Date().getHours()}:${new Date().getMinutes() < 9 ? "0":""}${new Date().getMinutes()}</p>
                </div>
             </div>
          </div>
