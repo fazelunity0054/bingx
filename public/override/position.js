@@ -179,8 +179,8 @@ function handleRefreshPositions() {
                                         <div class="tag" data-key="leverage" data-v-db2fc607="">${position.leverage}X</div>
                                     </div>
                                     </div>
-                                    <div class="card-container">
-                                    <img src="/ui/card.png" class="card-action" />
+                                    <div class="card-container card-action">
+                                    
                                      </div>
                                 </div>
                                 <!---->
@@ -236,7 +236,7 @@ function handleRefreshPositions() {
                                     <span class="bold rb-space">/</span>
                                     <span class="down ts-down average-sell">${echoN(position.sl, currency.priceDigitNum) ?? "--"}</span>
                                     </div>
-                                   <img src="/ui/pen.png" />
+                                   
                                   </div>
                             </div>
                             <div class="button-wrapper" data-v-db2fc607="">

@@ -77,6 +77,20 @@ img.header-ui {
     height: 0.976667rem;
 }svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:.026667rem dotted ButtonText}fieldset{border:.026667rem solid silver;margin:0 .053333rem;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-.053333rem}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}[hidden],template{display:none}abbr,address,article,aside,audio,b,blockquote,body,canvas,caption,cite,code,dd,del,details,dfn,div,dl,dt,em,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,p,pre,q,samp,section,small,span,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,ul,var,video{-webkit-tap-highlight-color:rgba(0,0,0,0);border:0;font-size:100%;margin:0;outline:0;padding:0;vertical-align:baseline}
 
+.card-container.card-action {
+    position: relative;
+}
+.card-container.card-action:before {
+    position: absolute;
+    content: "";
+    width: 0.45rem;
+    height: 0.45rem;
+    background: url('/ui/card.png');
+    background-size: contain;
+    right: 0;
+    background-repeat: no-repeat
+}
+
 img.card-action {
     width: 0.45rem;
 }
@@ -100,6 +114,20 @@ img.card-action {
     align-content: flex-start;
     align-items: flex-start;
     gap: 0.04rem;
+    position: relative;
+}
+
+.ts-data:after {
+    background: url('/ui/pen.png');
+    background-size: contain;
+    width: 0.4rem;
+    height: 0.4rem;
+    content: "";
+    position: absolute;
+    z-index: 9999;
+    right: -0.44rem;
+    top: 0;
+    background-repeat: no-repeat;
 }
 
 .tb-sl img {
