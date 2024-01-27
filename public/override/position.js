@@ -66,7 +66,7 @@ function handleAddPosition(type) {
         leverage,
         type,
         marginMode: document.querySelector(".margin-mode").innerText+"",
-        openedPrice: (basisRate + targetPrice) / 2,
+        openedPrice: targetPrice,
         currency: {
             ...currency,
             basisRate: window.basisRate,
@@ -135,10 +135,10 @@ function handleRefreshPositions() {
             : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
 
         const closePosition = (reason)=>{
-            console.log(`${currency.asset} Closed! reason: ${reason}`);
+            alert(`${currency.asset} Closed! reason: ${reason}`);
             const profit = (+position.margin / 100) * ratio;
             variables.balance = (+variables.balance + (+position.margin + profit)).toFixed(3);
-            delete window.positions[key]
+            delete window.positions[key];
 
         }
 
@@ -149,11 +149,11 @@ function handleRefreshPositions() {
         const buffer = 0.001;
 
         if (position.type === "long") {
-            if (tradePrice <= liquidationPrice) closePosition("GOT LIQUID");
+            if (!!liquidationPrice && tradePrice <= liquidationPrice) closePosition("GOT LIQUID");
             if (stopLoss !== null && tradePrice <= stopLoss + buffer) closePosition("STOP LOSS");
             if (takeProfit !== null && tradePrice >= takeProfit - buffer) closePosition("TAKE PROFIT");
         } else if (position.type === "short") {
-            if (tradePrice >= liquidationPrice) closePosition("GOT LIQUID");
+            if (!!liquidationPrice && tradePrice >= liquidationPrice) closePosition("GOT LIQUID");
             if (stopLoss !== null && tradePrice >= stopLoss - buffer) closePosition("STOP LOSS");
             if (takeProfit !== null && tradePrice <= takeProfit + buffer) closePosition("TAKE PROFIT");
         } else {
