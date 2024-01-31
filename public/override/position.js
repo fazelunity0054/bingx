@@ -318,9 +318,10 @@ function handleRefreshPositions() {
             const percent = +window.prompt("Enter Risk Percent [The result may change with PNL] (0-100)");
             if (isNaN(percent)) return;
             const targetPrice = position.targetPrice;
+            const liquid =  type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent);
             window.positions[key] = {
                 ...window.positions[key] ?? {},
-                liq: type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent)
+                liq: liquid
             }
         }
 
