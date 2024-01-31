@@ -37,3 +37,6 @@ body {
 .tag-wrapper .tag.long:before {
     background: #0d1c18 !important;
 }
+.positions .tag-wrapper .tag.short:before, .positions .tag-wrapper .tag.long:before {
+    background: #211417;
+}
