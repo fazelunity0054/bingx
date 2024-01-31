@@ -30,3 +30,7 @@ input {
 body {
     color: var(--light-text-1);
 }
+
+.dark-reverse {
+    filter: invert(1);
+}
