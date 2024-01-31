@@ -74,7 +74,8 @@ function handleAddPosition(type) {
             basisRate: window.basisRate,
             mids: window.mids
         },
-        estLiq: type === "long" ? targetPrice - ((targetPrice / 100) * random):targetPrice + ((targetPrice / 100) * random)
+        estLiq: type === "long" ? targetPrice - ((targetPrice / 100) * random):targetPrice + ((targetPrice / 100) * random),
+        estLiqRandom: random
     };
 
     positions["position_"+id] = position
