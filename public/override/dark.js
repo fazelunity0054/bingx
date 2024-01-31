@@ -16,6 +16,7 @@ window.onload = function() {
             img.onload = ()=>{
                 const canvas = document.createElement("canvas");
                 img.parentNode.append(canvas);
+                canvas.className = img.className;
                 const ctx = canvas.getContext('2d');
 
                 // Set canvas size to match the image size
