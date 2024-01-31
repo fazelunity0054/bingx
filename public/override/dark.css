@@ -55,5 +55,7 @@ body {
 }
 
 .ts-data:after {
-    background: url('/ui/pen-dark.png');
+    background: url('/ui/pen-dark.png') no-repeat;
+    background-size: contain;
+
 }
