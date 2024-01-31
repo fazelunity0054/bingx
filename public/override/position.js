@@ -53,6 +53,8 @@ function handleAddPosition(type) {
         return;
     }
 
+    const random = generateRandomString("12345",1)+generateRandomString("1234567890",1)
+
     variables.balance = ((+variables.balance) - margin).toFixed(2);
     /**
      * @name position
