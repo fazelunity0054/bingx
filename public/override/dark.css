@@ -12,6 +12,6 @@ input {
     background-color: var(--light-bg-dog)
 }
 
-.ice-slider.light .mark[data-v-52a12614] {
+.ice-slider.light .mark[data-v-52a12614], .ice-slider.light .rail[data-v-52a12614] {
     background:var(--light-bg-fish);
 }
