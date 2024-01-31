@@ -23,7 +23,7 @@ window.onload = function() {
                 canvas.width = img.naturalWidth;
                 canvas.height = img.naturalHeight;
 
-                ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
+                ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
                 const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
                 const data = imageData.data;
