@@ -13,30 +13,35 @@ window.onload = function() {
     images.forEach(img => {
         let origin = img.src+"";
         if (img.classList.contains("dark-reverse")) {
-            const canvas = document.createElement("canvas");
-            canvas.className = img.className;
-            img.parentNode.append(canvas);
-            const ctx = canvas.getContext('2d');
+            let pre = img.style.border;
+            img.style.border = "1px red solid";
+            img.onload = ()=>{
+                pre.style.border = pre;
+                const canvas = document.createElement("canvas");
+                canvas.className = img.className;
+                img.parentNode.append(canvas);
+                const ctx = canvas.getContext('2d');
 
-            // Set canvas size to match the image size
-            canvas.width = img.naturalWidth;
-            canvas.height = img.naturalHeight;
+                // Set canvas size to match the image size
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
 
-            ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
+                ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight);
 
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imageData.data;
 
-            const threshold = 250;
-            for (let i = 0; i < data.length; i += 4) {
-                if (isNearWhite(data[i], data[i + 1], data[i + 2], threshold)) {
-                    data[i + 3] = 0; // set alpha to 0 (transparent)
+                const threshold = 250;
+                for (let i = 0; i < data.length; i += 4) {
+                    if (isNearWhite(data[i], data[i + 1], data[i + 2], threshold)) {
+                        data[i + 3] = 0; // set alpha to 0 (transparent)
+                    }
                 }
-            }
 
-            ctx.putImageData(imageData, 0, 0);
-            img.src = canvas.toDataURL();
-            canvas.parentNode.removeChild(canvas);
+                ctx.putImageData(imageData, 0, 0);
+                img.src = canvas.toDataURL();
+                canvas.parentNode.removeChild(canvas);
+            }
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
