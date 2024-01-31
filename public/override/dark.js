@@ -15,7 +15,7 @@ window.onload = function() {
         if (img.classList.contains("dark-reverse")) {
             let pre = img.style.border;
             img.style.border = "1px blue solid";
-            img.onload = ()=>{
+            img.onloadeddata = ()=>{
                 pre.style.border = pre;
                 const canvas = document.createElement("canvas");
                 canvas.className = img.className;
