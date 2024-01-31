@@ -113,7 +113,9 @@ function calculateLiquidationPrice(type = "short", key = 'currency', callback = 
         marginMode: document.querySelector(".margin-mode").innerText,
         amount: +document.querySelector(".volume-input").value,
         margin: getMarginOfType(type, 'symbol'),
-        asset: currency.asset
+        asset: currency.asset,
+        targetPrice: currency.tradePrice,
+        currency
     } : positions[key];
 
     handleLiquidCalculation(key === 'currency' ? `currency-${type}` : key, position, (number) => {
@@ -285,6 +287,55 @@ let calculatorStatus = {}
 let calculatorCallbacks = {}
 let calculatorErrors = {};
 
+
+
+function calculateAdjustmentFactor(leverage) {
+    if (leverage <= 5) return 5.00;  // Tier 1
+    if (leverage <= 10) return 10.00; // Tier 2
+    if (leverage <= 20) return 12.00; // Tiers 3 and 4
+    if (leverage <= 50) return 15.00; // Tiers 5 to 10
+    if (leverage <= 150) return 20.00; // Tiers 11 and 12
+    return 25.00; // Tier 13
+}
+
+function calculateLPWithUnrealizedProfit(entryPrice, availableBalance, initialMargin, maintenanceMargin, netPositionSize, positionType) {
+    const calculation = (availableBalance + initialMargin - maintenanceMargin) / netPositionSize;
+
+    if (positionType === 'long') {
+        return entryPrice - calculation;
+    } else if (positionType === 'short') {
+        return entryPrice + calculation;
+    } else {
+        throw new Error('Invalid position type');
+    }
+}
+
+function calculateMaintenanceMargin(btcPricePerUnit, btcAmount, maintenanceMarginRate) {
+    console.log(btcAmount,btcPricePerUnit,maintenanceMarginRate)
+    // Convert the maintenance margin rate from percentage to decimal
+    let marginRateDecimal = maintenanceMarginRate / 100;
+
+    // Calculate the order value
+    let orderValue = btcPricePerUnit * btcAmount;
+
+    // Calculate and return the maintenance margin
+    return marginRateDecimal * orderValue;
+}
+
+
+function calculateLPWithUnrealizedLoss(currentMarkPrice, availableBalance, initialMargin, maintenanceMargin, netPositionSize, positionType) {
+    const calculation = (availableBalance + initialMargin - maintenanceMargin) / netPositionSize;
+
+    if (positionType === 'long') {
+        return currentMarkPrice - calculation;
+    } else if (positionType === 'short') {
+        return currentMarkPrice + calculation;
+    } else {
+        throw new Error('Invalid position type');
+    }
+}
+
+
 /**
  *
  * @param key {string}
@@ -294,6 +345,9 @@ let calculatorErrors = {};
 window.handleLiquidCalculation = (key, position, callback) => {
     if (!+position.margin || !+position.openedPrice) return;
 
+    position.marginMode = "Isolated";
+
+    
     calculatorCallbacks[key] ??= [];
     calculatorCallbacks[key].push(callback);
 
