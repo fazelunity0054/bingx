@@ -59,3 +59,6 @@ body {
     background-size: contain;
 
 }
+.symbol-picker-light .trigger .icon[data-v-910676f0] {
+    background: #fff;
+}
