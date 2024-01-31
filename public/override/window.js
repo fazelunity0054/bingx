@@ -174,7 +174,7 @@ function formatNumber(number, len) {
         }
     }
 
-    return result;
+    return (+result).toLocaleString();
 }
 
 window.formatNumber = formatNumber;
