@@ -134,9 +134,9 @@ window.calculateLiquidationPrice = calculateLiquidationPrice;
 window.substringNumber = (margin, n = 2, force = true) => {
     const R = (margin + '').split(".");
     if (n === 0) return R?.[0] ?? margin;
-    return R[0] + (!!R[1] || force ? "." : "") + (!!R[1] || force ? Array.from({
+    return (+(R[0] + (!!R[1] || force ? "." : "") + (!!R[1] || force ? Array.from({
         length: n
-    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : "");
+    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : ""))).toLocaleString();
 }
 
 function generateRandomString(charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', length = 10) {
