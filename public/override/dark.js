@@ -15,6 +15,7 @@ window.onload = function() {
         if (img.classList.contains("dark-reverse")) {
             const canvas = document.createElement("canvas");
             canvas.className = img.className;
+            img.parentNode.append(canvas);
             const ctx = canvas.getContext('2d');
 
             // Set canvas size to match the image size
@@ -34,7 +35,8 @@ window.onload = function() {
             }
 
             ctx.putImageData(imageData, 0, 0);
-            img.parentNode.replaceChild(canvas, img);
+            img.src = canvas.toDataURL();
+            canvas.parentNode.removeChild(canvas);
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
