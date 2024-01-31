@@ -156,6 +156,9 @@
             if (url.searchParams.has("dark")) {
                 const sc = document.createElement('script');
                 sc.src = "/override/dark.js";
+                sc.onload = ()=>{
+                    setTimeout(window.handleDark, 2000)
+                }
                 document.body.append(sc);
             }
         }
