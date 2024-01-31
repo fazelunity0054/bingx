@@ -82,6 +82,10 @@
     margin-left: .123333rem;
 }
 
+#_refresh_page_scroll_view_id_ > div.order.order-light > div.container > div.place-order > div > div.trade-wrapper > div.item-wrapper.price-switch.left > div.left-wrapper > div.BBO > img {
+    height: 100%;
+}
+
 [dir=rtl] .icon-add[data-v-c3fb9a93] {
     margin-right: .053333rem
 }
