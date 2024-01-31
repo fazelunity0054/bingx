@@ -16,6 +16,8 @@ window.onload = function() {
             let pre = img.style.border;
             img.style.border = "1px blue solid";
             const handleCanvasTransparent = ()=>{
+                if (img.hasAttribute("applied")) return;
+
                 const canvas = document.createElement("canvas");
                 canvas.className = img.className;
                 img.parentNode.append(canvas);
@@ -41,6 +43,7 @@ window.onload = function() {
                 img.src = canvas.toDataURL();
                 canvas.parentNode.removeChild(canvas);
                 img.style.border = pre;
+                img.setAttribute("applied", "dark")
             }
             handleCanvasTransparent();
             img.onload = handleCanvasTransparent
