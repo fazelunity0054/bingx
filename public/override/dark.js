@@ -8,6 +8,6 @@ window.onload = function() {
     const images = document.querySelectorAll("img");
     images.forEach(img => {
         const args = img.src.split(".");
-        img.src = `${args.slice(-1).join("")}-dark.${args[args.length -1]}`
+        img.src = `${args.slice(-1).join(".")}-dark.${args[args.length -1]}`
     })
 };
