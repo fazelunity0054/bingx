@@ -6,7 +6,6 @@ document.head.append(st);
 
 window.onload = function() {
     const image = document.querySelector("img");
-    console.log(image);
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext('2d');
     image.parentNode.append(canvas );
@@ -21,7 +20,7 @@ window.onload = function() {
 
     for (let i = 0; i < data.length; i += 4) {
         if (data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255) { // if white
-
+            data[i + 3] = 1; // set alpha to 0
         }
     }
 
