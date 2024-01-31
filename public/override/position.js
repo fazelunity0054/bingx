@@ -87,7 +87,7 @@ function handleAddPosition(type) {
 function calculateRisk(lastPrice, liquid, type = "long") {
     if (lastPrice === 0) {
         // Avoid division by zero
-        return "0.00";
+        return 0.00;
     }
     let change;
     if (type === "short") {
