@@ -72,7 +72,7 @@ function handleAddPosition(type) {
             basisRate: window.basisRate,
             mids: window.mids
         },
-        estLiq: targetPrice - ((targetPrice / 100) * 30)
+        estLiq: type === "long" ? targetPrice - ((targetPrice / 100) * 30):targetPrice + ((targetPrice / 100) * 30)
     };
 
     positions["position_"+id] = position
@@ -113,8 +113,9 @@ function handleRefreshPositions() {
             return;
         }
         const currency = position.currency;
+        const finalLiquid = position.liq ?? position.estLiq;
         const coin = position.currency;
-        const risk = typeof position.liq !== 'undefined' ? calculateRisk(+currency.tradePrice, position.liq,position.type):"Wait";
+        const risk = typeof finalLiquid !== 'undefined' ? calculateRisk(+currency.tradePrice, finalLiquid,position.type):"Wait";
         const tradePrice = +currency.tradePrice;
         const markPrice = currency.indexPrice + (1 + currency.basisRate);
         let positionSize = (position.margin * position.leverage) / position.openedPrice;
@@ -143,7 +144,7 @@ function handleRefreshPositions() {
 
         }
 
-        const liquidationPrice = +position.liq;
+        const liquidationPrice = +finalLiquid;
         const stopLoss = position.sl ? +position.sl : null;
         const takeProfit = position.tp ? +position.tp : null;
 
@@ -225,7 +226,7 @@ function handleRefreshPositions() {
                                     <p class="label dotted" data-v-db2fc607="">Est.
                                         Liq. Price
                                     </p>
-                                    <p class="value up" data-key="liq" data-v-db2fc607="">${typeof position.liq !== 'undefined' ? echoN(position.liq, currency.priceDigitNum) : "Calculating"}</p>
+                                    <p class="value up" data-key="liq" data-v-db2fc607="">${typeof finalLiquid !== 'undefined' ? echoN(finalLiquid, currency.priceDigitNum) : "Calculating"}</p>
                                 </div>
                                 <!---->
                             </div>
