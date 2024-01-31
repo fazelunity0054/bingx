@@ -19,7 +19,7 @@ input {
     color: var(--light-text-1)
 }
 
-.ice-slider.light .handle>i[data-v-52a12614],.header[data-v-81141236]m {
+.ice-slider.light .handle>i[data-v-52a12614],.header[data-v-81141236],#_refresh_page_scroll_view_id_ > div.order.order-light > div.top-wrapper {
     background-color: var(--light-text-1) !important;
 }
 
