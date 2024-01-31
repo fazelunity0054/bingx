@@ -27,6 +27,7 @@ window.onload = function() {
             const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             const data = imageData.data;
 
+            const threshold = 240;
             for (let i = 0; i < data.length; i += 4) {
                 if (isNearWhite(data[i], data[i + 1], data[i + 2], threshold)) {
                     data[i + 3] = 0; // set alpha to 0 (transparent)
