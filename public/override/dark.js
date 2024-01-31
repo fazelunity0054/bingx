@@ -10,17 +10,18 @@ window.onload = function() {
     const ctx = canvas.getContext('2d');
     image.parentNode.append(canvas );
 
-    canvas.width = image.width;
-    canvas.height = image.height;
+    // Set canvas size to match the image size
+    canvas.width = image.naturalWidth;
+    canvas.height = image.naturalHeight;
 
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
 
     const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
     const data = imageData.data;
 
     for (let i = 0; i < data.length; i += 4) {
         if (data[i] === 255 && data[i + 1] === 255 && data[i + 2] === 255) { // if white
-            data[i + 3] = 1; // set alpha to 0
+            data[i + 3] = 0; // set alpha to 0
         }
     }
 
