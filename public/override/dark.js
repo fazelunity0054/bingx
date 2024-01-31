@@ -50,9 +50,14 @@ window.handleDark = function() {
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
+            let preborder = img.style.border;
+            img.style.border = "1px yellow solid";
             img.src = `${args.slice(0, args.length - 1).join(".")}-dark.${args[args.length - 1]}`
             img.onerror = () => {
                 img.src = origin;
+            }
+            img.onload = ()=>{
+                img.style.border = preborder;
             }
         }
     })
