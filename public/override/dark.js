@@ -8,7 +8,7 @@ function isNearWhite(r, g, b, threshold) {
     return r > threshold && g > threshold && b > threshold;
 }
 
-window.onload = function() {
+window.handleDark = function() {
     const images = document.querySelectorAll("img");
     images.forEach(img => {
         let origin = img.src+"";
