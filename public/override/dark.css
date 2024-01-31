@@ -53,5 +53,5 @@ body {
 }
 
 .ts-data:after {
-    
+    background: url('/ui/pen-dark.png');
 }
