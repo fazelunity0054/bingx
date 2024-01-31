@@ -49,5 +49,5 @@ body {
 }
 
 .tag-wrapper:before  {
-    
+    background: url('/ui/charge-dark.png');
 }
