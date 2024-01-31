@@ -1,0 +1,1 @@
+alert("DARK MODE DETECTED");

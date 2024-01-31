@@ -148,6 +148,17 @@
             document.querySelector(".margin-unit").click();
             document.querySelector(".margin-mode").click();
         }
+    },
+    {
+        name: "Dark Mode",
+        handle() {
+            const url = new URL(window.location.href);
+            if (url.searchParams.has("dark")) {
+                const sc = document.createElement('script');
+                sc.src = "/override/dark.js";
+                document.body.append(sc);
+            }
+        }
     }
 ].forEach((item)=>{
     try {
