@@ -14,7 +14,6 @@ window.onload = function() {
         let origin = img.src+"";
         if (img.classList.contains("dark-reverse")) {
             const canvas = document.createElement("canvas");
-            img.parentNode.append(canvas);
             canvas.className = img.className;
             const ctx = canvas.getContext('2d');
 
@@ -35,7 +34,7 @@ window.onload = function() {
             }
 
             ctx.putImageData(imageData, 0, 0);
-            img.parentNode.removeChild(img);
+            img.parentNode.replaceChild(img, canvas);
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
