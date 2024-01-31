@@ -63,7 +63,7 @@
                 if (variables[key]) {
                     domVariable.innerText = variables[key];
                 } else {
-                    variables[key] = domVariable.innerText;
+                    variables[key] = (+domVariable.innerText).toLocaleString();
                 }
             })
         }
