@@ -22,3 +22,7 @@ input {
 .ice-slider.light .handle>i[data-v-52a12614] {
     background-color: var(--light-text-1) !important;
 }
+
+.header[data-v-81141236] {
+    background-color: var(--light-bg-dog);
+}
