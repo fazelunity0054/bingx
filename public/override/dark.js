@@ -51,13 +51,16 @@ window.handleDark = function() {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
             let preborder = img.style.border;
+            let prefilter = img.style.filter;
             img.style.border = "1px yellow solid";
+            img.style.filter = "blur(10px)";
             img.src = `${args.slice(0, args.length - 1).join(".")}-dark.${args[args.length - 1]}`
             img.onerror = () => {
                 img.src = origin;
             }
             img.onload = ()=>{
                 img.style.border = preborder;
+                img.style.filter = prefilter;
             }
         }
     })
