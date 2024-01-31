@@ -154,10 +154,11 @@
         handle() {
             let theme = window.localStorage.getItem("theme") ?? "light";
             const url = new URL(window.location.href);
-            if (url.searchParams.has("dark")) {
 
+            if (url.searchParams.has("dark")) {
+                theme = "dark";
             } else if (url.searchParams.has("light")) {
-                
+                theme = "light";
             }
 
             if (theme === "dark") {
@@ -168,6 +169,8 @@
                 }
                 document.body.append(sc);
             }
+
+            window.localStorage.setItem("theme", theme);
         }
     }
 ].forEach((item)=>{
