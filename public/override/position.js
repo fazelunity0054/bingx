@@ -315,13 +315,13 @@ function handleRefreshPositions() {
         }
 
         element.querySelector(".risk-container").onclick = ()=>{
-            const percent = +window.prompt("Enter Risk Percent (0-100)");
+            const percent = +window.prompt("Enter Risk Percent [the result may affect on pnl] (0-100)");
             if (isNaN(percent)) return;
 
-            
+
         }
 
-        element.id = `position-${key}`;
+        element.id = `${key}`;
         positionContainer.append(element);
     });
 
