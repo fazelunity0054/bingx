@@ -347,7 +347,6 @@ window.handleLiquidCalculation = (key, position, callback) => {
 
     position.marginMode = "Isolated";
 
-    
     calculatorCallbacks[key] ??= [];
     calculatorCallbacks[key].push(callback);
 
