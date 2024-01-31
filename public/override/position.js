@@ -315,10 +315,13 @@ function handleRefreshPositions() {
         }
 
         element.querySelector(".risk-container").onclick = ()=>{
-            const percent = +window.prompt("Enter Risk Percent [the result may affect on pnl] (0-100)");
+            const percent = +window.prompt("Enter Risk Percent [The result may change with PNL] (0-100)");
             if (isNaN(percent)) return;
-
-
+            const targetPrice = position.targetPrice;
+            window.positions[key] = {
+                ...window.positions[key] ?? {},
+                liq: type === "long" ? targetPrice - ((targetPrice / 100) * percent):targetPrice + ((targetPrice / 100) * percent)
+            }
         }
 
         element.id = `${key}`;
