@@ -339,6 +339,7 @@ p.content {
     background-position: center;
     display: flex;
     background-repeat: no-repeat;
+    display: none;
 }
 
 .left-wrapper {
