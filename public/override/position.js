@@ -215,7 +215,7 @@ function handleRefreshPositions() {
                                 </div>
                                 <div class="item risk-container" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>
-                                    <p class="value up" data-key="risk" data-v-db2fc607="">${risk}%</p>
+                                    <p class="value up" data-v-db2fc607="">${risk}%</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Avg. Open Price</p>
