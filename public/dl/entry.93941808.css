@@ -53,7 +53,7 @@ img.time-img {
     margin-top: 0.25rem;
 }
 
-img.tp {
+img.tp,canvas.tp {
     height: 0.55rem;
     object-fit: contain;
     object-position: center;

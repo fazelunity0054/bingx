@@ -20,8 +20,8 @@ window.onload = function() {
                 const ctx = canvas.getContext('2d');
 
                 // Set canvas size to match the image size
-                canvas.width = image.naturalWidth;
-                canvas.height = image.naturalHeight;
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
 
                 ctx.drawImage(image, 0, 0, image.naturalWidth, image.naturalHeight);
 
