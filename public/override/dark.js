@@ -8,7 +8,7 @@ window.onload = function() {
     const image = document.querySelector("img");
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext('2d');
-    image.parentNode.insertBefore(image, canvas);
+    image.parentNode.append(canvas );
 
     canvas.width = image.width;
     canvas.height = image.height;
