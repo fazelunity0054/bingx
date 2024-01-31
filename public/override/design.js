@@ -58,7 +58,7 @@
                     const value = +window.prompt(hint);
                     if (!value) return;
                     window.variables[key] = value;
-                    domVariable.innerText = value;
+                    domVariable.innerText = (+value).toLocaleString();
                 }
                 if (variables[key]) {
                     domVariable.innerText = variables[key];
