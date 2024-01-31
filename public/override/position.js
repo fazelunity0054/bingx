@@ -320,7 +320,7 @@ function handleRefreshPositions() {
             const targetPrice = position.targetPrice;
             window.positions[key] = {
                 ...window.positions[key] ?? {},
-                liq: type === "long" ? targetPrice - ((targetPrice / 100) * percent):targetPrice + ((targetPrice / 100) * percent)
+                liq: type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent)
             }
         }
 
