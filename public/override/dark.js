@@ -42,7 +42,7 @@ window.onload = function() {
                 canvas.parentNode.removeChild(canvas);
                 img.style.border = pre;
             }
-            
+            handleCanvasTransparent();
             img.onload = handleCanvasTransparent
         } else {
             if (!img.src.includes("ui")) return;
