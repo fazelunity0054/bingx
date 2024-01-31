@@ -213,7 +213,7 @@ function handleRefreshPositions() {
                                     </p>
                                     <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin, +currency.priceDigitNum)}</p>
                                 </div>
-                                <div class="item" data-v-db2fc607="">
+                                <div class="item risk-container" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>
                                     <p class="value up" data-key="risk" data-v-db2fc607="">${risk}%</p>
                                 </div>
@@ -312,6 +312,13 @@ function handleRefreshPositions() {
                 ratio,
             }));
             window.location.href="/export.html";
+        }
+
+        element.querySelector(".risk-container").onclick = ()=>{
+            const percent = +window.prompt("Enter Risk Percent (0-100)");
+            if (isNaN(percent)) return;
+
+            
         }
 
         element.id = `position-${key}`;
