@@ -6,6 +6,7 @@ document.head.append(st);
 
 window.onload = function() {
     const image = document.querySelector("img");
+    console.log(image);
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext('2d');
     image.parentNode.append(canvas );
