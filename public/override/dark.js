@@ -15,7 +15,8 @@ window.onload = function() {
         if (img.classList.contains("dark-reverse")) {
             let pre = img.style.border;
             img.style.border = "1px blue solid";
-            img.onload = ()=>{
+
+            const handleCanvasTransparenter = ()=>{
                 pre.style.border = pre;
                 const canvas = document.createElement("canvas");
                 canvas.className = img.className;
@@ -42,6 +43,8 @@ window.onload = function() {
                 img.src = canvas.toDataURL();
                 canvas.parentNode.removeChild(canvas);
             }
+            handleCanvasTransparenter();
+            img.onload = handleCanvasTransparenter
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
