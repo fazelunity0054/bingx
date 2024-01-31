@@ -9,6 +9,9 @@ function isNearWhite(r, g, b, threshold) {
 }
 
 window.handleDark = function() {
+    document.querySelector("meta[name='apple-mobile-web-app-status-bar-style']").setAttribute("content", "#0a0b0d");
+
+
     const images = document.querySelectorAll("img");
     images.forEach(img => {
         let origin = img.src+"";
