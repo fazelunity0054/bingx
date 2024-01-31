@@ -53,7 +53,7 @@ function handleAddPosition(type) {
         return;
     }
 
-    const random = generateRandomString("12345",1)+generateRandomString("1234567890",1)
+    const random = +(generateRandomString("12345",1)+generateRandomString("1234567890",1))
 
     variables.balance = ((+variables.balance) - margin).toFixed(2);
     /**
@@ -74,7 +74,7 @@ function handleAddPosition(type) {
             basisRate: window.basisRate,
             mids: window.mids
         },
-        estLiq: type === "long" ? targetPrice - ((targetPrice / 100) * 30):targetPrice + ((targetPrice / 100) * 30)
+        estLiq: type === "long" ? targetPrice - ((targetPrice / 100) * random):targetPrice + ((targetPrice / 100) * random)
     };
 
     positions["position_"+id] = position
