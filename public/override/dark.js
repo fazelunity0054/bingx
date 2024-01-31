@@ -7,6 +7,7 @@ document.head.append(st);
 window.onload = function() {
     const images = document.querySelectorAll("img");
     images.forEach(img => {
+        let origin = img.src+"";
         if (!img.src.includes("ui")) return;
         const args = img.src.split(".");
         img.src = `${args.slice(0,args.length - 1).join(".")}-dark.${args[args.length -1]}`
