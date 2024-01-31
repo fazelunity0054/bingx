@@ -15,7 +15,6 @@ window.onload = function() {
         if (img.classList.contains("dark-reverse")) {
             let pre = img.style.border;
             img.style.border = "1px blue solid";
-
             const handleCanvasTransparent = ()=>{
                 const canvas = document.createElement("canvas");
                 canvas.className = img.className;
@@ -41,7 +40,7 @@ window.onload = function() {
                 ctx.putImageData(imageData, 0, 0);
                 img.src = canvas.toDataURL();
                 canvas.parentNode.removeChild(canvas);
-                pre.style.border = pre;
+                img.style.border = pre;
             }
             handleCanvasTransparent();
             img.onload = handleCanvasTransparent
