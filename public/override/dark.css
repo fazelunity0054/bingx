@@ -18,3 +18,7 @@ input {
     background:var(--light-bg-fish);
     color: var(--light-text-1)
 }
+
+.ice-slider.light .handle>i[data-v-52a12614] {
+    background: var(--light-line-1);
+}
