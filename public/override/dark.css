@@ -1,3 +1,4 @@
-body {
-    filter: invert(1);
+:root {
+    --light-bg-dog: #0a0b0d;
+    
 }
