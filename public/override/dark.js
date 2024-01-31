@@ -16,8 +16,7 @@ window.onload = function() {
             let pre = img.style.border;
             img.style.border = "1px blue solid";
 
-            const handleCanvasTransparenter = ()=>{
-                pre.style.border = pre;
+            const handleCanvasTransparent = ()=>{
                 const canvas = document.createElement("canvas");
                 canvas.className = img.className;
                 img.parentNode.append(canvas);
@@ -42,9 +41,10 @@ window.onload = function() {
                 ctx.putImageData(imageData, 0, 0);
                 img.src = canvas.toDataURL();
                 canvas.parentNode.removeChild(canvas);
+                pre.style.border = pre;
             }
-            handleCanvasTransparenter();
-            img.onload = handleCanvasTransparenter
+            handleCanvasTransparent();
+            img.onload = handleCanvasTransparent
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
