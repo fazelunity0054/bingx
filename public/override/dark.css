@@ -60,5 +60,5 @@ body {
 
 }
 .symbol-picker-light .trigger .icon[data-v-910676f0] {
-    background: #fff;
+    background: var(--light-text-1)
 }
