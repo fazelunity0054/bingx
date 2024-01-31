@@ -47,3 +47,7 @@ body {
 .card-container.card-action:before {
     background: url('/ui/card-dark.png');
 }
+
+.tag-wrapper:before  {
+    
+}
