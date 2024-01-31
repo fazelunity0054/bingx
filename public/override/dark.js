@@ -53,7 +53,7 @@ window.handleDark = function() {
             let preborder = img.style.border;
             let prefilter = img.style.filter;
             img.style.border = "1px yellow solid";
-            img.style.filter = "blur(20px)";
+            img.style.filter = "blur(5px)";
             img.src = `${args.slice(0, args.length - 1).join(".")}-dark.${args[args.length - 1]}`
             img.onerror = () => {
                 img.src = origin;
