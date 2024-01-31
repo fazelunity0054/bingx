@@ -20,5 +20,5 @@ input {
 }
 
 .ice-slider.light .handle>i[data-v-52a12614] {
-    background: var(--light-text-1);
+    background-color: var(--light-text-1);
 }
