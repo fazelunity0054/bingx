@@ -7,7 +7,7 @@
     --light-text-2: #f7f7f7;
     --light-line-banana:#23242b;
     --light-text-4: #363942;
-    
+
 }
 
 input {
@@ -16,4 +16,5 @@ input {
 
 .ice-slider.light .mark[data-v-52a12614], .ice-slider.light .rail[data-v-52a12614],.ice-slider.light .handle[data-v-52a12614] {
     background:var(--light-bg-fish);
+    color: var(--light-text-1)
 }
