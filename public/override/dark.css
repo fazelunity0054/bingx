@@ -7,6 +7,6 @@
     --light-line-banana:#23242b;
 }
 
-* {
+input {
     background-color: var(--light-bg-dog)
 }
