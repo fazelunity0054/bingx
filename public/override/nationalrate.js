@@ -6,7 +6,6 @@ function rateUpdater() {
 
     socket.addEventListener("open", ()=>{
         n = 0;
-        console.log("National Updater Opened");
         socket.send("{\"method\":\"RSUBSCRIPTION\",\"params\":[\"main-site@crypto_price_15s@{}@detail\",\"825\"]}")
     })
     socket.addEventListener("message", (e)=>{
