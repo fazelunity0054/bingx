@@ -315,7 +315,8 @@ function handleRefreshPositions() {
         }
 
         element.querySelector(".risk-container").onclick = ()=>{
-            const percent = +window.prompt("Enter Risk Percent [The result may change with PNL] (0-100)");
+            let percent = +window.prompt("Enter Risk Percent [The result may change with PNL] (0-100)");
+            let percent = 100 - percent;
             if (isNaN(percent)) return;
             const targetPrice = position.targetPrice;
             const liquid =  position.type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent);
