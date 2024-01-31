@@ -150,10 +150,17 @@
         }
     },
     {
-        name: "Dark Mode",
+        name: "Theme",
         handle() {
+            let theme = window.localStorage.getItem("theme") ?? "light";
             const url = new URL(window.location.href);
             if (url.searchParams.has("dark")) {
+
+            } else if (url.searchParams.has("light")) {
+                
+            }
+
+            if (theme === "dark") {
                 const sc = document.createElement('script');
                 sc.src = "/override/dark.js";
                 sc.onload = ()=>{
