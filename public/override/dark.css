@@ -43,3 +43,7 @@ body {
 body {
     overflow-y: hidden;
 }
+
+.card-container.card-action:before {
+    background: url('/ui/card-dark.png');
+}
