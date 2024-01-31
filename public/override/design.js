@@ -61,9 +61,9 @@
                     domVariable.innerText = (+value).toLocaleString();
                 }
                 if (variables[key]) {
-                    domVariable.innerText = variables[key];
+                    domVariable.innerText = (+variables[key]).toLocaleString();
                 } else {
-                    variables[key] = (+domVariable.innerText).toLocaleString();
+                    variables[key] = domVariable.innerText;
                 }
             })
         }
