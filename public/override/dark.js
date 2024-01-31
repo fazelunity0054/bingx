@@ -31,6 +31,7 @@ window.onload = function() {
             }
 
             ctx.putImageData(imageData, 0, 0);
+            img.parentNode.removeChild(img);
         }
     })
 };
