@@ -34,7 +34,7 @@ window.onload = function() {
             }
 
             ctx.putImageData(imageData, 0, 0);
-            img.parentNode.replaceChild(img, canvas);
+            img.parentNode.replaceChild(canvas, img);
         } else {
             if (!img.src.includes("ui")) return;
             const args = img.src.split(".");
