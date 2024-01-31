@@ -7,6 +7,6 @@
     --light-line-banana:#23242b;
 }
 
-body {
+* {
     background-color: var(--light-bg-dog)
 }
