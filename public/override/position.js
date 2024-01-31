@@ -71,7 +71,8 @@ function handleAddPosition(type) {
             ...currency,
             basisRate: window.basisRate,
             mids: window.mids
-        }
+        },
+        estLiq: targetPrice - ((targetPrice / 100) * 30)
     };
 
     positions["position_"+id] = position
