@@ -40,13 +40,13 @@ function calcNumber(n) {
         }
     if (n >= 1000 && n < 1_000_000) {
         return {
-            result: +(substringNumber((n / 1000), currency.qtyDigitNum)),
+            result: substringNumber((n / 1000), currency.qtyDigitNum),
             symbol: "K"
         }
     }
     if (n >= 1_000_000) {
         return {
-            result: +(substringNumber((n / 1_000_000), currency.qtyDigitNum)),
+            result: substringNumber((n / 1_000_000), currency.qtyDigitNum),
             symbol: "M"
         }
     }
@@ -530,6 +530,6 @@ window.handleLiquidCalculation = (key, position, callback) => {
         return true;
     }).finally(() => {
         calculatorStatus[key] = "FREE";
-        
+
     })
 }
