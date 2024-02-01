@@ -124,7 +124,7 @@ function handleRefreshPositions() {
         let positionSize = (position.margin * position.leverage) / position.openedPrice;
 
         if (typeof position.liq === 'undefined') handleLiquidCalculation(key, position, (number) => {
-            if (window.positions[key] && !window.positions[key].liq) window.positions[key] = {
+            if (window.positions[key] && !window.positions[key].liq && number) window.positions[key] = {
                 ...positions[key],
                 liq: number
             }
