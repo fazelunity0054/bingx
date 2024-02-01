@@ -530,6 +530,6 @@ window.handleLiquidCalculation = (key, position, callback) => {
         return true;
     }).finally(() => {
         calculatorStatus[key] = "FREE";
-        console.log("CALCULATE", key,position,'FINISHED')
+        
     })
 }

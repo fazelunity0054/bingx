@@ -219,7 +219,7 @@ function handleRefreshPositions() {
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Avg. Open Price</p>
-                                    <p class="value up" data-key="openedPrice" >${echoN(position.openedPrice, +currency.priceDigitNum)}</p>
+                                    <p class="value up" data-key="openedPrice" data-v-db2fc607="">${echoN(position.openedPrice, +currency.priceDigitNum)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Mark Price</p>
