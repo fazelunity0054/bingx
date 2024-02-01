@@ -104,7 +104,7 @@ function handleDepth(data) {
                 const progress = item.querySelector(".progress");
                 progress.style.width = `${ask.percent}%`
                 const price = item.querySelector(".price");
-                price.innerText = ask.price;
+                price.innerText = (+ask.price).toLocaleString();
                 const total = item.querySelector(".total")
                 const n = +ask.volume;
                 const {result, symbol} = calcNumber(n);
