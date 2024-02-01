@@ -197,7 +197,7 @@ const types = [
             updateChange(target.changePercentageFair);
             window.localStorage.setItem("currency", JSON.stringify(target));
             window.currency = target;
-            document.querySelector(".fair").innerText = (+target.fairPrice).toLocaleString90;
+            document.querySelector(".fair").innerText = (+target.fairPrice).toLocaleString();
             document.querySelector(".funding-rate").innerText = target.fundingRate;
             refreshFee();
             if (!isLimit()) {
