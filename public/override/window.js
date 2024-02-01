@@ -345,8 +345,6 @@ function calculateLPWithUnrealizedLoss(currentMarkPrice, availableBalance, initi
 window.handleLiquidCalculation = (key, position, callback) => {
     if (!+position.margin || !+position.openedPrice) return;
 
-    position.marginMode = "Isolated";
-
     calculatorCallbacks[key] ??= [];
     calculatorCallbacks[key].push(callback);
 
@@ -423,7 +421,7 @@ window.handleLiquidCalculation = (key, position, callback) => {
             {
                 iframeDoc.querySelector("#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div").click();
                 await waitFor(".selector-dialog .option-list");
-                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div.selector-dialog > div.option-list > div:nth-child(${position.marginMode.includes("Iso") ? 2 : 1})`).click();
+                iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.selector-wrapper > div.selector-dialog > div.option-list > div:nth-child(2)`).click();
             } // Select Margin Mode
             {
                 iframeDoc.querySelector(`#__layout > div > div > div > section > div.calculator-container > div > div.inner > div.direction > button:nth-child(${position.type === "short" ? 3 : 1})`).click();
