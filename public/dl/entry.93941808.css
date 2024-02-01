@@ -31,7 +31,10 @@ p.label.tp-sl-text {}
 .top-wrapper {}
 
 .menu-container {
-    position: relative;
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
 }
 
 .rate-wrapper {
