@@ -276,12 +276,9 @@ img.info {
     height: 0.12rem;
 }
 
-img.icon-arrow {}.default-font-family,html,html body{font-family:HarmonyOS Sans,PingFang TC,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif}body,html{min-height: 100vh;}
+img.icon-arrow {}.default-font-family,html,html body{font-family:HarmonyOS Sans,PingFang TC,-apple-system,BlinkMacSystemFont,segoe ui,Roboto,Helvetica,Arial,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif}body,html{min-height: 100%;}
 
 html {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
 }article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}li,ul{list-style:none}
 
 #_refresh_page_scroll_view_id_ div.positions-light > ul > li:nth-child(1) {
