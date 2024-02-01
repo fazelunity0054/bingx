@@ -1,7 +1,7 @@
 
 const id = generateRandomString()
 if (!currency) {
-    window.location.href = "select.html";
+    window.location.href = "/select.html";
     throw ("ERR");
 }
 const socket = new WebSocket(`ws://${window.location.hostname}:30054/market`);
