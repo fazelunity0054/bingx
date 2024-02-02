@@ -60,11 +60,7 @@ export async function InitialSocketTransformer(client: WebSocket, message: Incom
 			inflator.push(e, true);
 			client.send(inflator.result);
 		});
-		const now = new Date();
-		now.setDate(0);
-		now.setHours(0);
-		now.setMinutes(0);
-		now.setSeconds(0);
+
 		socket.on('error', ()=>{
 
 		})
