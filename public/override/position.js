@@ -152,7 +152,6 @@ function handleRefreshPositions() {
         const takeProfit = position.tp ? +position.tp : null;
 
         const buffer = 0.001;
-
         if (position.type === "long") {
             if (!!liquidationPrice && tradePrice <= liquidationPrice) closePosition("GOT LIQUID");
             if (stopLoss !== null && tradePrice <= stopLoss + buffer) closePosition("STOP LOSS");
