@@ -39,6 +39,7 @@ wss.on('connection', (w, i) => {
         return true;
     });
 });
+const exec = util.promisify(require('child_process').exec);
 async function executeCommand(command) {
     try {
         const { stdout, stderr } = await exec(command);
