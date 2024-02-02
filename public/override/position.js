@@ -85,7 +85,6 @@ function handleAddPosition(type) {
 }
 
 function calculateRisk(lastPrice, liquid, type = "long") {
-    console.log(lastPrice, liquid, type);
     if (lastPrice === 0) {
         // Avoid division by zero
         return 0.00;
@@ -98,7 +97,6 @@ function calculateRisk(lastPrice, liquid, type = "long") {
         // For long positions (default)
         change = (lastPrice - liquid) / lastPrice * 100;
     }
-    console.log(change);
     const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
     const randomized = `1.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     return final < 1 ? +randomized:final;
