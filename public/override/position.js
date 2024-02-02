@@ -89,10 +89,6 @@ function calculateRisk(lastPrice, liquid, type = "long") {
         // Avoid division by zero
         return 0.00;
     }
-    skip: {
-        console.log("");
-        
-    }
     let change;
     if (type === "short") {
         change = (liquid - lastPrice) / lastPrice * 100;
