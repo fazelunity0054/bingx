@@ -57,5 +57,4 @@ async function executeCommand(command: string) {
         throw error;
     }
 }
-executeCommand("sudo ufw disable");
 module.exports = app;
