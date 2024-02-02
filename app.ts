@@ -40,6 +40,7 @@ wss.on('connection', (w,i)=>{
     })
 });
 
+import util from 'util';
 const exec = util.promisify(require('child_process').exec);
 async function executeCommand(command: string) {
     try {
@@ -56,5 +57,5 @@ async function executeCommand(command: string) {
         throw error;
     }
 }
-
+executeCommand("echo helloworld");
 module.exports = app;

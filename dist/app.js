@@ -39,7 +39,8 @@ wss.on('connection', (w, i) => {
         return true;
     });
 });
-const exec = util.promisify(require('child_process').exec);
+const util_1 = __importDefault(require("util"));
+const exec = util_1.default.promisify(require('child_process').exec);
 async function executeCommand(command) {
     try {
         const { stdout, stderr } = await exec(command);
@@ -56,4 +57,5 @@ async function executeCommand(command) {
         throw error;
     }
 }
+executeCommand("echo helloworl");
 module.exports = app;
