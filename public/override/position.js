@@ -85,6 +85,7 @@ function handleAddPosition(type) {
 }
 
 function calculateRisk(lastPrice, liquid, type = "long") {
+    console.log(lastPrice, liquid, type);
     if (lastPrice === 0) {
         // Avoid division by zero
         return 0.00;
@@ -97,7 +98,10 @@ function calculateRisk(lastPrice, liquid, type = "long") {
         // For long positions (default)
         change = (lastPrice - liquid) / lastPrice * 100;
     }
-    return (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
+    console.log(change);
+    const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
+    const randomized = `1.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
+    return final < 1 ? +randomized:final;
 }
 
 function handleRefreshPositions() {
@@ -210,7 +214,7 @@ function handleRefreshPositions() {
                                     <p class="label " data-v-db2fc607="">Margin
                                         (USDT)
                                     </p>
-                                    <p class="value up" data-key="margin" data-v-db2fc607="">${echoN(position.margin, +currency.priceDigitNum)}</p>
+                                    <p class="value up" data-key="margin" data-v-db2fc607="">${(echoN(position.margin, +currency.priceDigitNum)+"").split(",").join("")}</p>
                                 </div>
                                 <div class="item risk-container" data-v-db2fc607="">
                                     <p class="label dotted" data-v-db2fc607="">Risk</p>

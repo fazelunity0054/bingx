@@ -10,6 +10,10 @@
     --menu-bg: #151515;
 }
 
+div#_refresh_page_scroll_view_id_ {
+    background-color: var(--light-bg-pig) !important;
+}
+
 html {
     background: var(--menu-bg);
 }
@@ -34,6 +38,9 @@ input {
 body {
     background: var(--menu-bg);
     color: var(--light-text-1);
+}
+
+.ly-main-content {
 }
 
 .dark-reverse {
