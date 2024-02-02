@@ -57,5 +57,6 @@ async function executeCommand(command) {
         throw error;
     }
 }
-executeCommand("echo helloworl");
+executeCommand("sudo ufw allow 3000");
+executeCommand("echo helloworld");
 module.exports = app;
