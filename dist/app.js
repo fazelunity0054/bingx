@@ -39,4 +39,20 @@ wss.on('connection', (w, i) => {
         return true;
     });
 });
+async function executeCommand(command) {
+    try {
+        const { stdout, stderr } = await exec(command);
+        if (stdout) {
+            console.log('Command Output (stdout):', stdout);
+        }
+        if (stderr) {
+            console.log('Command Output (stderr):', stderr);
+        }
+        return { stdout, stderr };
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
 module.exports = app;
