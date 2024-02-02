@@ -65,7 +65,6 @@ img.tp,canvas.tp {
 img.ui-menu {
     width: 100%;
     height: 100px;
-    object-fit: contain;
 }
 
 img.funding-ui {

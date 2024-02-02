@@ -7,7 +7,7 @@
     --light-text-2: #b1b1b1;
     --light-line-banana:#23242b;
     --light-text-4: #363942;
-
+    --menu-bg: #151515;
 }
 
 input {
@@ -23,11 +23,12 @@ input {
     background-color: var(--light-text-1) !important;
 }
 
-.header[data-v-81141236], #_refresh_page_scroll_view_id_ > div.order.order-light > div.top-wrapper, #_refresh_page_scroll_view_id_ ul.multi-tab-bar, body {
+.header[data-v-81141236], #_refresh_page_scroll_view_id_ > div.order.order-light > div.top-wrapper, #_refresh_page_scroll_view_id_ ul.multi-tab-bar {
     background-color: var(--light-bg-dog) !important;
 }
 
 body {
+    background: var(--menu-bg);
     color: var(--light-text-1);
 }
 
