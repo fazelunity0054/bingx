@@ -64,9 +64,6 @@ img.tp,canvas.tp {
 
 img.ui-menu {
     width: 100%;
-    height: 100px;
-    object-fit: contain;
-    object-position: top;
 }
 
 img.funding-ui {
@@ -260,7 +257,7 @@ img.charge {
 
 #__nuxt > div.ly-main > div.menu-container > div {
     position: absolute;
-    top: 0.35rem;
+    top: 0.29rem;
     left: 0.54rem;
 }
 
