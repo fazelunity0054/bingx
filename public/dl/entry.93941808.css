@@ -66,6 +66,7 @@ img.ui-menu {
     width: 100%;
     height: 100px;
     object-fit: contain;
+    object-position: top;
 }
 
 img.funding-ui {
