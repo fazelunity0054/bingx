@@ -75,7 +75,7 @@ function calculateMaxMarginAsSymbol(type, lastTrade) {
     let result = origin - fee;
     if (result < 0)
         result = 0;
-    return result < 99 ? substringNumber(result, +currency.qtyDigitNum, true) : (type === "long" ? Math.floor(result) : Math.round(result)).toLocaleString();
+    return result < 99 ? substringNumber(result, +currency.qtyDigitNum, true) : (type === "long" ? Math.floor(result) : Math.round(result)).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
 }
 
 window.calculateMaxMarginAsSymbol = calculateMaxMarginAsSymbol;
@@ -136,7 +136,7 @@ window.substringNumber = (margin, n = 2, force = true) => {
     if (n === 0) return R?.[0] ?? margin;
     return (+(R[0] + (!!R[1] || force ? "." : "") + (!!R[1] || force ? Array.from({
         length: n
-    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : ""))).toLocaleString();
+    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : ""))).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
 }
 
 function generateRandomString(charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', length = 10) {
@@ -174,7 +174,7 @@ function formatNumber(number, len) {
         }
     }
 
-    return (+result).toLocaleString();
+    return (+result).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
 }
 
 window.formatNumber = formatNumber;

@@ -104,7 +104,7 @@ function handleDepth(data) {
                 const progress = item.querySelector(".progress");
                 progress.style.width = `${ask.percent}%`
                 const price = item.querySelector(".price");
-                price.innerText = (+ask.price).toLocaleString();
+                price.innerText = (+ask.price).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
                 const total = item.querySelector(".total")
                 const n = +ask.volume;
                 const {result, symbol} = calcNumber(n);
@@ -138,7 +138,7 @@ function handleDepth(data) {
                 const progress = item.querySelector(".progress");
                 progress.style.width = `${ask.percent}%`
                 const price = item.querySelector(".price");
-                price.innerText = (+ask.price).toLocaleString();
+                price.innerText = (+ask.price).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
                 const total = item.querySelector(".total")
                 const n = +ask.volume;
                 const {result, symbol} = calcNumber(n);
@@ -197,7 +197,7 @@ const types = [
             updateChange(target.changePercentageFair);
             window.localStorage.setItem("currency", JSON.stringify(target));
             window.currency = target;
-            document.querySelector(".fair").innerText = (+target.fairPrice).toLocaleString();
+            document.querySelector(".fair").innerText = (+target.fairPrice).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
             document.querySelector(".funding-rate").innerText = target.fundingRate;
             refreshFee();
             if (!isLimit()) {

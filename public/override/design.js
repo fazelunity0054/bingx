@@ -58,10 +58,10 @@
                     const value = +window.prompt(hint);
                     if (!value) return;
                     window.variables[key] = value;
-                    domVariable.innerText = (+value).toLocaleString();
+                    domVariable.innerText = (+value).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
                 }
                 if (variables[key]) {
-                    domVariable.innerText = (+variables[key]).toLocaleString();
+                    domVariable.innerText = (+variables[key]).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
                 } else {
                     variables[key] = domVariable.innerText;
                 }
