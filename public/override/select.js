@@ -78,12 +78,13 @@ function onMessage(object) {
             /**
              * @type {string[]}
              */
-            const symbols = all?.map?.(i => i?.symbol+"");
+            let symbols = all?.map?.(i => i?.symbol+"");
 
             for (let item of array) {
                 if (symbols.includes(item?.symbol)) continue;
 
                 all.push(item);
+                symbols.push(item.symbol);
             }
 
             break;
