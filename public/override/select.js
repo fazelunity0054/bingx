@@ -68,20 +68,10 @@ function onMessage(object) {
 
     switch (object.dataType) {
         case "ready":
-            types.forEach((t) => {
-                socket.send(`{"dataType":"${t.type}","id": "UPDATE-LIST","reqType":"sub"}`)
-            })
+            socket.send(`{"dataType":"swap.market.v2.contracts","id": "UPDATE-LIST","reqType":"sub"}`)
             break;
         default:
-            const type = types.find(t => t.type === object.dataType);
-            if (type) {
-                try {
-                    type.handle(object);
-                } catch(e) {
-                    console.error(e);
-                }
-            }
-            else console.log("TYPE NOT FOUND", object);
+            console.log(object);
             break;
     }
 }
