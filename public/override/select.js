@@ -53,3 +53,35 @@ function render(contracts) {
         container.append(item);
     })
 }
+
+
+const socket = new WebSocket(`ws://${window.location.hostname}:30054/market`);
+
+socket.addEventListener('message', (event) => {
+    try {
+        onMessage(JSON.parse(event.data));
+    } catch (e) {
+    }
+});
+
+function onMessage(object) {
+
+    switch (object.dataType) {
+        case "ready":
+            types.forEach((t) => {
+                socket.send(`{"dataType":"${t.type}","id": "UPDATE-LIST","reqType":"sub"}`)
+            })
+            break;
+        default:
+            const type = types.find(t => t.type === object.dataType);
+            if (type) {
+                try {
+                    type.handle(object);
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+            else console.log("TYPE NOT FOUND", object);
+            break;
+    }
+}
