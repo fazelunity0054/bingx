@@ -177,7 +177,10 @@ function handleRefreshPositions() {
 
         const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => typeof n === 'undefined' ? undefined:substringNumber(n,n2,n3)
 
-
+        /**
+         *
+         * @type {Element}
+         */
         let element = new DOMParser().parseFromString(`
         <div class="item-wrapper" data-v-db2fc607="">
             <div class="top-wrapper" data-v-db2fc607="">
