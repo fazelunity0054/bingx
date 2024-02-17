@@ -37,12 +37,10 @@ function render(contracts) {
     container.innerHTML = "";
 
 
-    [
-        ...contracts,
-        {
-            name: "Wait until data load"
-        }
-    ].forEach(contract => {
+    (!contracts?.length ? [{
+        name: "SYMBOL NOT FOUND",
+        changeFair: "wait until full data load"
+    }]:contracts).forEach(contract => {
         const item = document.createElement("div");
         item.style.cursor = "pointer";
         item.style.padding = "10px";
