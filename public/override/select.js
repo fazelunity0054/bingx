@@ -71,6 +71,7 @@ function onMessage(object) {
             socket.send(`{"dataType":"market.contracts","id": "UPDATE-LIST","reqType":"sub"}`)
             break;
         case "market.contracts":
+            console.log(object)
             /**
              * @type {any[]}
              */
