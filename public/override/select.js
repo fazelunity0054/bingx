@@ -39,7 +39,8 @@ function render(contracts) {
 
     (!contracts?.length ? [{
         name: "LIST EMPTY",
-        changeFair: "Wait until full data load"
+        changeFair: "Wait until full data load",
+        fairDirection: "Down"
     }]:contracts).forEach(contract => {
         const item = document.createElement("div");
         item.style.cursor = "pointer";
