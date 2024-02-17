@@ -49,7 +49,7 @@ function render(contracts) {
         }
         item.innerHTML = `
            <p>${contract.name}</p>
-           <small style="color: ">${contract?.changeFair}</small>
+           <small style="color: ${contract?.fairDirection === 'Down' ? "red":"green"}">${contract?.changeFair}</small>
         `
         container.append(item);
     })
