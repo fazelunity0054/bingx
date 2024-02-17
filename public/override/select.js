@@ -75,7 +75,7 @@ function onMessage(object) {
             /**
              * @type {any[]}
              */
-            const array = object?.data;
+            const array = object?.data?.contracts;
             /**
              * @type {string[]}
              */
