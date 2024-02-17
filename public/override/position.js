@@ -331,7 +331,8 @@ function handleRefreshPositions() {
             const liquid =  position.type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent);
             window.positions[key] = {
                 ...window.positions[key] ?? {},
-                liq: liquid
+                liq: liquid,
+                randomized: undefined
             }
         }
 
