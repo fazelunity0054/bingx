@@ -8,6 +8,7 @@ import {InitialSocketTransformer} from "./ws/Transformer";
 import {contractList} from "./utils/other";
 import {currencyImage} from "./routes/image";
 import {middleware} from "./middleware/middleware";
+import * as fs from "fs";
 
 const app = express();
 app.use(express.json());
