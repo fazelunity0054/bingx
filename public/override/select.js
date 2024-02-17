@@ -79,15 +79,17 @@ function onMessage(object) {
             /**
              * @type {string[]}
              */
-            let symbols = all?.map?.(i => i?.symbol+"");
+            let copy= Object.fromEntries(
+                all?.map?.(i => ([
+                    i?.symbol,
+                    i
+                ]))
+            )
 
             for (let item of array) {
-                if (symbols.includes(item?.symbol)) continue;
-
-                all.push(item);
-                symbols.push(item.symbol);
+                copy[item?.symbol] = item;
             }
-
+            all = Object.values(copy);
             render(all);
             break;
         default:
