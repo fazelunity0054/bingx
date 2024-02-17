@@ -49,6 +49,7 @@ function render(contracts) {
         item.style.border = "solid 1px #333"
         item.style.margin = "20px 0px"
         item.onclick = ()=>{
+            if (!contract?.symbol) return;
             window.localStorage.setItem("currency", JSON.stringify(contract));
             window.location.href = "/";
         }
