@@ -38,7 +38,7 @@ function render(contracts) {
 
 
     (!contracts?.length ? [{
-        name: "SYMBOL NOT FOUND",
+        name: "LIST EMPTY",
         changeFair: "wait until full data load"
     }]:contracts).forEach(contract => {
         const item = document.createElement("div");
