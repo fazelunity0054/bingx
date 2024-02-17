@@ -1,5 +1,7 @@
+let all = [];
+
 (async () => {
-    const all = await fetch("/contracts").then(r => r.json());
+
 
     /**
      * @type {{
@@ -7,17 +9,16 @@
      *     name: string
      * }[]}
      */
-    const contracts = all.data.contracts;
 
-    render(contracts);
+    render(all);
 
     const input = document.querySelector("input");
     input.oninput = ()=>{
         const value = input.value;
         if (!value) {
-            render(contracts);
+            render(all);
         } else {
-            render(contracts.filter(c => c.name.toLowerCase().includes(value.toLowerCase())))
+            render(all.filter(c => c.name.toLowerCase().includes(value.toLowerCase())))
         }
     }
 })()
