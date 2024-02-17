@@ -37,7 +37,12 @@ function render(contracts) {
     container.innerHTML = "";
 
 
-    contracts.forEach(contract => {
+    [
+        ...contracts,
+        {
+            name: "Wait until data load"
+        }
+    ].forEach(contract => {
         const item = document.createElement("div");
         item.style.cursor = "pointer";
         item.style.padding = "10px";
@@ -53,6 +58,8 @@ function render(contracts) {
         `
         container.append(item);
     })
+
+
 }
 
 
