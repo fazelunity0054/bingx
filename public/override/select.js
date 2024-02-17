@@ -70,6 +70,23 @@ function onMessage(object) {
         case "ready":
             socket.send(`{"dataType":"market.contracts","id": "UPDATE-LIST","reqType":"sub"}`)
             break;
+        case "market.contracts":
+            /**
+             * @type {any[]}
+             */
+            const array = object?.data;
+            /**
+             * @type {string[]}
+             */
+            const symbols = all?.map?.(i => i?.symbol+"");
+
+            for (let item of array) {
+                if (symbols.includes(item?.symbol)) continue;
+
+                all.push(item);
+            }
+
+            break;
         default:
             console.log(object);
             break;
