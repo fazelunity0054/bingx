@@ -68,7 +68,7 @@ function onMessage(object) {
 
     switch (object.dataType) {
         case "ready":
-            socket.send(`{"dataType":"swap.market.v2.contracts","id": "UPDATE-LIST","reqType":"sub"}`)
+            socket.send(`{"dataType":"market.contracts","id": "UPDATE-LIST","reqType":"sub"}`)
             break;
         default:
             console.log(object);
