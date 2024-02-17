@@ -87,6 +87,7 @@ function onMessage(object) {
                 symbols.push(item.symbol);
             }
 
+            render(all);
             break;
         default:
             console.log(object);
