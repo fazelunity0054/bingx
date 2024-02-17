@@ -49,6 +49,7 @@ function render(contracts) {
         }
         item.innerHTML = `
            <p>${contract.name}</p>
+           <small style="color: ">${contract?.changeFair}</small>
         `
         container.append(item);
     })
