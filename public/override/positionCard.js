@@ -111,8 +111,6 @@ function appendImagesTo(selector, links, key) {
         }
     })
     setVar("entries_"+key, added);
-
-
 }
 
 window.data = {};
