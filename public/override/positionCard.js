@@ -129,7 +129,8 @@ document.querySelectorAll(".inputs input").forEach(input => {
         window.data[key] = input.value;
         setVar(key, input?.value)
     }
-    input.value = getVar(key);
+    const value = getVar(key);
+    if (value) input.value = value;
 })
 
 window.generate = () => {
