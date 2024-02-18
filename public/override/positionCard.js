@@ -25,9 +25,9 @@ function handleImagesRequest(path, params, selector, key) {
     })
 }
 
-iframe.onload = () => {
+iframe.onload = async () => {
     window.request = iframe.contentWindow.request;
-    handleImagesRequest("/fake/fetch/https/api-app.we-api.com/api/platform-tool/v1/sharing/get-config-list"
+    await handleImagesRequest("/fake/fetch/https/api-app.we-api.com/api/platform-tool/v1/sharing/get-config-list"
         , {shareType: 4}
         , ".select-banner"
         , 'banner'
@@ -39,7 +39,11 @@ iframe.onload = () => {
         const img = document.querySelector(`img[src="${targetLink}"]`);
         img?.click?.();
     })
-    appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar')
+    appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar');
+
+    if (window?.location.href?.includes?.('auto')) {
+        
+    }
 }
 
 
