@@ -93,7 +93,7 @@ function handleAddPosition(type) {
  * @param position {position}
  * @return {number|string}
  */
-function calculateRisk(lastPrice, liquid, type = "long", position) {
+function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
     if (lastPrice === 0) {
         // Avoid division by zero
         return 0.00;
@@ -104,6 +104,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position) {
     } else {
         change = (lastPrice - liquid) / lastPrice * 100;
     }
+    change *= pnl
     const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
     const randomized = `1.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
@@ -139,7 +140,6 @@ function handleRefreshPositions() {
         const currency = position.currency;
         const finalLiquid = position.liq ?? position.estLiq;
         const coin = position.currency;
-        const risk = typeof finalLiquid !== 'undefined' ? calculateRisk(+currency.tradePrice, finalLiquid,position.type, position):"Wait";
         const tradePrice = +currency.tradePrice;
         const markPrice = currency.indexPrice + (1 + currency.basisRate);
         let positionSize = (position.margin * position.leverage) / position.openedPrice;
@@ -154,7 +154,7 @@ function handleRefreshPositions() {
         let pnl = position.type === "short"
             ? (position.openedPrice - tradePrice) * positionSize
             : (tradePrice - position.openedPrice) * positionSize;
-
+        const risk = typeof finalLiquid !== 'undefined' ? calculateRisk(+currency.tradePrice, finalLiquid,position.type, position, pnl):"Wait";
         const positionMargin = position.openedPrice * position.leverage * position.amount;
         const ratio = position.type === "long"
             ? (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100
