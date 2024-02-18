@@ -135,7 +135,10 @@ document.querySelectorAll(".inputs input").forEach(input => {
         setVar(key, input?.value)
     }
     const value = getVar(key);
-    if (value) input.value = value;
+    if (value) {
+        input.value = value;
+        input.onchange();
+    }
 })
 
 window.generate = () => {
