@@ -53,6 +53,7 @@ window.setVar = (key, value) => {
     let pre = getVars();
     pre[key] = value;
     localStorage.setItem("exportVar", JSON.stringify(pre));
+    return pre;
 }
 
 function appendImagesTo(selector, links, key) {
