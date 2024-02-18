@@ -98,7 +98,6 @@ function calculateRisk(lastPrice, liquid, type = "long", position) {
         // Avoid division by zero
         return 0.00;
     }
-    return calculatePositionRisk(lastPrice, position?.openedPrice, type, liquid)
     let change;
     if (type === "short") {
         change = (liquid - lastPrice) / lastPrice * 100;
