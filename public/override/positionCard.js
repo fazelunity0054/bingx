@@ -62,6 +62,7 @@ window.setVar = (key, value) => {
 }
 
 function appendImagesTo(selector, links, key) {
+    setVar("entries_"+key, links);
     const container = document.querySelector(selector);
 
     const addImg = link => {
