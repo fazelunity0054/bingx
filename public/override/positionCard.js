@@ -33,7 +33,11 @@ iframe.onload = () => {
         , 'banner'
     ).then(links=>{
         const isProfit = card?.ratio > 0;
-        alert(`profit = ${isProfit+""}`)
+        const target = isProfit ? "profit":"loss";
+
+        const targetLink = links.find(l => l?.includes?.(target));
+        const img = document.querySelector(`img[src="${targetLink}"]`);
+        img?.click?.();
     })
     appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar')
 }
