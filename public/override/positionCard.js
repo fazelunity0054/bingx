@@ -31,9 +31,9 @@ iframe.onload = async () => {
         , {shareType: 4}
         , ".select-banner"
         , 'banner'
-    ).then(links=>{
+    ).then(links => {
         const isProfit = card?.ratio > 0;
-        const target = isProfit ? "profit":"loss";
+        const target = isProfit ? "profit" : "loss";
 
         const targetLink = links.find(l => l?.includes?.(target));
         const img = document.querySelector(`img[src="${targetLink}"]`);
@@ -48,7 +48,7 @@ iframe.onload = async () => {
 
 const isAuto = window?.location.href?.includes?.('auto');
 
-window.getVars = ()=>{
+window.getVars = () => {
     return JSON.parse(localStorage.getItem("exportVar") || "{}");
 }
 
@@ -57,7 +57,7 @@ window.getVars = ()=>{
  * @param key {string}
  * @return string
  */
-window.getVar = (key)=>{
+window.getVar = (key) => {
     return getVars()?.[key];
 }
 /**
@@ -125,7 +125,7 @@ function appendImagesTo(selector, links, key) {
             img?.click?.();
         }
     })
-    setVar("entries_"+key, added);
+    setVar("entries_" + key, added);
     return added;
 }
 
@@ -133,7 +133,7 @@ window.data = {};
 const card = JSON.parse(window.localStorage.getItem("card") ?? "{}");
 document.querySelectorAll(".inputs input").forEach(input => {
     const key = input.getAttribute("name");
-    input.onchange =()=>{
+    input.onchange = () => {
         window.data[key] = input.value;
         setVar(key, input?.value)
     }
@@ -159,9 +159,16 @@ window.generate = () => {
    <div class="order-share-body" data-v-70eaf828="">
       <div class="logo-wrapper" data-v-325acc0c="" data-v-70eaf828=""><img src="${window.location.origin}/dl/logo.png" alt="" data-v-325acc0c=""></div>
       <div class="order-info" data-v-70eaf828="">
-         <p class="base-info" data-v-70eaf828="" style="font-weight: bold"><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down":"up"}" data-v-70eaf828="">${card.position.type === "short"?"S":"L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
+         <p class="base-info" data-v-70eaf828="" style="font-weight: bold"><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down" : "up"}" data-v-70eaf828="">${card.position.type === "short" ? "S" : "L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
          <span class="order-profit-desc" data-v-70eaf828="">ROI</span>
-         <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down":""}" data-v-70eaf828="" style="font-size: 40px;font-weight: ${(+(+card.ratio).toFixed(2)+"")?.replace("-","")?.length <= 4 ? "bolder":"unset"}"><span class="profit-text" data-v-70eaf828="">${+card.ratio > 0 ? "+":""}${+(+card.ratio).toFixed(2)}<span>%</span></span></div>
+         <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down" : ""}"
+          data-v-70eaf828=""
+           style="font-size: 40px;font-weight: ${(+(+card.ratio).toFixed(2) + "")?.replace("-", "")?.length <= 4 ? "bolder" : "unset"}">
+           <span class="profit-text" data-v-70eaf828="">
+${+card.ratio > 0 ? "+" : ""}${+(+card.ratio).toFixed(2)}
+           </span>
+               <span>%</span>
+           </div>
          <ul class="price-info" data-v-70eaf828=""><li class="price-item close-price" data-v-70eaf828="">
                <p class="label" data-v-70eaf828="">Last Price</p>
                <p class="value din-pro" data-v-70eaf828="">${(+card.currency.tradePrice).toFixed(+card.currency.priceDigitNum)}</p>
@@ -182,8 +189,8 @@ window.generate = () => {
                   </div>
                </div>
                <div class="user-info" data-v-d1925dea="">
-                  <p class="nickname" data-v-d1925dea="">${data?.email?.slice(0,2)+`***@${data?.email?.split("@")?.[1]?.split("").slice(0,8).join("")}...`}</p>
-                  <p class="date din-pro" data-v-d1925dea="">${new Date().toLocaleDateString().split("/").slice(0,2).map(s => s.length === 1 ? "0"+s:s).join("/")} ${new Date().getHours() < 9 ? "0":""}${new Date().getHours()}:${new Date().getMinutes() < 9 ? "0":""}${new Date().getMinutes()}</p>
+                  <p class="nickname" data-v-d1925dea="">${data?.email?.slice(0, 2) + `***@${data?.email?.split("@")?.[1]?.split("").slice(0, 8).join("")}...`}</p>
+                  <p class="date din-pro" data-v-d1925dea="">${new Date().toLocaleDateString().split("/").slice(0, 2).map(s => s.length === 1 ? "0" + s : s).join("/")} ${new Date().getHours() < 9 ? "0" : ""}${new Date().getHours()}:${new Date().getMinutes() < 9 ? "0" : ""}${new Date().getMinutes()}</p>
                </div>
             </div>
          </div>
@@ -197,11 +204,11 @@ window.generate = () => {
       </div>
    </div>
 </div>
-    `,"text/html")
+    `, "text/html")
         .querySelector(".poster-container");
 
     const profit = content.querySelector(".profit");
-    profit.onclick = ()=>{
+    profit.onclick = () => {
         const unit = content.querySelector(".order-profit-desc");
         let text = "";
         if (unit.innerText === "ROI") {
@@ -211,12 +218,12 @@ window.generate = () => {
             unit.innerText = "ROI";
             text = `${+(+card.ratio).toFixed(2)}%`
         }
-        profit.style.fontSize = text.length >= 12 ? "26px":"40px";
+        profit.style.fontSize = text.length >= 12 ? "26px" : "40px";
         profit.innerText = text;
     }
     const btn = document.createElement("button");
     btn.innerText = "DOWNLOAD";
-    btn.onclick = ()=>{
+    btn.onclick = () => {
         var pixelRatio = window.devicePixelRatio || 1;
         html2canvas(content, {
             scale: 5

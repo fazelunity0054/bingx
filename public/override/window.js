@@ -136,7 +136,7 @@ window.substringNumber = (margin, n = 2, force = true) => {
     if (n === 0) return R?.[0] ?? margin;
     return (+(R[0] + (!!R[1] || force ? "." : "") + (!!R[1] || force ? Array.from({
         length: n
-    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : ""))).toLocaleString(undefined, {maximumFractionDigits: 99, useGroup: true});
+    }).map((_, i) => (R?.[1]?.split("")?.[i] || "0")).join("") : ""))).toLocaleString(undefined, {maximumFractionDigits: 10, useGroup: true});
 }
 
 function generateRandomString(charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', length = 10) {
