@@ -234,8 +234,8 @@ window.generate = () => {
             var link = document.createElement('a');
             link.href = image;
             link.download = 'screenshot.png';
-            link.click();
-            canvas.parentNode.removeChild(canvas);
+            // link.click();
+            // canvas.parentNode.removeChild(canvas);
         })
     }
     resultElement.append(content);
