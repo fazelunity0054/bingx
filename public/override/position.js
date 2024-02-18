@@ -104,7 +104,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position) {
     } else {
         change = (lastPrice - liquid) / lastPrice * 100;
     }
-    const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
+    const final = Math.max(change < 100 ? change:99.99, 0).toFixed(2);
     const randomized = `1.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
     return final < 1 ? +position.randomized:final;
