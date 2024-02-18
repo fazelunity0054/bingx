@@ -16,7 +16,7 @@ function handleImagesRequest(path, params, selector, key) {
             params
         }))?.list;
         const links = extractAllLink(bannersData);
-        appendImagesTo(selector, links.map(l => `${window.location.origin}${new URL(l).pathname}`), key);
+        return appendImagesTo(selector, links.map(l => `${window.location.origin}${new URL(l).pathname}`), key);
     })().catch((e) => {
         console.error(e)
         if (!window.location.host.includes("localhost")) {
@@ -31,8 +31,9 @@ iframe.onload = () => {
         , {shareType: 4}
         , ".select-banner"
         , 'banner'
-    ).then(()=>{
-        alert("LOADED");
+    ).then(links=>{
+        const isProfit = card?.ratio > 0;
+        alert(`profit = ${isProfit+""}`)
     })
     appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar')
 }
