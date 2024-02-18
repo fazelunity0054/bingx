@@ -227,6 +227,7 @@ window.generate = () => {
         }).then(canvas => {
 
             document.body.append(canvas);
+            console.log(canvas)
             var image = canvas.toDataURL("image/png");
 
             // You can then download it or display it as needed
@@ -234,6 +235,7 @@ window.generate = () => {
             link.href = image;
             link.download = 'screenshot.png';
             link.click();
+            canvas.parentNode.removeChild(canvas);
         })
     }
     resultElement.append(content);
