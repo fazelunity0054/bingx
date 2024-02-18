@@ -159,7 +159,7 @@ window.generate = () => {
    <div class="order-share-body" data-v-70eaf828="">
       <div class="logo-wrapper" data-v-325acc0c="" data-v-70eaf828=""><img src="${window.location.origin}/fake/fetch/https/bin.bb-os.com/swap_nuxt/logo.fbb10114.png" alt="" data-v-325acc0c=""></div>
       <div class="order-info" data-v-70eaf828="">
-         <p class="base-info" data-v-70eaf828=""><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down":"up"}" data-v-70eaf828="">${card.position.type === "short"?"S":"L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
+         <p class="base-info" data-v-70eaf828="" style="font-weight: bold"><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down":"up"}" data-v-70eaf828="">${card.position.type === "short"?"S":"L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
          <span class="order-profit-desc" data-v-70eaf828="">ROI</span>
          <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down":""}" data-v-70eaf828="" style="font-size: 40px;"><span class="profit-text" data-v-70eaf828="">${+(+card.ratio).toFixed(2)}%</span></div>
          <ul class="price-info" data-v-70eaf828=""><li class="price-item close-price" data-v-70eaf828="">
