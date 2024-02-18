@@ -98,6 +98,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position) {
         // Avoid division by zero
         return 0.00;
     }
+    return calculatePositionRisk(lastPrice, position?.openedPrice, type, liquid)
     let change;
     if (type === "short") {
         change = (liquid - lastPrice) / lastPrice * 100;
@@ -108,6 +109,17 @@ function calculateRisk(lastPrice, liquid, type = "long", position) {
     const randomized = `1.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
     return final < 1 ? +position.randomized:final;
+}
+
+function calculatePositionRisk(lastPrice, openedPrice, positionType, liquidPrice) {
+    if (!["long", "short"].includes(positionType)) {
+        throw new Error("Invalid position type. Must be 'long' or 'short'.");
+    }
+
+    const isLong = positionType === "long";
+    const priceDiff = isLong ? lastPrice - liquidPrice : liquidPrice - lastPrice;
+
+    return Math.max(0, priceDiff);
 }
 
 function handleRefreshPositions() {
