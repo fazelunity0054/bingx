@@ -105,6 +105,10 @@ function appendImagesTo(selector, links, key) {
     const prevalue = getVar(key);
     links.forEach(l => {
         const img = addImg(l);
+
+        if (l === prevalue) {
+            img?.click?.();
+        }
     })
     setVar("entries_"+key, added);
 
