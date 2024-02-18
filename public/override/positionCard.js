@@ -109,11 +109,12 @@ function appendImagesTo(selector, links, key) {
 window.data = {};
 const card = JSON.parse(window.localStorage.getItem("card") ?? "{}");
 document.querySelectorAll(".inputs input").forEach(input => {
+    const key = input.getAttribute("name");
     input.onchange =()=>{
-        const key = input.getAttribute("name");
         window.data[key] = input.value;
         setVar(key, input?.value)
     }
+    input.value = getVar(key);
 })
 
 window.generate = () => {
