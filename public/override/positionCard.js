@@ -71,7 +71,7 @@ function appendImagesTo(selector, links, key) {
         img.src = link;
         img.onclick = () => {
             window[key] = link;
-
+            setVar(key, link);
             container.querySelectorAll("img").forEach(i => i.style.removeProperty("border"))
             img.style.border = "2px solid red"
         }
