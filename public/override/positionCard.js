@@ -161,7 +161,7 @@ window.generate = () => {
       <div class="order-info" data-v-70eaf828="">
          <p class="base-info" data-v-70eaf828="" style="font-weight: bold"><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down":"up"}" data-v-70eaf828="">${card.position.type === "short"?"S":"L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
          <span class="order-profit-desc" data-v-70eaf828="">ROI</span>
-         <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down":""}" data-v-70eaf828="" style="font-size: 40px;font-weight: ${(+(+card.ratio).toFixed(2)+"")?.replace("-","")?.length <= 4 ? "bold":"unset"}"><span class="profit-text" data-v-70eaf828="">${+(+card.ratio).toFixed(2)}%</span></div>
+         <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down":""}" data-v-70eaf828="" style="font-size: 40px;font-weight: ${(+(+card.ratio).toFixed(2)+"")?.replace("-","")?.length <= 4 ? "bolder":"unset"}"><span class="profit-text" data-v-70eaf828="">${+(+card.ratio).toFixed(2)}%</span></div>
          <ul class="price-info" data-v-70eaf828=""><li class="price-item close-price" data-v-70eaf828="">
                <p class="label" data-v-70eaf828="">Last Price</p>
                <p class="value din-pro" data-v-70eaf828="">${(+card.currency.tradePrice).toFixed(+card.currency.priceDigitNum)}</p>
