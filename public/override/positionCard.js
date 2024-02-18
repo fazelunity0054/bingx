@@ -36,6 +36,25 @@ iframe.onload = () => {
 }
 
 
+window.getVars = ()=>{
+    return JSON.parse(localStorage.getItem("exportVar") || "{}");
+}
+
+/**
+ *
+ * @param key {string}
+ * @param value {string}
+ * @return string
+ */
+window.getVar = (key)=>{
+    return getVars()?.[key];
+}
+window.setVar = (key, value) => {
+    let pre = getVars();
+    pre[key] = value;
+    localStorage.setItem("exportVar", JSON.stringify(pre));
+}
+
 function appendImagesTo(selector, links, key) {
     const container = document.querySelector(selector);
 
@@ -46,6 +65,7 @@ function appendImagesTo(selector, links, key) {
         img.src = link;
         img.onclick = () => {
             window[key] = link;
+
             container.querySelectorAll("img").forEach(i => i.style.removeProperty("border"))
             img.style.border = "2px solid red"
         }
