@@ -31,7 +31,7 @@ iframe.onload = () => {
         , {shareType: 4}
         , ".select-banner"
         , 'banner'
-    ).finally(()=>{
+    ).then(()=>{
         alert("LOADED");
     })
     appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar')
@@ -113,8 +113,7 @@ function appendImagesTo(selector, links, key) {
         }
     })
     setVar("entries_"+key, added);
-
-
+    return added;
 }
 
 window.data = {};
