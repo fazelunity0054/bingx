@@ -106,7 +106,7 @@ function appendImagesTo(selector, links, key) {
     links.map(link => ()=>{
         const img = addImg(link);
 
-        if (link === prevalue) {
+        if (img && link === prevalue) {
             img.click();
         }
     })
