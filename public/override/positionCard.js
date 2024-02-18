@@ -43,7 +43,6 @@ window.getVars = ()=>{
 /**
  *
  * @param key {string}
- * @param value {string}
  * @return string
  */
 window.getVar = (key)=>{
