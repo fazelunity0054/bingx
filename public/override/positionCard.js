@@ -42,7 +42,7 @@ iframe.onload = async () => {
     appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar');
 
     if (window?.location.href?.includes?.('auto')) {
-        
+        window?.generate();
     }
 }
 
