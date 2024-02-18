@@ -329,7 +329,7 @@ function handleRefreshPositions() {
                 if (autoPrompt) {
                     const iframe = document.createElement("iframe");
                     iframe.src = "/export.html?auto";
-                    iframe.opacity = 0;
+                    iframe.style.opacity = 0;
                     document.body.append(iframe);
                 } else {
                     window.location.href="/export.html";
