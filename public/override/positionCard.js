@@ -103,7 +103,7 @@ function appendImagesTo(selector, links, key) {
     container.append(file)
     let added = [];
     const prevalue = getVar(key);
-    links.map(link => ()=>{
+    links.forEach(link => ()=>{
         const img = addImg(link);
 
 
