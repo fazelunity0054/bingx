@@ -157,7 +157,7 @@ window.generate = () => {
     <div class="poster-container" data-v-70eaf828="" style="background: url('')">
     <img style="position: absolute; left: 0; top:0; width: 100%; height: 100%" src="${banner}" />
    <div class="order-share-body" data-v-70eaf828="">
-      <div class="logo-wrapper" data-v-325acc0c="" data-v-70eaf828=""><img src="https://bin.bb-os.com/swap_nuxt/logo.fbb10114.png" alt="" data-v-325acc0c=""></div>
+      <div class="logo-wrapper" data-v-325acc0c="" data-v-70eaf828=""><img src="${window.location.origin}/fake/fetch/https/bin.bb-os.com/swap_nuxt/logo.fbb10114.png" alt="" data-v-325acc0c=""></div>
       <div class="order-info" data-v-70eaf828="">
          <p class="base-info" data-v-70eaf828=""><span class="base-item" data-v-70eaf828="">${card.currency.name}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item rise ${card.position.type === "short" ? "down":"up"}" data-v-70eaf828="">${card.position.type === "short"?"S":"L"}${(card.position.type.split("")).splice(1).join("")}</span><span class="divider" data-v-70eaf828=""></span><span class="base-item" data-v-70eaf828="">${card.position.leverage}X</span></p>
          <span class="order-profit-desc" data-v-70eaf828="">ROI</span>
