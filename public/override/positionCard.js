@@ -9,7 +9,7 @@ function extractAllLink(data) {
 }
 
 function handleImagesRequest(path, params, selector, key) {
-    (async () => {
+    return (async () => {
         const bannersData = (await request({
             method: "GET",
             url: `//${window.location.protocol}//${window.location.host}${path}`,
@@ -31,7 +31,9 @@ iframe.onload = () => {
         , {shareType: 4}
         , ".select-banner"
         , 'banner'
-    )
+    ).finally(()=>{
+        alert("LOADED");
+    })
     appendImagesTo(".select-avatar", [1, 2, 3, 4].map(n => `${window.location.origin}/fake/fetch/https/static-app.bb-os.com/avatar/20230901/avatar_${n}.png`), 'avatar')
 }
 
