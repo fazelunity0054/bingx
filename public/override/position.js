@@ -343,6 +343,7 @@ function handleRefreshPositions() {
 
         element.querySelector(".risk-container").onclick = ()=>{
             let percent = +window.prompt("Enter Risk Percent [The result may change with PNL] (0-100)");
+            if (!percent) return;
             percent = 100 - percent;
             if (isNaN(percent)) return;
             const targetPrice = position.targetPrice;
