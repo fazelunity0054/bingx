@@ -1705,7 +1705,7 @@ p.label.dotted {
     color: var(--light-text-1);
     display: flex;
     font-size: .373333rem;
-    font-weight: bold;
+    font-weight: 500;
     line-height: .426667rem;
     margin-top: .106667rem
 }
