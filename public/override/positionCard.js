@@ -49,6 +49,12 @@ window.getVars = ()=>{
 window.getVar = (key)=>{
     return getVars()?.[key];
 }
+/**
+ *
+ * @param key {string}
+ * @param value {any}
+ * @return {any}
+ */
 window.setVar = (key, value) => {
     let pre = getVars();
     pre[key] = value;
