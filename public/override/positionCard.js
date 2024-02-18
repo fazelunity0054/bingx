@@ -164,7 +164,7 @@ window.generate = () => {
          <div class="rtl-text-ta-right profit min-profit din-pro ${card.ratio < 0 ? "down" : ""}"
           data-v-70eaf828=""
            style="font-size: 40px;font-weight: ${(+(+card.ratio).toFixed(2) + "")?.replace("-", "")?.length <= 4 ? "bolder" : "unset"}">
-           <p class="profit-text" data-v-70eaf828="">${+card.ratio > 0 ? "+" : ""}${+(+card.ratio).toFixed(2)}</p>
+           <p class="profit-text" data-v-70eaf828="">${+card.ratio > 0 ? "+" : ""}${+(+card.ratio).toFixed(2)}%</p>
            </div>
          <ul class="price-info" data-v-70eaf828=""><li class="price-item close-price" data-v-70eaf828="">
                <p class="label" data-v-70eaf828="">Last Price</p>
