@@ -108,7 +108,9 @@ window.data = {};
 const card = JSON.parse(window.localStorage.getItem("card") ?? "{}");
 document.querySelectorAll(".inputs input").forEach(input => {
     input.onchange =()=>{
-        window.data[input.getAttribute("name")] = input.value;
+        const key = input.getAttribute("name");
+        window.data[key] = input.value;
+        setVar(key, input?.value)
     }
 })
 
