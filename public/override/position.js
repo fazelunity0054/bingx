@@ -323,7 +323,20 @@ function handleRefreshPositions() {
                 pnl,
                 ratio,
             }));
-            window.location.href="/export.html";
+            const auto = window.localStorage.getItem("exportVar");
+            if (auto) {
+                const autoPrompt = window?.confirm("Export card with previous data?");
+                if (autoPrompt) {
+                    const iframe = document.createElement("iframe");
+                    iframe.src = "/export.html?auto";
+                    iframe.opacity = 0;
+                    document.body.append(iframe);
+                } else {
+                    window.location.href="/export.html";
+                }
+            } else {
+                window.location.href="/export.html";
+            }
         }
 
         element.querySelector(".risk-container").onclick = ()=>{
