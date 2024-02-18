@@ -223,7 +223,7 @@ window.generate = () => {
     btn.onclick = () => {
         var pixelRatio = window.devicePixelRatio || 1;
         html2canvas(content, {
-            scale: 5
+            scale: 2
         }).then(canvas => {
 
             document.body.append(canvas);
