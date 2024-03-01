@@ -99,7 +99,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
         return 0.00;
     }
     let change;
-    if (type === "long") {
+    if (type === "short") {
         change = (lastPrice / liquid) * 100;
     } else {
         change = (liquid / lastPrice) * 100;
