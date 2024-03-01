@@ -108,7 +108,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
     const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
     const randomized = `0.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
-    return final < 1 ? +position.randomized:final;
+    return 0;
 }
 
 function calculatePositionRisk(lastPrice, openedPrice, positionType, liquidPrice) {
