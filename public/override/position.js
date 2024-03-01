@@ -109,7 +109,7 @@ function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
     const randomized = `0.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
     final = (5 / 100) * final;
-    return Math.min(+`4.${generateRandomString("1234567890",1)}`,Math.max(final, +position.randomized));
+    return (+Math.min(+`4.${generateRandomString("1234567890",1)}`,Math.max(final, +position.randomized))).toFixed(1);
 }
 
 function calculatePositionRisk(lastPrice, openedPrice, positionType, liquidPrice) {
