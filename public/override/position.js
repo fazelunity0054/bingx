@@ -100,9 +100,9 @@ function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
     }
     let change;
     if (type === "short") {
-        change = (lastPrice / liquid) * 100;
+        change = (liquid - lastPrice) / lastPrice * 100;
     } else {
-        change = (liquid / lastPrice) * 100;
+        change = (lastPrice - liquid) / lastPrice * 100;
     }
     change += pnl;
     const final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
