@@ -154,11 +154,12 @@ function handleRefreshPositions() {
         let pnl = position.type === "short"
             ? (position.openedPrice - tradePrice) * positionSize
             : (tradePrice - position.openedPrice) * positionSize;
-        const risk = typeof finalLiquid !== 'undefined' ? calculateRisk(+currency.tradePrice, finalLiquid,position.type, position, pnl):"Wait";
-        const positionMargin = position.openedPrice * position.leverage * position.amount;
+                const positionMargin = position.openedPrice * position.leverage * position.amount;
         const ratio = position.type === "long"
             ? (tradePrice - position.openedPrice) / position.openedPrice * position.leverage * 100
             : (position.openedPrice - tradePrice) / position.openedPrice * position.leverage * 100;
+
+        const risk = typeof finalLiquid !== 'undefined' ? calculateRisk(+currency.tradePrice, finalLiquid,position.type, position, ratio):"Wait";
 
         const closePosition = (reason)=>{
             alert(`${currency.asset} Closed! reason: ${reason}`);
