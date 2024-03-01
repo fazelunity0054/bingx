@@ -105,7 +105,6 @@ function calculateRisk(lastPrice, liquid, type = "long", position, pnl) {
         change = (liquid / lastPrice) * 100;
     }
     change += pnl;
-    console.log(position.currency.symbol, change, 'real', change - pnl, pnl)
     let final = (100 - Math.max(change < 100 ? change:99.99, 0)).toFixed(2);
     const randomized = `0.${generateRandomString("1234567890",1)}${generateRandomString("123456789",1)}`;
     position.randomized ??= randomized;
