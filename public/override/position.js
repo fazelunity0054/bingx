@@ -358,7 +358,7 @@ function handleRefreshPositions() {
             if (!percent) return;
             percent = 100 - percent;
             if (isNaN(percent)) return;
-            const targetPrice = position.targetPrice;
+            const targetPrice = markPrice;
             const liquid =  position.type === "long" ? targetPrice - ((targetPrice / 100) * percent) : targetPrice + ((targetPrice / 100) * percent);
             window.positions[key] = {
                 ...window.positions[key] ?? {},
