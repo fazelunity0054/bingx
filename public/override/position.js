@@ -232,7 +232,7 @@ function handleRefreshPositions() {
                             <div class="data-wrapper" data-v-db2fc607="">
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Position (USDT)
-                                    <p class="value up" data-v-db2fc607="">${(posSize + (posSize / 100 * (-ra))).toFixed(2)}</p>
+                                    <p class="value up" data-v-db2fc607="">${(posSize + (-pnl)).toFixed(2)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label " data-v-db2fc607="">Margin
