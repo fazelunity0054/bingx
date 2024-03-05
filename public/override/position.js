@@ -190,6 +190,8 @@ function handleRefreshPositions() {
 
         const echoN = (n,n2 = currency.qtyDigitNum, n3 =false) => typeof n === 'undefined' ? undefined:substringNumber(n,n2,n3)
 
+        const posSize = position.margin * position.leverage;
+
         /**
          *
          * @type {Element}
@@ -230,7 +232,7 @@ function handleRefreshPositions() {
                             <div class="data-wrapper" data-v-db2fc607="">
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label" data-v-db2fc607="">Position (USDT)
-                                    <p class="value up" data-v-db2fc607="">${(position.margin * position.leverage).toFixed(2)}</p>
+                                    <p class="value up" data-v-db2fc607="">${(posSize + (posSize / 100 * (-ra))).toFixed(2)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
                                     <p class="label " data-v-db2fc607="">Margin
