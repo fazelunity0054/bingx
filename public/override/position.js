@@ -229,7 +229,7 @@ function handleRefreshPositions() {
                             </div>
                             <div class="data-wrapper" data-v-db2fc607="">
                                 <div class="item" data-v-db2fc607="">
-                                    <p class="label" data-v-db2fc607="">Position (${currency.asset})
+                                    <p class="label" data-v-db2fc607="">Position (USDT)
                                     <p class="value up" data-v-db2fc607="">${(positionSize + 0).toFixed(2)}</p>
                                 </div>
                                 <div class="item" data-v-db2fc607="">
