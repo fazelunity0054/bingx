@@ -143,7 +143,7 @@ function handleRefreshPositions() {
         const coin = position.currency;
         const tradePrice = +currency.tradePrice;
         const markPrice = currency.indexPrice + (1 + currency.basisRate);
-        let positionSize = (position.margin * position.leverage);
+        let positionSize = (position.margin * position.leverage) / position.openedPrice;
 
         if (typeof position.liq === 'undefined') handleLiquidCalculation(key, position, (number) => {
             if (window.positions[key] && !window.positions[key].liq && number) window.positions[key] = {
