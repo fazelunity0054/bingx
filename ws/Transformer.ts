@@ -1,5 +1,4 @@
 import {WebSocket} from "ws";
-import {generateRandomString} from "../utils/string";
 
 import pako from 'pako';
 import {IncomingMessage} from "node:http";
