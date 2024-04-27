@@ -10,7 +10,6 @@ async function middleware(req, res) {
     const originUrl = req.url;
     let url = new URL(originUrl.startsWith("http") ? originUrl : Faker_1.default.url + originUrl);
     if (!originUrl.startsWith("fake") && !url.toString().includes("bing")) {
-        console.log("IGNORED", url.toString());
         res.end();
         return;
     }

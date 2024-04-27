@@ -30,7 +30,7 @@ function filterFetch(path: string, init: RequestInit){
     if (!path.startsWith("http")) {
         path = Config.url + path;
     }
-    console.log(echoRequest(path,init, "fetch"))
+    // console.log(echoRequest(path,init, "fetch")) TODO: DEBUG ONLY
     //@ts-ignore
     return fetch(path, init);
 }
