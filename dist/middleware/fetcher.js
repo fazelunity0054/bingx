@@ -20,7 +20,7 @@ async function forceFetch(path, init) {
             return fetch;
         }
         catch (e) {
-            // console.error(e);TODO: 
+            // console.error(e);TODO: DEBUG ONLY
             // console.error(echoRequest(path,init,e))
             break;
         }
