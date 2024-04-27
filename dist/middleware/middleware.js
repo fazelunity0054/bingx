@@ -15,7 +15,6 @@ async function middleware(req, res) {
         return;
     }
     url.pathname = url.pathname.replace("/fake", "");
-    console.log("INCOMING", url.pathname);
     if (url.pathname === "/") {
         url.pathname = "/en-us/h5/swapCalculator";
         url.search = "?symbol=BTC-USDT&fiatRate=0.998955189074141&fiatSymbol=%24";
