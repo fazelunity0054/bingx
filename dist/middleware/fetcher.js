@@ -17,12 +17,9 @@ async function forceFetch(path, init) {
             if (!fetch.ok) {
                 throw (`${init.method} ${fetch.url} ${fetch.status}  REQUEST NOT COMPLETED`);
             }
-            console.log("FINISHED");
             return fetch;
         }
         catch (e) {
-            console.error(e);
-            console.error(echoRequest(path, init, e));
             break;
         }
     }

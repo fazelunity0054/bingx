@@ -24,13 +24,11 @@ export async function middleware(req: Request, res: ServerResponse) {
 	}
 
 	const scrapUrl = url.toString();
-	console.log("scrap url ",scrapUrl);
 	const _headers = {
 		...req.headers,
 		host: url.host,
 		referer: url.toString()
 	};
-	console.log(scrapUrl,_headers);
 	const scrap = await forceFetch(scrapUrl, {
 		...req,
 		headers: _headers,

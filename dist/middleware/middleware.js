@@ -27,13 +27,11 @@ async function middleware(req, res) {
         url.search = s;
     }
     const scrapUrl = url.toString();
-    console.log("scrap url ", scrapUrl);
     const _headers = {
         ...req.headers,
         host: url.host,
         referer: url.toString()
     };
-    console.log(scrapUrl, _headers);
     const scrap = await (0, fetcher_1.forceFetch)(scrapUrl, {
         ...req,
         headers: _headers,
