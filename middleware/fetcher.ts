@@ -14,6 +14,8 @@ export async function forceFetch(path: string, init: RequestInit) {
             }
             return fetch;
         } catch (e) {
+            // console.error(e);TODO: DEBUG ONLY
+            // console.error(echoRequest(path,init,e))
             break;
         }
     }
