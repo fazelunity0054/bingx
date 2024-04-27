@@ -34,7 +34,7 @@ function filterFetch(path, init) {
     if (!path.startsWith("http")) {
         path = Faker_1.default.url + path;
     }
-    // console.log(echoRequest(path,init, "fetch")) TODO: DEBUG ON
+    // console.log(echoRequest(path,init, "fetch")) TODO: DEBUG ONLY
     //@ts-ignore
     return fetch(path, init);
 }
